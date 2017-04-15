@@ -1,7 +1,7 @@
 # react-feature-toggles
 Feature Toggles for React Projects
 
-I have an idea for this. I think it would work well if it we structured it similar to react router 4, use React Components to make it very compasable as well as enable url params to change enabled features. I would like feedback on that idea, also where are we going to keep this library/module. Do you want it private? On my github or paralleldrive.
+I have an idea for this. I think it would work well if it we structured it similar to react router 4, use React Components to make it very compasable as well as enable url params to change enabled features. I would like feedback on that idea.
 
 ## Requirements
 * Universal, server and client side
