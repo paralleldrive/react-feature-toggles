@@ -36,7 +36,7 @@ This component should wrap the app.
 * `features` (FeatureToggle config object)
 * `children` (React Element)
 
-### <BrowserFeatureToggles />
+### BrowserFeatureToggles
 Same as FeatureToggles but merges the featuresthe browser search params so that features can be enabled or disabled via the url
 
 
