@@ -12,8 +12,6 @@
     "type": "git",
     "url": "git+https://github.com/paralleldrive/react-feature-toggles.git"
   },
-  "author": "Kenny Lavender",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/paralleldrive/react-feature-toggles/issues"
   },
