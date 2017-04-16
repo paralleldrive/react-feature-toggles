@@ -4,7 +4,9 @@ import invariant from "invariant";
 
 class FeatureToggles extends React.Component {
   getChildContext() {
-    return { features: {} };
+    return {
+      features: this.props.features
+    };
   }
   componentWillMount() {
     const { children } = this.props;
