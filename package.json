@@ -22,10 +22,14 @@
     "babel-preset-react": "^6.24.1",
     "babel-register": "^6.24.1",
     "cheerio": "^0.22.0",
-    "react": "^15.5.4",
-    "react-dom": "^15.5.4",
     "tape": "^4.6.3",
     "watch": "^1.0.2"
   },
-  "dependencies": {}
+  "dependencies": {
+    "prop-types": "^15.5.8"
+  },
+  "peerDependencies": {
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4"
+  }
 }
