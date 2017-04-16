@@ -37,7 +37,11 @@ This component should wrap the app.
 * `children` (React Element)
 
 ### BrowserFeatureToggles
-Same as FeatureToggles but merges the featuresthe browser search params so that features can be enabled or disabled via the url
+This component check the url params, and applies updates to the features object then pass it to the FeaturesToggles Component.
+
+#### Props
+* `features` (FeatureToggle config object)
+* `children` (React Element)
 
 ### FeatureEnabled
 Checks the features state via react context and renders the children if the feature is enabled. It will not render the children if the
