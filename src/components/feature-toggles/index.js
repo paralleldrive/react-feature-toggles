@@ -1,11 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 import invariant from "invariant";
+import utils from "../../utils";
 
 class FeatureToggles extends React.Component {
   getChildContext() {
     return {
-      features: this.props.features
+      features: {
+        enabled: utils.getEnabled(this.props.features)
+      }
     };
   }
   componentWillMount() {
@@ -30,3 +33,11 @@ FeatureToggles.childContextTypes = {
 };
 
 export default FeatureToggles;
+
+export const getEnabled = (context = {}) => {
+  const { features = {} } = context;
+  return features.enabled ? features.enabled : [];
+};
+
+export const getIsEnabled = (context, featureName) =>
+  getEnabled(context).includes(featureName);

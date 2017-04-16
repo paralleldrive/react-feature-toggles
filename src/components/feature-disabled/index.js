@@ -1,11 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import utils from "../../utils";
+import { getIsEnabled } from "../feature-toggles";
 import invariant from "invariant";
-const { getIsEnabled } = utils;
 
 const FeatureDisabled = ({ children, name }, context) => {
-  return getIsEnabled(name, context.features) ? null : children;
+  return getIsEnabled(context, name) ? null : children;
 };
 
 FeatureDisabled.contextTypes = { features: PropTypes.object };
