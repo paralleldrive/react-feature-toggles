@@ -1,5 +1,5 @@
 import describe from "tape";
-import getIsEnabled from "../index";
+import getEnabled from "../index";
 import deepFreeze from "deep-freeze";
 
 const createFeature = (
@@ -12,14 +12,48 @@ const createFeature = (
   dependencies
 });
 
-describe("getIsEnabled()", nest => {
-  nest.test("...getIsEnabled() no arguments", ({ end, equal }) => {
-    equal(getIsEnabled(), false, "It should return false");
+describe("getEnabled()", nest => {
+  nest.test("...getEnabled() no arguments", ({ end, deepEqual }) => {
+    deepEqual(getEnabled(), [], "It should return an empty array");
     end();
   });
-  nest.test("...getIsEnabled() with feature object", ({
+
+  nest.test("...getEnabled() with empty object", ({
     end,
-    equal
+    deepEqual
+  }) => {
+    const features = {};
+    deepFreeze(features);
+
+    deepEqual(getEnabled(features), [], "posts -> should return true");
+    end();
+  });
+
+  nest.test("...getEnabled() features that have no dependencies", ({
+    end,
+    deepEqual
+  }) => {
+    const features = {
+      posts: createFeature({
+        enabled: true
+      }),
+      reports: createFeature({
+        enabled: false
+      })
+    };
+    deepFreeze(features);
+
+    deepEqual(
+      getEnabled(features),
+      ["posts"],
+      "should return the the only active feature"
+    );
+    end();
+  });
+
+  nest.test("...getEnabled() with feature dependencies", ({
+    end,
+    deepEqual
   }) => {
     const features = {
       posts: createFeature({
@@ -58,30 +92,10 @@ describe("getIsEnabled()", nest => {
     };
     deepFreeze(features);
 
-    equal(getIsEnabled("posts", features), true, "posts -> should return true");
-
-    equal(
-      getIsEnabled("post-rating", features),
-      false,
-      "post-rating -> should return false"
-    );
-
-    equal(
-      getIsEnabled("post-rating-graph", features),
-      false,
-      "post-rating-graph -> It should return false"
-    );
-
-    equal(
-      getIsEnabled("report-rating-graph", features),
-      false,
-      "report-rating-graph -> should return false"
-    );
-
-    equal(
-      getIsEnabled("comment-rating-graph", features),
-      true,
-      "comment-rating-graph -> should return true"
+    deepEqual(
+      getEnabled(features),
+      ["posts", "comments", "comment-rating", "comment-rating-graph"],
+      "should return the correct enabled features"
     );
     end();
   });

@@ -15,12 +15,10 @@ This will need to be fleshed out quite a bit more, but here is a basic idea
 {
   'comments': {
     enabled: false,
-    allow_url_params_override: true,
     dependencies: []
   },
   'user-ratings' {
     enabled: false,
-    allow_url_params_override: true,
     dependencies: ['comments']
   }
 }
@@ -48,14 +46,14 @@ Checks the features state via react context and renders the children if the feat
 feature is not specified.
 
 #### Props
-* `featureName` (String) the name of a feature
+* `name` (String) the name of a feature
 * `children` (React Element)
 
 ### FeatureDisabled
 Checks the features state via react context and renders the children if the feature is disabled. It will also render the children if the feature is not specified.
 
 #### Props
-* `featureName` (String) the name of a feature
+* `name` (String) the name of a feature
 * `children` (React Element)
 
 ## Quick Example
@@ -69,12 +67,12 @@ Checks the features state via react context and renders the children if the feat
 }}>
   <App>
     <p>Some page Content</p>
-    <FeatureEnabled featureName={'comments'}>
+    <FeatureEnabled name={'comments'}>
       <div>
         My feature is enabled :)
       </div>
     </FeatureEnabled>
-    <FeatureDisabled featureName={'comments'}>
+    <FeatureDisabled name={'comments'}>
       <div>
         My feature is not enabled :(
       </div>
