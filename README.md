@@ -40,14 +40,15 @@ This component should wrap the app.
 Same as FeatureToggles but merges the featuresthe browser search params so that features can be enabled or disabled via the url
 
 ### FeatureEnabled
-Checks the features state via react context and renders the children if the feature is enabled.
+Checks the features state via react context and renders the children if the feature is enabled. It will not render the children if the
+feature is not specified.
 
 #### Props
 * `featureName` (String) the name of a feature
 * `children` (React Element)
 
 ### FeatureDisabled
-Checks the features state via react context and renders the children if the feature is disabled.
+Checks the features state via react context and renders the children if the feature is disabled. It will also render the children if the feature is not specified.
 
 #### Props
 * `featureName` (String) the name of a feature
