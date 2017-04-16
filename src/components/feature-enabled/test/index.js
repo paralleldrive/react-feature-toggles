@@ -66,7 +66,7 @@ describe("FeatureEnabled", nest => {
     end();
   });
 
-  nest.test("...context, feature no in the features object", ({
+  nest.test("...context, feature not declared in the features config", ({
     end,
     equal
   }) => {

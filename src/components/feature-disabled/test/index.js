@@ -70,7 +70,7 @@ describe("FeatureDisabled", nest => {
     end();
   });
 
-  nest.test("...context, feature not in the features object", ({
+  nest.test("...context, feature not declared the features object", ({
     end,
     equal
   }) => {
