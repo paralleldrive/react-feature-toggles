@@ -6,10 +6,12 @@ import ReactDOMServer from "react-dom/server";
 
 const render = ReactDOMServer.renderToStaticMarkup;
 
+const createProps = ({} = {}) => ({});
+
 describe("FeatureToggles", nest => {
   nest.test("...children", ({ end, equal }) => {
     const $ = dom.load(
-      render(<FeatureToggles><h1>I am here</h1></FeatureToggles>)
+      render(<FeatureToggles features={{}}><h1>I am here</h1></FeatureToggles>)
     );
     equal(
       $.html(),
