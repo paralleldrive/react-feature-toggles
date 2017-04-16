@@ -39,13 +39,37 @@ This component should wrap the app.
 ### BrowserFeatureToggles
 Same as FeatureToggles but merges the featuresthe browser search params so that features can be enabled or disabled via the url
 
-
-### DisplayFeature
-Takes a features name and renders it if the feature is enabled.
-It checks the feature state via react context and renders its children if the features is enabled.
+### FeatureEnabled
+Checks the features state via react context and renders the children if the feature is enabled.
 
 #### Props
 * `featureName` (String) the name of a feature
 * `children` (React Element)
 
+### FeatureDisabled
+Checks the features state via react context and renders the children if the feature is disabled.
 
+#### Props
+* `featureName` (String) the name of a feature
+* `children` (React Element)
+
+## Quick Example
+
+```javascript
+<BrowserFeatureToggles features={features}>
+  <App>
+    <p>Some page Content</p>
+    <FeatureEnabled featureName={'commment'}>
+      <div>
+        My feature is enabled :)
+      </div>
+    </FeatureEnabled>
+    <FeatureDisabled featureName={'commment'}>
+      <div>
+        My feature is not enabled :(
+      </div>
+    </FeatureEnabled>
+    <p>Some other page Content</p>
+  </App>
+</BrowserFeatureToggles>
+```
