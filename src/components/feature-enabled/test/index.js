@@ -16,7 +16,11 @@ describe("FeatureEnabled", nest => {
         </FeatureEnabled>
       )
     );
-    equal($.html(), "", "It should not render anything");
+    equal(
+      $.html(),
+      "",
+      "It should not render the content when there is no context available"
+    );
     end();
   });
 
@@ -40,7 +44,7 @@ describe("FeatureEnabled", nest => {
     equal(
       $.html(),
       "<h1>My Feature Content</h1>",
-      "It should render the children"
+      "It should render the content when the feature is enabled"
     );
     end();
   });
@@ -62,7 +66,11 @@ describe("FeatureEnabled", nest => {
         </FeatureToggles>
       )
     );
-    equal($.html(), "", "It should not render any children");
+    equal(
+      $.html(),
+      "",
+      "It should not render the content when the feature is disabled"
+    );
     end();
   });
 
@@ -72,21 +80,18 @@ describe("FeatureEnabled", nest => {
   }) => {
     const $ = dom.load(
       render(
-        <FeatureToggles
-          features={{
-            comments: {
-              enabled: false,
-              dependencies: []
-            }
-          }}
-        >
+        <FeatureToggles features={{}}>
           <FeatureEnabled name={"reports"}>
             <h1>My Feature Content</h1>
           </FeatureEnabled>
         </FeatureToggles>
       )
     );
-    equal($.html(), "", "It should not render any children");
+    equal(
+      $.html(),
+      "",
+      "It should not render the content when the feature is not declared in the feature config"
+    );
     end();
   });
 });

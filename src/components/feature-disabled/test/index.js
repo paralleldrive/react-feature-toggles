@@ -12,14 +12,14 @@ describe("FeatureDisabled", nest => {
     const $ = dom.load(
       render(
         <FeatureDisabled name={"name"}>
-          <h1>My Feature Content</h1>
+          <h1>My alternate feature content</h1>
         </FeatureDisabled>
       )
     );
     equal(
       $.html(),
-      "<h1>My Feature Content</h1>",
-      "It should render the children"
+      "<h1>My alternate feature content</h1>",
+      "It should render the children when the context is not available"
     );
     end();
   });
@@ -36,12 +36,12 @@ describe("FeatureDisabled", nest => {
           }}
         >
           <FeatureDisabled name={"comments"}>
-            <h1>My Feature Content</h1>
+            <h1>My alternate feature content</h1>
           </FeatureDisabled>
         </FeatureToggles>
       )
     );
-    equal($.html(), "", "It should not render");
+    equal($.html(), "", "It should not render when the feature is enabled");
     end();
   });
 
@@ -57,15 +57,15 @@ describe("FeatureDisabled", nest => {
           }}
         >
           <FeatureDisabled name={"comments"}>
-            <h1>My Feature Content</h1>
+            <h1>My alternate feature content</h1>
           </FeatureDisabled>
         </FeatureToggles>
       )
     );
     equal(
       $.html(),
-      "<h1>My Feature Content</h1>",
-      "It should render the children"
+      "<h1>My alternate feature content</h1>",
+      "It should render the content when the feature is disabled"
     );
     end();
   });
@@ -76,24 +76,17 @@ describe("FeatureDisabled", nest => {
   }) => {
     const $ = dom.load(
       render(
-        <FeatureToggles
-          features={{
-            comments: {
-              enabled: false,
-              dependencies: []
-            }
-          }}
-        >
+        <FeatureToggles features={{}}>
           <FeatureDisabled name={"reports"}>
-            <h1>My Feature Content</h1>
+            <h1>My alternate feature content</h1>
           </FeatureDisabled>
         </FeatureToggles>
       )
     );
     equal(
       $.html(),
-      "<h1>My Feature Content</h1>",
-      "It should render the children"
+      "<h1>My alternate feature content</h1>",
+      "It should render the content when a feature is not declared"
     );
     end();
   });
