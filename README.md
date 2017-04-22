@@ -23,38 +23,45 @@ This will need to be fleshed out quite a bit more, but here is a basic idea
   }
 }
 ```
+## Utils
+
+### getEnabled
+Returns all the names of enabled features
+```javascript
+getEnabled(features: Object) => enabledFeatureNames: Array
+```
+
+### getIsEnabled
+Returns the enabled value of a single feature. If the feature does not exist it is considered disabled
+```javascript
+getIsEnabled(featureName: String, features: Object) => enabled: Boolean
+```
 
 ## Components
 
 ### FeatureToggles
-Takes feature configuration and sets it into react context 
-This component should wrap the app.
-
-#### Props
-* `features` (FeatureToggle config object)
-* `children` (React Element)
+Renders all children and sets an array of enabled features into the React context.
+```javascript
+FeatureToggles({ features: Object, children: Object }) => Object
+```
 
 ### BrowserFeatureToggles
-This component check the url params, and applies updates to the features object then pass it to the FeaturesToggles Component.
-
-#### Props
-* `features` (FeatureToggle config object)
-* `children` (React Element)
+Renders all children and sets an array of enabled features into the React context after checking the window search string for feature overrides.
+```javascript
+BrowserFeatureToggles({ features: Object, children: Object }) => Object
+```
 
 ### FeatureEnabled
-Checks the features state via react context and renders the children if the feature is enabled. It will not render the children if the
-feature is not specified.
-
-#### Props
-* `name` (String) the name of a feature
-* `children` (React Element)
+Renders children when a feature is enabled
+```javascript
+FeatureDisabled({name: String, children: Object}, context: Object) => Object | Any
+```
 
 ### FeatureDisabled
-Checks the features state via react context and renders the children if the feature is disabled. It will also render the children if the feature is not specified.
-
-#### Props
-* `name` (String) the name of a feature
-* `children` (React Element)
+Renders children when a feature is disabled or not declared in context
+```javascript
+FeatureDisabled({name: String, children: Object}, context: Object) => Object | Any
+```
 
 ## Quick Example
 

@@ -1,4 +1,4 @@
-// Returns the enabled value of a feature.
+// Returns the enabled value of a single feature. If the feature does not exist it is considered disabled
 // getIsEnabled(featureName: String, features: Object) => enabled: Boolean
 
 const getIsEnabled = (featureName = "", features = {}) => {
