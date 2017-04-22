@@ -3,7 +3,12 @@ import PropTypes from "prop-types";
 import { getIsEnabled } from "../feature-toggles";
 import invariant from "invariant";
 
-const FeatureDisabled = ({ children, name }, context) => {
+//
+// Renders children when a feature is disabled or not declared in context
+// FeatureDisabled({name: String, children: Object}, context: Object) => Object | Any
+//
+
+const FeatureDisabled = ({ name, children }, context) => {
   return getIsEnabled(context, name) ? null : children;
 };
 

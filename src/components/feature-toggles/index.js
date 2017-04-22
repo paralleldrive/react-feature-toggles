@@ -3,6 +3,10 @@ import PropTypes from "prop-types";
 import invariant from "invariant";
 import utils from "../../utils";
 
+// Creates and array of enabled features and places it into the React context.
+// Renders all children.
+//
+// FeatureToggles({ features: Object, children: Object }) => Object
 class FeatureToggles extends React.Component {
   getChildContext() {
     return {

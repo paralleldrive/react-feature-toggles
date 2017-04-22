@@ -1,9 +1,5 @@
-/**
- * This function takes a feature name
- * @param {String} featureName 
- * @param {Object} features
- * @return {Boolean} Feature is enabled/disabled;
- */
+// Returns the enabled value of a feature.
+// getIsEnabled(featureName: String, features: Object) => enabled: Boolean
 
 const getIsEnabled = (featureName = "", features = {}) => {
   const feature = features[featureName];
