@@ -28,7 +28,7 @@ This will need to be fleshed out quite a bit more, but here is a basic idea
 ### getEnabled
 Returns all the names of enabled features
 ```javascript
-getEnabled(features: Object) => enabledFeatureNames: Array
+getEnabled(features: Object) => enabledFeatureNames: [...String]
 ```
 
 ### getIsEnabled
@@ -40,27 +40,21 @@ getIsEnabled(featureName: String, features: Object) => enabled: Boolean
 ## Components
 
 ### FeatureToggles
-Renders all children and sets an array of enabled features into the React context.
-```javascript
-FeatureToggles({ features: Object, children: Object }) => Object
-```
-
-### BrowserFeatureToggles
 Renders all children and sets an array of enabled features into the React context after checking the window search string for feature overrides.
 ```javascript
-BrowserFeatureToggles({ features: Object, children: Object }) => Object
+FeatureToggles({ features: Object, children: Object }) => Object
 ```
 
 ### FeatureEnabled
 Renders children when a feature is enabled
 ```javascript
-FeatureDisabled({name: String, children: Object}, context: Object) => Object | Any
+FeatureDisabled({name: String, children: Object}, context: Object) => Object | null
 ```
 
 ### FeatureDisabled
 Renders children when a feature is disabled or not declared in context
 ```javascript
-FeatureDisabled({name: String, children: Object}, context: Object) => Object | Any
+FeatureDisabled({name: String, children: Object}, context: Object) => Object | null
 ```
 
 ## Quick Example

@@ -5,7 +5,7 @@ import invariant from "invariant";
 
 //
 // Renders children when a feature is enabled
-// FeatureDisabled({name: String, children: Object}, context: Object) => Object | Any
+// FeatureEnabled({name: String, children: Object}, context: Object) => Object | null
 //
 
 const FeatureEnabled = ({ name, children }, context) => {
