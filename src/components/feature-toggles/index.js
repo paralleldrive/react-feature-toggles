@@ -6,10 +6,18 @@ import utils from "../../utils";
 // Renders all children, and sets an array of enabled features into the React context.
 // FeatureToggles({ features: Object, children: Object }) => Object
 class FeatureToggles extends React.Component {
+  getFeaturesWithParamOverrides(features) {
+    if (typeof window !== "undefined") {
+      return utils.updateFeaturesWithParams(features, window.location.search);
+    }
+    return features;
+  }
   getChildContext() {
     return {
       features: {
-        enabled: utils.getEnabled(this.props.features)
+        enabled: utils.getEnabled(
+          this.getFeaturesWithParamOverrides(this.props.features)
+        )
       }
     };
   }
