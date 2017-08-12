@@ -5,7 +5,7 @@
 // ... other page HOC imports
 
 const export default = compose(
-  withFeatures
+  withFeatures(initialFeatures)
   hoc1,
   hoc2,
 );
