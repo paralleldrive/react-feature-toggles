@@ -1,2 +1,2 @@
 import "../utils/test";
-import "../with-features";
+import "../with-features/test";
