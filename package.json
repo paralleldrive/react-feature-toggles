@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "babel src -d dist",
-    "test": "tape -r babel-register src/test.js",
+    "test": "tape -r babel-register src/test",
     "watch": "watch 'reset && npm run --silent test' src"
   },
   "repository": {
@@ -18,8 +18,9 @@
   "homepage": "https://github.com/paralleldrive/react-feature-toggles#readme",
   "devDependencies": {
     "babel-cli": "^6.24.1",
-    "babel-preset-env": "^1.4.0",
+    "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
     "babel-register": "^6.24.1",
     "cheerio": "^0.22.0",
     "deep-freeze": "0.0.1",
@@ -29,11 +30,7 @@
     "watch": "^1.0.2"
   },
   "dependencies": {
-    "invariant": "^2.2.2",
-    "prop-types": "^15.5.7"
-  },
-  "peerDependencies": {
-    "react": "^15.5.0",
-    "react-dom": "^15.5.0"
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
   }
 }
