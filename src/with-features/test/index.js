@@ -6,8 +6,6 @@ import ReactDOMServer from "react-dom/server";
 import merge from "lodash/merge";
 import PropTypes from "prop-types";
 
-const compose = (...fns) => x => fns.reduce((v, f) => f(v), x);
-
 const defaultInitialFeatures = {
   help: {
     enabled: true,
@@ -68,16 +66,16 @@ describe("withFeatures", ({ test }) => {
     ChildComponent.contextTypes = { features: PropTypes.array };
 
     const initialFeatures = {
-      help: {
+      game: {
         enabled: true,
         dependencies: []
       },
-      comments: {
-        enabled: true,
-        dependencies: []
-      },
-      sorting: {
+      "enhanced-game": {
         enabled: false,
+        dependencies: []
+      },
+      "game-comments": {
+        enabled: true,
         dependencies: []
       }
     };
@@ -86,7 +84,7 @@ describe("withFeatures", ({ test }) => {
     const $ = dom.load(render(<Component />));
 
     const actual = $(".child-component").text();
-    const expected = "help,comments";
+    const expected = "game,game-comments";
 
     deepEqual(actual, expected, msg);
     end();
