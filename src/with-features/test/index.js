@@ -7,6 +7,11 @@ import PropTypes from "prop-types";
 
 const render = ReactDOMServer.renderToStaticMarkup;
 
+import $find from "../../test/fixtures/find-by-class";
+import createDocument from "../../test/fixtures/create-document";
+import ReactTestUtils from "react-dom/test-utils";
+const renderDOM = ReactTestUtils.renderIntoDocument;
+
 describe("withFeatures", ({ test }) => {
   test("...child features prop", ({ end, deepEqual }) => {
     const msg =
@@ -116,6 +121,38 @@ describe("withFeatures", ({ test }) => {
 
     const actual = $(".child-component").text();
     const expected = "";
+
+    deepEqual(actual, expected, msg);
+    end();
+  });
+
+  test("...overrides", ({ end, deepEqual }) => {
+    const msg = "it should render without crashing";
+    const dom = createDocument();
+    dom.reconfigure({ url: "https://example.com/?ft=game" });
+
+    const ChildComponent = (props, context) => (
+      <div className="child-component">{context.features.toString()}</div>
+    );
+    ChildComponent.contextTypes = { features: PropTypes.array };
+
+    const Component = withFeatures({
+      game: {
+        enabled: false,
+        dependencies: []
+      },
+      help: {
+        enabled: false,
+        dependencies: []
+      }
+    })(ChildComponent);
+
+    const output = renderDOM(<Component />, document.body);
+
+    const el = $find(output, ".child-component");
+
+    const actual = el.innerHTML;
+    const expected = "game";
 
     deepEqual(actual, expected, msg);
     end();
