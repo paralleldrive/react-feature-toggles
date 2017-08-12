@@ -10,7 +10,7 @@ const applyParamFeatureOverrides = features => {
   return features;
 };
 
-// withFeatures = initialFeatures => Component => Component
+// withFeatures = initialFeatures?:Object => Component => Component
 const withFeatures = initialFeatures => WrappedComponent => {
   class withFeaturesHOC extends Component {
     static childContextTypes = {
