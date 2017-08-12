@@ -43,9 +43,9 @@ describe("withFeatures", ({ test }) => {
     end();
   });
 
-  test("...recieved props", ({ end, deepEqual }) => {
+  test("...received props", ({ end, deepEqual }) => {
     const msg =
-      "it should pass through all recieved props to the wrapped component";
+      "it should pass through all received props to the wrapped component";
 
     const ChildComponent = ({ name }) => (
       <div className="child-component">{name}</div>
@@ -76,7 +76,7 @@ describe("withFeatures", ({ test }) => {
     end();
   });
 
-  test("...context", ({ end, deepEqual }) => {
+  test("...react context", ({ end, deepEqual }) => {
     const msg = "it should add enabled features to the react context";
 
     const ChildComponent = (props, context) => (
