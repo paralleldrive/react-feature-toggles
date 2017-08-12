@@ -14,7 +14,12 @@ const withFeatures = initialFeatures => WrappedComponent => {
       };
     }
     render() {
-      return <WrappedComponent features={getEnabled(initialFeatures)} />;
+      return (
+        <WrappedComponent
+          {...this.props}
+          features={getEnabled(initialFeatures)}
+        />
+      );
     }
   }
   return withFeaturesHOC;

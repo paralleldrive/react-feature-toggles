@@ -38,6 +38,38 @@ describe("withFeatures", ({ test }) => {
     end();
   });
 
+  test("...props pass through", ({ end, deepEqual }) => {
+    const msg = "it should pass through all props";
+
+    const ChildComponent = ({ name }) => (
+      <div className="child-component">{name}</div>
+    );
+    const initialFeatures = {
+      help: {
+        enabled: true,
+        dependencies: []
+      },
+      comments: {
+        enabled: true,
+        dependencies: []
+      },
+      sorting: {
+        enabled: false,
+        dependencies: []
+      }
+    };
+
+    const name = "Joe Joe";
+    const Component = withFeatures(initialFeatures)(ChildComponent);
+    const $ = dom.load(render(<Component name={name} />));
+
+    const actual = $(".child-component").text();
+    const expected = name;
+
+    deepEqual(actual, expected, msg);
+    end();
+  });
+
   test("...features in context", ({ end, deepEqual }) => {
     const msg = "it should set the enabled features in context";
 
