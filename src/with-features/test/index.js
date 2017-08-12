@@ -102,4 +102,22 @@ describe("withFeatures", ({ test }) => {
     deepEqual(actual, expected, msg);
     end();
   });
+
+  test("...no initialFeatures", ({ end, deepEqual }) => {
+    const msg = "it should render without crashing";
+
+    const ChildComponent = (props, context) => (
+      <div className="child-component">{context.features.toString()}</div>
+    );
+    ChildComponent.contextTypes = { features: PropTypes.array };
+
+    const Component = withFeatures()(ChildComponent);
+    const $ = dom.load(render(<Component />));
+
+    const actual = $(".child-component").text();
+    const expected = "";
+
+    deepEqual(actual, expected, msg);
+    end();
+  });
 });
