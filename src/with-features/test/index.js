@@ -3,26 +3,7 @@ import withFeatures from "../index";
 import dom from "cheerio";
 import React from "react";
 import ReactDOMServer from "react-dom/server";
-import merge from "lodash/merge";
 import PropTypes from "prop-types";
-
-const defaultInitialFeatures = {
-  help: {
-    enabled: true,
-    dependencies: []
-  },
-  comments: {
-    enabled: true,
-    dependencies: []
-  },
-  sorting: {
-    enabled: false,
-    dependencies: []
-  }
-};
-
-const createInitialFeatures = settings =>
-  merge(defaultInitialFeatures, settings);
 
 const render = ReactDOMServer.renderToStaticMarkup;
 
