@@ -1,8 +1,20 @@
 # Dream Code
 
-// Component to wrap
+## HOC to supply feature list as a prop
 ```js
-import configureFeature from 'react-feature-toggle';
+// ... other page HOC imports
+
+const export default = compose(
+  withFeatures
+  hoc1,
+  hoc2,
+);
+```
+
+
+## Conditionally render a component based on feature state
+```js
+import { configureFeature } from 'react-feature-toggle';
 
 const featureOr404 = configureFeature(NotFound);
 // featureOrUpgrade, etc...
@@ -16,14 +28,4 @@ export default featureOr404('feature name', Component);
 const configureFeature = ({ notFound }) => (featureName, Component, fallbackComponent = NotFound) => {
   // implementation
 };
-```
-
-```js
-// ... other page HOC imports
-
-const export default = compose(
-  featureToggle
-  hoc1,
-  hoc2,
-);
 ```
