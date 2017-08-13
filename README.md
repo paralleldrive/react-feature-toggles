@@ -55,8 +55,7 @@ Conditionally renders components based on enabled features
 configureFeature =
   (NotFoundComponent: ReactComponent) =>
   (featureName: String) => 
-  (FeatureComponent: ReactComponent) =>
-  (FallbackComponent = NotFoundComponent) => ReactComponent | null
+  (FeatureComponent: ReactComponent, FallbackComponent = NotFoundComponent) => ReactComponent | null
 ```
 
 
