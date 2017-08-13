@@ -4,29 +4,29 @@
 
 ## Requirements
 
-React Feature Toggles attempts to satisify the following requirements
+React Feature Toggles attempts to satisfy the following requirements:
 
-* Universal, server and client side
-* Conditionally execute code based on the presence or absence of a specific feature. 
+* Universal - server and client side
+* Conditionally execute code based on the presence or absence of a specific feature
 * Toggle features on with url parameters
-* Feature Dependency. If a feature depends a another feature that is disabled, then neither of them should exectue.
+* Feature Dependency - if a feature depends on a another feature that is disabled, then neither of them should execute
 
 ## API
 
 ### withFeatures()
 
-Creates an array of enabled features, then sets the features array into react context and passes it onto the wrapped component via props.
+Creates an array of enabled features, then sets the features array into React context and passes it onto the wrapped component via props.
 
 ```javascript
 withFeatures = ({
-  initialFeatures = {}, 
+  initialFeatures = {},
   windowLocationSearch = ""
 } = {}) => (WrappedComponent: ReactComponent) => ReactComponent
 ```
 
 __initialFeatures__
 
-```javasript
+```javascript
 const initialFeatures = {
   'comments': {
     enabled: false,
@@ -41,7 +41,7 @@ const initialFeatures = {
 
 __windowLocationSearch__
 
-Should be a string that is equivalent to the browser window.location.search, this is mostly used test purposes. 
+Should be a string that is equivalent to the browser `window.location.search`; this is mostly used test for purposes.
 
 ```javascript
 const windowLocationSearch = '?ft=comments'
@@ -49,27 +49,28 @@ const windowLocationSearch = '?ft=comments'
 
 ### configureFeature()
 
-Conditionally renders components based on enabled features in the react context.
+Conditionally renders components based on enabled features in the React context.
 
 ```javascript
 configureFeature =
   (NotFoundComponent: ReactComponent) =>
-  (featureName: String) => 
+  (featureName: String) =>
   (FeatureComponent: ReactComponent, FallbackComponent = NotFoundComponent) => ReactComponent
 ```
-In progress
-
+**🚧  _Work in Progress_ 🚧**
 
 ### Utils
 
 ### getEnabled
-Returns all the names of enabled features
+Returns all the names of enabled features.
+
 ```javascript
 getEnabled(features: Object) => enabledFeatureNames: [...String]
 ```
 
 ### getIsEnabled
-Returns the enabled value of a single feature. If the feature does not exist it is considered disabled
+Returns the enabled value of a single feature. If the feature does not exist it is considered disabled.
+
 ```javascript
 getIsEnabled(featureName: String, features: Object) => enabled: Boolean
 ```
