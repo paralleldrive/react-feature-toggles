@@ -24,23 +24,27 @@ withFeatures = ({
 } = {}) => (Component: ReactComponent) => ReactComponent
 ```
 
+__initialFeatures__
 
-__example config object__
-
-```javascript
-{
-  windowLocationSearch: '?ft=comments'
-  initialFeatures: {
-    'comments': {
-      enabled: false,
-      dependencies: []
-    },
-    'user-ratings': {
-      enabled: false,
-      dependencies: ['comments']
-    }
+```javasript
+const initialFeatures = {
+  'comments': {
+    enabled: false,
+    dependencies: []
+  },
+  'user-ratings': {
+    enabled: false,
+    dependencies: ['comments']
   }
 }
+```
+
+__windowLocationSearch__
+
+Should be a string that is equivalent to the browser window.location.search, this is mostly used test purposes. 
+
+```javascript
+const windowLocationSearch = '?ft=comments'
 ```
 
 ### configureFeature()
@@ -52,7 +56,7 @@ configureFeature =
   (NotFound: ReactComponent) =>
   (featureName: String) => 
   (Component: ReactComponent) =>
-  (FallbackComponent = NotFound: ReactComponent) => ReactComponent | null
+  (FallbackComponent = NotFound) => ReactComponent | null
 ```
 
 
