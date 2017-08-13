@@ -18,7 +18,10 @@ React Feature Toggles attempts to satisify the following requirements
 Creates an array of enabled features, then sets the features array into react context and passes it onto the wrapped component via props.
 
 ```javascript
-withFeatures = ({ initialFeatures = {}, windowLocationSearch = "" } = {}) => (Component: ReactComponent) => WrappedComponent: ReactComponent
+withFeatures = ({
+  initialFeatures = {}, 
+  windowLocationSearch = ""
+} = {}) => (Component: ReactComponent) => ReactComponent
 ```
 
 
