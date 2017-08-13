@@ -3,8 +3,7 @@ import withFeatures from "../index";
 import dom from "cheerio";
 import React from "react";
 import ReactDOMServer from "react-dom/server";
-
-import WrappedComponent from "./wrapped-component";
+import createWrappedComponent from "./create-wrapped-component";
 
 const render = ReactDOMServer.renderToStaticMarkup;
 
@@ -12,6 +11,7 @@ describe("withFeatures", ({ test }) => {
   test("...no config", ({ end, deepEqual }) => {
     let msg, actual, expected;
 
+    const WrappedComponent = createWrappedComponent();
     const Component = withFeatures()(WrappedComponent);
     const $ = dom.load(render(<Component />));
 
@@ -31,6 +31,7 @@ describe("withFeatures", ({ test }) => {
   test("...empty config object", ({ end, deepEqual }) => {
     let msg, actual, expected;
 
+    const WrappedComponent = createWrappedComponent();
     const Component = withFeatures({})(WrappedComponent);
     const $ = dom.load(render(<Component />));
 
@@ -65,6 +66,7 @@ describe("withFeatures", ({ test }) => {
       }
     };
 
+    const WrappedComponent = createWrappedComponent();
     const Component = withFeatures({ initialFeatures })(WrappedComponent);
     const $ = dom.load(render(<Component />));
 
@@ -99,6 +101,7 @@ describe("withFeatures", ({ test }) => {
       }
     };
 
+    const WrappedComponent = createWrappedComponent();
     const Component = withFeatures({
       initialFeatures,
       windowLocationSearch: "?ft=game,comments"
@@ -122,6 +125,7 @@ describe("withFeatures", ({ test }) => {
     const msg =
       "it should pass through all received props to the wrapped component";
 
+    const WrappedComponent = createWrappedComponent();
     const name = "Joe Joe";
     const Component = withFeatures()(WrappedComponent);
     const $ = dom.load(render(<Component name={name} />));
