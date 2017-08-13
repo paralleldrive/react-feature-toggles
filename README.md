@@ -13,9 +13,14 @@ React Feature Toggles attempts to satisify the following requirements
 
 ## API
 
-### withFeatures(config?: Object)(Component: ReactComponent)
+### withFeatures()
 
 Creates an array of enabled features, then sets the features array into react context and passes it onto the wrapped component via props.
+
+```javascript
+withFeatures = (config?: Object) => (Component: ReactComponent) => Component
+```
+
 
 __example config object__
 
@@ -35,7 +40,18 @@ __example config object__
 }
 ```
 
-### configureFeature(config?: Object)(featureName: String)(Component: ReactComponent)(FallbackComponent?: ReactComponent)
+### configureFeature()
+
+Conditionally renders components based on enabled features
+
+```javascript
+configureFeature =
+  (config?: Object) =>
+  (featureName: String) => 
+  (Component: ReactComponent) =>
+  (FallbackComponent?: ReactComponent) => Component | null
+```
+
 
 In progress
 
