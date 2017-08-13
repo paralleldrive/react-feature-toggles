@@ -12,7 +12,8 @@ const withFeatures = (
     initialFeatures = {},
     windowLocationSearch = typeof window !== "undefined"
       ? window.location.search
-      : ""
+      : "",
+    features = getEnabledFeatures(initialFeatures, windowLocationSearch)
   } = {}
 ) => WrappedComponent => {
   class withFeaturesHOC extends Component {
@@ -21,14 +22,14 @@ const withFeatures = (
     };
     getChildContext() {
       return {
-        features: getEnabledFeatures(initialFeatures, windowLocationSearch)
+        features
       };
     }
     render() {
       return (
         <WrappedComponent
           {...this.props}
-          features={getEnabledFeatures(initialFeatures, windowLocationSearch)}
+          features={features}
         />
       );
     }
