@@ -1,4 +1,7 @@
 # react-feature-toggles
+
+[![Build Status](https://travis-ci.com/paralleldrive/react-feature-toggles.svg?token=Ba8H1FN3UT5CqqFhs2AM&branch=master)](https://travis-ci.com/paralleldrive/react-feature-toggles)
+
 Feature Toggles for React Projects
 
 I have an idea for this. I think it would work well if it we structured it similar to react router 4, use React Components to make it very compasable as well as enable url params to change enabled features. I would like feedback on that idea.
