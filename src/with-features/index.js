@@ -3,6 +3,9 @@ import getEnabled from "../utils/get-enabled";
 import updateFeaturesWithParams from "../utils/updateFeaturesWithParams";
 import PropTypes from "prop-types";
 
+const getEnabledFeatures = (initialFeatures, windowLocationSearch) =>
+  getEnabled(updateFeaturesWithParams(initialFeatures, windowLocationSearch));
+
 // withFeatures = (config?: { initialFeatures: Object, windowLocation: Object }) => Component => Component
 const withFeatures = (
   {
@@ -18,16 +21,14 @@ const withFeatures = (
     };
     getChildContext() {
       return {
-        features: getEnabled(
-          updateFeaturesWithParams(initialFeatures, windowLocationSearch)
-        )
+        features: getEnabledFeatures(initialFeatures, windowLocationSearch)
       };
     }
     render() {
       return (
         <WrappedComponent
           {...this.props}
-          features={getEnabled(initialFeatures)}
+          features={getEnabledFeatures(initialFeatures, windowLocationSearch)}
         />
       );
     }
