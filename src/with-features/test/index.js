@@ -7,11 +7,6 @@ import PropTypes from "prop-types";
 
 const render = ReactDOMServer.renderToStaticMarkup;
 
-import $find from "../../test/fixtures/find-by-class";
-import createDocument from "../../test/fixtures/create-document";
-import ReactTestUtils from "react-dom/test-utils";
-const renderDOM = ReactTestUtils.renderIntoDocument;
-
 describe("withFeatures", ({ test }) => {
   test("...features prop", ({ end, deepEqual }) => {
     const msg =
@@ -33,7 +28,7 @@ describe("withFeatures", ({ test }) => {
         dependencies: []
       }
     };
-    const Component = withFeatures(initialFeatures)(ChildComponent);
+    const Component = withFeatures({ initialFeatures })(ChildComponent);
     const $ = dom.load(render(<Component />));
 
     const actual = $(".child-component").text();
@@ -66,7 +61,7 @@ describe("withFeatures", ({ test }) => {
     };
 
     const name = "Joe Joe";
-    const Component = withFeatures(initialFeatures)(ChildComponent);
+    const Component = withFeatures({ initialFeatures })(ChildComponent);
     const $ = dom.load(render(<Component name={name} />));
 
     const actual = $(".child-component").text();
@@ -99,7 +94,7 @@ describe("withFeatures", ({ test }) => {
       }
     };
 
-    const Component = withFeatures(initialFeatures)(ChildComponent);
+    const Component = withFeatures({ initialFeatures })(ChildComponent);
     const $ = dom.load(render(<Component />));
 
     const actual = $(".child-component").text();
@@ -109,7 +104,7 @@ describe("withFeatures", ({ test }) => {
     end();
   });
 
-  test("...no initialFeatures", ({ end, deepEqual }) => {
+  test("...no config", ({ end, deepEqual }) => {
     const msg = "it should have no enabled features";
 
     const ChildComponent = (props, context) => (
@@ -127,17 +122,33 @@ describe("withFeatures", ({ test }) => {
     end();
   });
 
-  test("...url param overrides", ({ end, deepEqual }) => {
-    const msg = "it should override the correct features";
-    const dom = createDocument();
-    dom.reconfigure({ url: "https://example.com/?ft=game" });
+  test("...config with no initialFeatures", ({ end, deepEqual }) => {
+    const msg = "it should have no enabled features";
 
     const ChildComponent = (props, context) => (
       <div className="child-component">{context.features.toString()}</div>
     );
     ChildComponent.contextTypes = { features: PropTypes.array };
 
-    const Component = withFeatures({
+    const Component = withFeatures({})(ChildComponent);
+    const $ = dom.load(render(<Component />));
+
+    const actual = $(".child-component").text();
+    const expected = "";
+
+    deepEqual(actual, expected, msg);
+    end();
+  });
+
+  test("...url param overrides", ({ end, deepEqual }) => {
+    const msg = "it should override the correct features";
+
+    const ChildComponent = (props, context) => (
+      <div className="child-component">{context.features.toString()}</div>
+    );
+    ChildComponent.contextTypes = { features: PropTypes.array };
+
+    const initialFeatures = {
       game: {
         enabled: false,
         dependencies: []
@@ -145,15 +156,22 @@ describe("withFeatures", ({ test }) => {
       help: {
         enabled: false,
         dependencies: []
+      },
+      comments: {
+        enabled: false,
+        dependencies: []
       }
+    };
+
+    const Component = withFeatures({
+      initialFeatures,
+      windowLocation: { search: "?ft=game,comments" }
     })(ChildComponent);
 
-    const output = renderDOM(<Component />, document.body);
+    const $ = dom.load(render(<Component />));
 
-    const el = $find(output, ".child-component");
-
-    const actual = el.innerHTML;
-    const expected = "game";
+    const actual = $(".child-component").text();
+    const expected = "game,comments";
 
     deepEqual(actual, expected, msg);
     end();

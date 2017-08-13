@@ -3,22 +3,22 @@ import getEnabled from "../utils/get-enabled";
 import updateFeaturesWithParams from "../utils/updateFeaturesWithParams";
 import PropTypes from "prop-types";
 
-const applyParamFeatureOverrides = features => {
-  if (typeof window !== "undefined") {
-    return updateFeaturesWithParams(features, window.location.search);
-  }
-  return features;
-};
-
-// withFeatures = initialFeatures?:Object => Component => Component
-const withFeatures = initialFeatures => WrappedComponent => {
+// withFeatures = (config?: { initialFeatures: Object, windowLocation: Object }) => Component => Component
+const withFeatures = (
+  {
+    initialFeatures = {},
+    windowLocation = typeof window !== "undefined" ? window.location : {}
+  } = {}
+) => WrappedComponent => {
   class withFeaturesHOC extends Component {
     static childContextTypes = {
       features: PropTypes.array
     };
     getChildContext() {
       return {
-        features: getEnabled(applyParamFeatureOverrides(initialFeatures))
+        features: getEnabled(
+          updateFeaturesWithParams(initialFeatures, windowLocation.search)
+        )
       };
     }
     render() {
