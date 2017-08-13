@@ -49,17 +49,16 @@ const windowLocationSearch = '?ft=comments'
 
 ### configureFeature()
 
-Conditionally renders components based on enabled features
+Conditionally renders components based on enabled features in the react context.
 
 ```javascript
 configureFeature =
   (NotFoundComponent: ReactComponent) =>
   (featureName: String) => 
-  (FeatureComponent: ReactComponent, FallbackComponent = NotFoundComponent) => ReactComponent | null
+  (FeatureComponent: ReactComponent, FallbackComponent = NotFoundComponent) => ReactComponent
 ```
-
-
 In progress
+
 
 ### Utils
 
