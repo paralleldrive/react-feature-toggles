@@ -7,7 +7,9 @@ import PropTypes from "prop-types";
 const withFeatures = (
   {
     initialFeatures = {},
-    windowLocation = typeof window !== "undefined" ? window.location : {}
+    windowLocationSearch = typeof window !== "undefined"
+      ? window.location.search
+      : ""
   } = {}
 ) => WrappedComponent => {
   class withFeaturesHOC extends Component {
@@ -17,7 +19,7 @@ const withFeatures = (
     getChildContext() {
       return {
         features: getEnabled(
-          updateFeaturesWithParams(initialFeatures, windowLocation.search)
+          updateFeaturesWithParams(initialFeatures, windowLocationSearch)
         )
       };
     }

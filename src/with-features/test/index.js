@@ -165,7 +165,7 @@ describe("withFeatures", ({ test }) => {
 
     const Component = withFeatures({
       initialFeatures,
-      windowLocation: { search: "?ft=game,comments" }
+      windowLocationSearch: "?ft=game,comments"
     })(ChildComponent);
 
     const $ = dom.load(render(<Component />));
