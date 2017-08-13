@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 configureFeature =
   (NotFoundComponent: ReactComponent) =>
   (featureName: String) => 
-  (FeatureComponent: ReactComponent, FallbackComponent = NotFoundComponent) => ReactComponent | null
+  (FeatureComponent: ReactComponent, FallbackComponent = NotFoundComponent) => ReactComponent
 */
 const checkIfEnabled = (featureName, features) =>
   features.indexOf(featureName) >= 0;
