@@ -21,7 +21,7 @@ Creates an array of enabled features, then sets the features array into react co
 withFeatures = ({
   initialFeatures = {}, 
   windowLocationSearch = ""
-} = {}) => (Component: ReactComponent) => ReactComponent
+} = {}) => (WrappedComponent: ReactComponent) => ReactComponent
 ```
 
 __initialFeatures__
@@ -53,10 +53,10 @@ Conditionally renders components based on enabled features
 
 ```javascript
 configureFeature =
-  (NotFound: ReactComponent) =>
+  (NotFoundComponent: ReactComponent) =>
   (featureName: String) => 
-  (Component: ReactComponent) =>
-  (FallbackComponent = NotFound) => ReactComponent | null
+  (FeatureComponent: ReactComponent) =>
+  (FallbackComponent = NotFoundComponent) => ReactComponent | null
 ```
 
 
