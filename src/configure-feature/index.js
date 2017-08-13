@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-/**
-configureFeature =
-  (NotFoundComponent: ReactComponent) =>
-  (featureName: String) => 
-  (FeatureComponent: ReactComponent, FallbackComponent = NotFoundComponent) => ReactComponent
-*/
+//
+// const configureFeature =
+//   (NotFoundComponent: ReactComponent) =>
+//   (featureName: String) => 
+//   (FeatureComponent: ReactComponent, FallbackComponent = NotFoundComponent) => ReactComponent
+//
+
 const checkIfEnabled = (featureName, features) =>
   features.indexOf(featureName) >= 0;
 
