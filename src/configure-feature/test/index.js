@@ -19,8 +19,6 @@ describe("configureFeature()", ({ test }) => {
     end,
     deepEqual
   }) => {
-    let msg, actual, expected;
-
     const NotFound = createTestComponent("not-found");
     const Feature = createTestComponent("feature");
     const Fallback = createTestComponent("fall-back");
@@ -36,33 +34,34 @@ describe("configureFeature()", ({ test }) => {
     const $ = dom.load(
       render(<FeatureWithContext someOtherProp={someOtherProp} />)
     );
-
-    msg = "it should not render NotFound component";
-    actual = $(".not-found").length;
-    expected = 0;
-    deepEqual(actual, expected, msg);
-
-    msg = "it should not render the Feature component";
-    actual = $(".feature").length;
-    expected = 0;
-    deepEqual(actual, expected, msg);
-
-    msg = "it should render the Fallback component";
-    actual = $(".fall-back").length;
-    expected = 1;
-    deepEqual(actual, expected, msg);
-
-    msg = "it should pass through received props";
-    actual = $(".some-other-prop").text();
-    expected = someOtherProp;
-    deepEqual(actual, expected, msg);
-
+    {
+      const msg = "it should not render NotFound component";
+      const actual = $(".not-found").length;
+      const expected = 0;
+      deepEqual(actual, expected, msg);
+    }
+    {
+      const msg = "it should not render the Feature component";
+      const actual = $(".feature").length;
+      const expected = 0;
+      deepEqual(actual, expected, msg);
+    }
+    {
+      const msg = "it should render the Fallback component";
+      const actual = $(".fall-back").length;
+      const expected = 1;
+      deepEqual(actual, expected, msg);
+    }
+    {
+      const msg = "it should pass through received props";
+      const actual = $(".some-other-prop").text();
+      const expected = someOtherProp;
+      deepEqual(actual, expected, msg);
+    }
     end();
   });
 
   test("...feature enabled, with FallbackComponent", ({ end, deepEqual }) => {
-    let msg, actual, expected;
-
     const NotFound = createTestComponent("not-found");
     const Feature = createTestComponent("feature");
     const Fallback = createTestComponent("fall-back");
@@ -80,33 +79,34 @@ describe("configureFeature()", ({ test }) => {
     const $ = dom.load(
       render(<FeatureWithContext someOtherProp={someOtherProp} />)
     );
-
-    msg = "it should not render NotFound component";
-    actual = $(".not-found").length;
-    expected = 0;
-    deepEqual(actual, expected, msg);
-
-    msg = "it should render the Feature component";
-    actual = $(".feature").length;
-    expected = 1;
-    deepEqual(actual, expected, msg);
-
-    msg = "it should not render the Fallback component";
-    actual = $(".fall-back").length;
-    expected = 0;
-    deepEqual(actual, expected, msg);
-
-    msg = "it should pass through received props";
-    actual = $(".some-other-prop").text();
-    expected = someOtherProp;
-    deepEqual(actual, expected, msg);
-
+    {
+      const msg = "it should not render NotFound component";
+      const actual = $(".not-found").length;
+      const expected = 0;
+      deepEqual(actual, expected, msg);
+    }
+    {
+      const msg = "it should render the Feature component";
+      const actual = $(".feature").length;
+      const expected = 1;
+      deepEqual(actual, expected, msg);
+    }
+    {
+      const msg = "it should not render the Fallback component";
+      const actual = $(".fall-back").length;
+      const expected = 0;
+      deepEqual(actual, expected, msg);
+    }
+    {
+      const msg = "it should pass through received props";
+      const actual = $(".some-other-prop").text();
+      const expected = someOtherProp;
+      deepEqual(actual, expected, msg);
+    }
     end();
   });
 
   test("...feature not enabled, no FallbackComponent", ({ end, deepEqual }) => {
-    let msg, actual, expected;
-
     const NotFound = createTestComponent("not-found");
     const Feature = createTestComponent("feature");
     const ConfiguredFeature = configureFeature(NotFound)("game")(Feature);
@@ -117,33 +117,34 @@ describe("configureFeature()", ({ test }) => {
     const $ = dom.load(
       render(<FeatureWithContext someOtherProp={someOtherProp} />)
     );
-
-    msg = "it should render NotFound component";
-    actual = $(".not-found").length;
-    expected = 1;
-    deepEqual(actual, expected, msg);
-
-    msg = "it should not render the Feature component";
-    actual = $(".feature").length;
-    expected = 0;
-    deepEqual(actual, expected, msg);
-
-    msg = "it should not render the Fallback component";
-    actual = $(".fall-back").length;
-    expected = 0;
-    deepEqual(actual, expected, msg);
-
-    msg = "it should pass through received props";
-    actual = $(".some-other-prop").text();
-    expected = someOtherProp;
-    deepEqual(actual, expected, msg);
-
+    {
+      const msg = "it should render NotFound component";
+      const actual = $(".not-found").length;
+      const expected = 1;
+      deepEqual(actual, expected, msg);
+    }
+    {
+      const msg = "it should not render the Feature component";
+      const actual = $(".feature").length;
+      const expected = 0;
+      deepEqual(actual, expected, msg);
+    }
+    {
+      const msg = "it should not render the Fallback component";
+      const actual = $(".fall-back").length;
+      const expected = 0;
+      deepEqual(actual, expected, msg);
+    }
+    {
+      const msg = "it should pass through received props";
+      const actual = $(".some-other-prop").text();
+      const expected = someOtherProp;
+      deepEqual(actual, expected, msg);
+    }
     end();
   });
 
   test("...feature enabled, no FallbackComponent", ({ end, deepEqual }) => {
-    let msg, actual, expected;
-
     const NotFound = createTestComponent("not-found");
     const Feature = createTestComponent("feature");
     const ConfiguredFeature = configureFeature(NotFound)("game")(Feature);
@@ -156,27 +157,30 @@ describe("configureFeature()", ({ test }) => {
     const $ = dom.load(
       render(<FeatureWithContext someOtherProp={someOtherProp} />)
     );
-
-    msg = "it should not render NotFound component";
-    actual = $(".not-found").length;
-    expected = 0;
-    deepEqual(actual, expected, msg);
-
-    msg = "it should render the Feature component";
-    actual = $(".feature").length;
-    expected = 1;
-    deepEqual(actual, expected, msg);
-
-    msg = "it should not render the Fallback component";
-    actual = $(".fall-back").length;
-    expected = 0;
-    deepEqual(actual, expected, msg);
-
-    msg = "it should pass through received props";
-    actual = $(".some-other-prop").text();
-    expected = someOtherProp;
-    deepEqual(actual, expected, msg);
-
+    {
+      const msg = "it should not render NotFound component";
+      const actual = $(".not-found").length;
+      const expected = 0;
+      deepEqual(actual, expected, msg);
+    }
+    {
+      const msg = "it should render the Feature component";
+      const actual = $(".feature").length;
+      const expected = 1;
+      deepEqual(actual, expected, msg);
+    }
+    {
+      const msg = "it should not render the Fallback component";
+      const actual = $(".fall-back").length;
+      const expected = 0;
+      deepEqual(actual, expected, msg);
+    }
+    {
+      const msg = "it should pass through received props";
+      const actual = $(".some-other-prop").text();
+      const expected = someOtherProp;
+      deepEqual(actual, expected, msg);
+    }
     end();
   });
 });
