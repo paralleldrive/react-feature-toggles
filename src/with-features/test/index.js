@@ -9,48 +9,46 @@ const render = ReactDOMServer.renderToStaticMarkup;
 
 describe("withFeatures", ({ test }) => {
   test("...no config", ({ end, deepEqual }) => {
-    let msg, actual, expected;
-
     const WrappedComponent = createWrappedComponent();
     const Component = withFeatures()(WrappedComponent);
     const $ = dom.load(render(<Component />));
+    {
+      const msg = "the react context features should have no enabled features";
+      const actual = $(".context-features-string").text();
+      const expected = "";
+      deepEqual(actual, expected, msg);
+    }
+    {
+      const msg = "the prop features should have no enabled features";
+      const actual = $(".props-features-string").text();
+      const expected = "";
+      deepEqual(actual, expected, msg);
+    }
 
-    msg = "the react context features should have no enabled features";
-    actual = $(".context-features-string").text();
-    expected = "";
-    deepEqual(actual, expected, msg);
-
-    msg = "the prop features should have no enabled features";
-    actual = $(".props-features-string").text();
-    expected = "";
-
-    deepEqual(actual, expected, msg);
     end();
   });
 
   test("...empty config object", ({ end, deepEqual }) => {
-    let msg, actual, expected;
-
     const WrappedComponent = createWrappedComponent();
     const Component = withFeatures({})(WrappedComponent);
     const $ = dom.load(render(<Component />));
+    {
+      const msg = "the react context features should have no enabled features";
+      const actual = $(".context-features-string").text();
+      const expected = "";
+      deepEqual(actual, expected, msg);
+    }
+    {
+      const msg = "the prop features should have no enabled features";
+      const actual = $(".props-features-string").text();
+      const expected = "";
+      deepEqual(actual, expected, msg);
+    }
 
-    msg = "the react context features should have no enabled features";
-    actual = $(".context-features-string").text();
-    expected = "";
-    deepEqual(actual, expected, msg);
-
-    msg = "the prop features should have no enabled features";
-    actual = $(".props-features-string").text();
-    expected = "";
-
-    deepEqual(actual, expected, msg);
     end();
   });
 
   test("...config with initialFeatures", ({ end, deepEqual }) => {
-    let msg, actual, expected;
-
     const initialFeatures = {
       help: {
         enabled: true,
@@ -69,23 +67,24 @@ describe("withFeatures", ({ test }) => {
     const WrappedComponent = createWrappedComponent();
     const Component = withFeatures({ initialFeatures })(WrappedComponent);
     const $ = dom.load(render(<Component />));
+    {
+      const msg =
+        "the react context features should have the correct enabled features";
+      const actual = $(".context-features-string").text();
+      const expected = "help,comments";
+      deepEqual(actual, expected, msg);
+    }
+    {
+      const msg = "the prop features should have the correct enabled features";
+      const actual = $(".props-features-string").text();
+      const expected = "help,comments";
+      deepEqual(actual, expected, msg);
+    }
 
-    msg = "the react context features should have the correct enabled features";
-    actual = $(".context-features-string").text();
-    expected = "help,comments";
-    deepEqual(actual, expected, msg);
-
-    msg = "the prop features should have the correct enabled features";
-    actual = $(".props-features-string").text();
-    expected = "help,comments";
-
-    deepEqual(actual, expected, msg);
     end();
   });
 
   test("...url search param overrides", ({ end, deepEqual }) => {
-    let msg, actual, expected;
-
     const initialFeatures = {
       game: {
         enabled: false,
@@ -107,17 +106,20 @@ describe("withFeatures", ({ test }) => {
       windowLocationSearch: "?ft=game,comments"
     })(WrappedComponent);
     const $ = dom.load(render(<Component />));
+    {
+      const msg =
+        "the react context features should have the correct enabled features";
+      const actual = $(".context-features-string").text();
+      const expected = "game,comments";
+      deepEqual(actual, expected, msg);
+    }
+    {
+      const msg = "the prop features should have the correct enabled features";
+      const actual = $(".props-features-string").text();
+      const expected = "game,comments";
+      deepEqual(actual, expected, msg);
+    }
 
-    msg = "the react context features should have the correct enabled features";
-    actual = $(".context-features-string").text();
-    expected = "game,comments";
-    deepEqual(actual, expected, msg);
-
-    msg = "the prop features should have the correct enabled features";
-    actual = $(".props-features-string").text();
-    expected = "game,comments";
-
-    deepEqual(actual, expected, msg);
     end();
   });
 
@@ -132,8 +134,8 @@ describe("withFeatures", ({ test }) => {
 
     const actual = $(".props-name").text();
     const expected = name;
-
     deepEqual(actual, expected, msg);
+
     end();
   });
 });
