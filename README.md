@@ -2,86 +2,75 @@
 
 [![Build Status](https://travis-ci.com/paralleldrive/react-feature-toggles.svg?token=Ba8H1FN3UT5CqqFhs2AM&branch=master)](https://travis-ci.com/paralleldrive/react-feature-toggles)
 
-Feature Toggles for React Projects
-
-I have an idea for this. I think it would work well if it we structured it similar to react router 4, use React Components to make it very compasable as well as enable url params to change enabled features. I would like feedback on that idea.
-
 ## Requirements
-* Universal, server and client side
-* Conditionally execute code based on the presence or absence of a specific feature. 
-* Should be able to toggle features with url parameters
-* Feature Dependency. If a feature depends a another feature that is disabled, then neither of them should exectue.
 
-## FeatureToggle Config Object
-This will need to be fleshed out quite a bit more, but here is a basic idea
+React Feature Toggles attempts to satisfy the following requirements:
+
+* Universal - server and client side
+* Conditionally execute code based on the presence or absence of a specific feature
+* Toggle features on with url parameters
+* Feature Dependency - if a feature depends on a another feature that is disabled, then neither of them should execute
+
+## API
+
+### withFeatures()
+
+Creates an array of enabled features, then sets the features array into React context and passes it onto the wrapped component via props.
+
 ```javascript
-{
+withFeatures = ({
+  initialFeatures = {},
+  windowLocationSearch = ""
+} = {}) => (WrappedComponent: ReactComponent) => ReactComponent
+```
+
+__initialFeatures__
+
+```javascript
+const initialFeatures = {
   'comments': {
     enabled: false,
     dependencies: []
   },
-  'user-ratings' {
+  'user-ratings': {
     enabled: false,
     dependencies: ['comments']
   }
 }
 ```
-## Utils
+
+__windowLocationSearch__
+
+Should be a string that is equivalent to the browser `window.location.search`; this is mostly used test for purposes.
+
+```javascript
+const windowLocationSearch = '?ft=comments'
+```
+
+### configureFeature()
+
+Conditionally renders components based on enabled features in the React context.
+
+```javascript
+configureFeature =
+  (NotFoundComponent: ReactComponent) =>
+  (featureName: String) =>
+  (FeatureComponent: ReactComponent, FallbackComponent = NotFoundComponent) => ReactComponent
+```
+**🚧  _Work in Progress_ 🚧**
+
+### Utils
 
 ### getEnabled
-Returns all the names of enabled features
+Returns all the names of enabled features.
+
 ```javascript
 getEnabled(features: Object) => enabledFeatureNames: [...String]
 ```
 
 ### getIsEnabled
-Returns the enabled value of a single feature. If the feature does not exist it is considered disabled
+Returns the enabled value of a single feature. If the feature does not exist it is considered disabled.
+
 ```javascript
 getIsEnabled(featureName: String, features: Object) => enabled: Boolean
-```
-
-## Components
-
-### FeatureToggles
-Renders all children and sets an array of enabled features into the React context after checking the window search string for feature overrides.
-```javascript
-FeatureToggles({ features: Object, children: Object }) => Object
-```
-
-### FeatureEnabled
-Renders children when a feature is enabled
-```javascript
-FeatureDisabled({name: String, children: Object}, context: Object) => Object | null
-```
-
-### FeatureDisabled
-Renders children when a feature is disabled or not declared in context
-```javascript
-FeatureDisabled({name: String, children: Object}, context: Object) => Object | null
-```
-
-## Quick Example
-
-```javascript
-<BrowserFeatureToggles features={{
-  comments: {
-    enabled: true,
-    dependencies: []
-  }
-}}>
-  <App>
-    <p>Some page Content</p>
-    <FeatureEnabled name={'comments'}>
-      <div>
-        My feature is enabled :)
-      </div>
-    </FeatureEnabled>
-    <FeatureDisabled name={'comments'}>
-      <div>
-        My feature is not enabled :(
-      </div>
-    </FeatureEnabled>
-    <p>Some other page Content</p>
-  </App>
-</BrowserFeatureToggles>
 ```
