@@ -14,7 +14,7 @@ const export default = compose(
 
 ## Conditionally render a component based on feature state
 ```js
-import { configureFeature } from 'react-feature-toggle';
+import { configureFeature } from 'react-feature-toggles';
 
 const featureOr404 = configureFeature(NotFound);
 // featureOrUpgrade, etc...
