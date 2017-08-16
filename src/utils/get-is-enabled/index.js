@@ -1,17 +1,17 @@
 // Returns the enabled value of a single feature. If the feature does not exist it is considered disabled
 // getIsEnabled(featureName: String, features: Object) => enabled: Boolean
 
-const getIsEnabled = (featureName = "", features = {}) => {
+const getIsEnabled = (featureName = '', features = {}) => {
   const feature = features[featureName];
 
   /**
-   * If the feature doesn't exist or is not enabled then 
+   * If the feature doesn't exist or is not enabled then
    * return false immediatly.
    */
   if (!feature || !feature.enabled) return false;
 
   /**
-   * If the feature doesn't have any requirements, return 
+   * If the feature doesn't have any requirements, return
    * its value.
    */
   if (feature.dependencies && feature.dependencies.length <= 0)
