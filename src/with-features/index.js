@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import getEnabled from "../utils/get-enabled";
-import updateFeaturesWithParams from "../utils/updateFeaturesWithParams";
-import PropTypes from "prop-types";
+import React, { Component } from 'react';
+import getEnabled from '../utils/get-enabled';
+import updateFeaturesWithParams from '../utils/updateFeaturesWithParams';
+import PropTypes from 'prop-types';
 
 const getEnabledFeatures = (initialFeatures, windowLocationSearch) =>
   getEnabled(updateFeaturesWithParams(initialFeatures, windowLocationSearch));
@@ -10,9 +10,9 @@ const getEnabledFeatures = (initialFeatures, windowLocationSearch) =>
 const withFeatures = (
   {
     initialFeatures = {},
-    windowLocationSearch = typeof window !== "undefined"
+    windowLocationSearch = typeof window !== 'undefined'
       ? window.location.search
-      : "",
+      : '',
     features = getEnabledFeatures(initialFeatures, windowLocationSearch)
   } = {}
 ) => WrappedComponent => {
@@ -26,12 +26,7 @@ const withFeatures = (
       };
     }
     render() {
-      return (
-        <WrappedComponent
-          {...this.props}
-          features={features}
-        />
-      );
+      return <WrappedComponent {...this.props} features={features} />;
     }
   }
   return withFeaturesHOC;
