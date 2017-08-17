@@ -3,11 +3,6 @@
   "version": "1.0.0",
   "description": "React Feature Toggles",
   "main": "dist/index.js",
-  "scripts": {
-    "build": "babel src -d dist",
-    "test": "tape -r babel-register src/test",
-    "watch": "watch 'reset && npm run --silent test' src"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/paralleldrive/react-feature-toggles.git"
@@ -18,12 +13,16 @@
   "homepage": "https://github.com/paralleldrive/react-feature-toggles#readme",
   "devDependencies": {
     "babel-cli": "6.24.1",
+    "babel-eslint": "7.2.3",
     "babel-preset-env": "1.6.0",
     "babel-preset-react": "6.24.1",
     "babel-preset-stage-2": "6.24.1",
     "babel-register": "6.24.1",
     "cheerio": "0.22.0",
     "deep-freeze": "0.0.1",
+    "eslint": "4.4.1",
+    "eslint-plugin-react": "7.2.1",
+    "pre-commit": "1.2.2",
     "prop-types": "15.5.10",
     "react": "15.6.1",
     "react-dom": "15.6.1",
@@ -34,5 +33,16 @@
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-dom": "^15.6.1"
+  },
+  "pre-commit": [
+    "test",
+    "lint"
+  ],
+  "scripts": {
+    "lint": "eslint src && echo '-- linting finished --'",
+    "build": "babel src -d dist",
+    "test": "tape -r babel-register src/test",
+    "watch": "watch 'reset && npm run --silent test' src",
+    "precommit-msg": "echo 'Pre-commit checks...' && exit 0"
   }
 }

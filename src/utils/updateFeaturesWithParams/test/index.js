@@ -1,39 +1,39 @@
-import describe from "tape";
-import updateFeaturesWithParams from "../index";
-import deepFreeze from "deep-freeze";
+import describe from 'tape';
+import updateFeaturesWithParams from '../index';
+import deepFreeze from 'deep-freeze';
 
 const createFeature = ({ enabled = false, dependencies = [] } = {}) => ({
   enabled,
   dependencies
 });
 
-describe("updateFeaturesWithParams()", nest => {
+describe('updateFeaturesWithParams()', nest => {
   nest.test(
-    "...updateFeaturesWithParams() no arguments",
+    '...updateFeaturesWithParams() no arguments',
     ({ end, deepEqual }) => {
       deepEqual(
         updateFeaturesWithParams(),
         {},
-        "It should return an empty object"
+        'It should return an empty object'
       );
       end();
     }
   );
 
   nest.test(
-    "...updateFeaturesWithParams(search: String)",
+    '...updateFeaturesWithParams(search: String)',
     ({ end, deepEqual }) => {
       const features = {
         posts: createFeature({
           enabled: true
         }),
-        "post-rating": createFeature({
+        'post-rating': createFeature({
           enabled: false,
-          dependencies: ["posts"]
+          dependencies: ['posts']
         }),
-        "post-rating-graph": createFeature({
+        'post-rating-graph': createFeature({
           enabled: true,
-          dependencies: ["post-rating"]
+          dependencies: ['post-rating']
         }),
         reports: createFeature({
           enabled: false
@@ -42,24 +42,24 @@ describe("updateFeaturesWithParams()", nest => {
       deepFreeze(features);
 
       deepEqual(
-        updateFeaturesWithParams(features, ""),
+        updateFeaturesWithParams(features, ''),
         features,
-        "if an empty string is passed it then it should return the original object"
+        'if an empty string is passed it then it should return the original object'
       );
 
       deepEqual(
-        updateFeaturesWithParams(features, "?"),
+        updateFeaturesWithParams(features, '?'),
         features,
-        "if an empty search string is passed it then it should return the original object"
+        'if an empty search string is passed it then it should return the original object'
       );
 
       deepEqual(
-        updateFeaturesWithParams(features, "?ft=post-rating,reports,login"),
+        updateFeaturesWithParams(features, '?ft=post-rating,reports,login'),
         Object.assign({}, features, {
-          "post-rating": Object.assign({}, features["post-rating"], {
+          'post-rating': Object.assign({}, features['post-rating'], {
             enabled: true
           }),
-          reports: Object.assign({}, features["reports"], {
+          reports: Object.assign({}, features['reports'], {
             enabled: true
           }),
           login: createFeature({
@@ -67,7 +67,7 @@ describe("updateFeaturesWithParams()", nest => {
             dependencies: []
           })
         }),
-        "it should enable the correct features and add additional features that are not in the original feature object"
+        'it should enable the correct features and add additional features that are not in the original feature object'
       );
       end();
     }

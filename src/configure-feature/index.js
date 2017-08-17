@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 //
 // const configureFeature =
 //   (NotFoundComponent: ReactComponent) =>
-//   (featureName: String) => 
+//   (featureName: String) =>
 //   (FeatureComponent: ReactComponent, FallbackComponent = NotFoundComponent) => ReactComponent
 //
 
