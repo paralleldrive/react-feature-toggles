@@ -1,87 +1,79 @@
-import describe from "tape";
-import getIsEnabled from "../index";
-import deepFreeze from "deep-freeze";
+import describe from 'tape';
+import getIsEnabled from '../index';
+import deepFreeze from 'deep-freeze';
 
-const createFeature = (
-  {
-    enabled = false,
-    dependencies = []
-  } = {}
-) => ({
+const createFeature = ({ enabled = false, dependencies = [] } = {}) => ({
   enabled,
   dependencies
 });
 
-describe("getIsEnabled()", nest => {
-  nest.test("...getIsEnabled() no arguments", ({ end, equal }) => {
-    equal(getIsEnabled(), false, "It should return false");
+describe('getIsEnabled()', nest => {
+  nest.test('...getIsEnabled() no arguments', ({ end, equal }) => {
+    equal(getIsEnabled(), false, 'It should return false');
     end();
   });
-  nest.test("...getIsEnabled() with feature object", ({
-    end,
-    equal
-  }) => {
+  nest.test('...getIsEnabled() with feature object', ({ end, equal }) => {
     const features = {
       posts: createFeature({
         enabled: true
       }),
-      "post-rating": createFeature({
+      'post-rating': createFeature({
         enabled: false,
-        dependencies: ["posts"]
+        dependencies: ['posts']
       }),
-      "post-rating-graph": createFeature({
+      'post-rating-graph': createFeature({
         enabled: true,
-        dependencies: ["post-rating"]
+        dependencies: ['post-rating']
       }),
       reports: createFeature({
         enabled: false
       }),
-      "report-rating": createFeature({
+      'report-rating': createFeature({
         enabled: true,
-        dependencies: ["reports"]
+        dependencies: ['reports']
       }),
-      "report-rating-graph": createFeature({
+      'report-rating-graph': createFeature({
         enabled: true,
-        dependencies: ["report-rating"]
+        dependencies: ['report-rating']
       }),
       comments: createFeature({
         enabled: true
       }),
-      "comment-rating": createFeature({
+      'comment-rating': createFeature({
         enabled: true,
-        dependencies: ["comments"]
+        dependencies: ['comments']
       }),
-      "comment-rating-graph": createFeature({
+      'comment-rating-graph': createFeature({
         enabled: true,
-        dependencies: ["comment-rating"]
+        dependencies: ['comment-rating']
       })
     };
     deepFreeze(features);
 
-    equal(getIsEnabled("posts", features), true, "posts -> should return true");
+    equal(getIsEnabled('posts', features), true, 'posts -> should return true');
 
     equal(
-      getIsEnabled("post-rating", features),
+      getIsEnabled('post-rating', features),
       false,
-      "post-rating -> should return false"
+      'post-rating -> should return false'
     );
 
     equal(
-      getIsEnabled("post-rating-graph", features),
+      getIsEnabled('post-rating-graph', features),
       false,
-      "post-rating-graph -> It should return false"
+      'post-rating-graph -> It should return false'
     );
 
     equal(
-      getIsEnabled("report-rating-graph", features),
+      getIsEnabled('report-rating-graph', features),
       false,
-      "report-rating-graph -> should return false"
+      'report-rating-graph -> should return false'
     );
 
     equal(
-      getIsEnabled("comment-rating-graph", features),
+      getIsEnabled('comment-rating-graph', features),
       true,
-      "comment-rating-graph -> should return true"
+      'comment-rating-graph -> should return true'
     );
     end();
   });

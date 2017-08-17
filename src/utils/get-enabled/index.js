@@ -1,4 +1,4 @@
-import getIsEnabled from "../get-is-enabled";
+import getIsEnabled from '../get-is-enabled';
 
 // Returns all the names of enabled features
 // getEnabled(features: Object) => enabledFeatureNames: [...String]
