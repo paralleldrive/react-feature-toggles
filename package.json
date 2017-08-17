@@ -11,6 +11,9 @@
     "url": "https://github.com/paralleldrive/react-feature-toggles/issues"
   },
   "homepage": "https://github.com/paralleldrive/react-feature-toggles#readme",
+  "engines" : {
+    "node" : ">=8.3"
+  },
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-eslint": "^7.2.3",
