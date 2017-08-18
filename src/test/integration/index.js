@@ -9,7 +9,7 @@ import configureFeature from '../../configure-feature';
 const render = ReactDOMServer.renderToStaticMarkup;
 
 /*
-Test Scenarios: ✔ ✗
+Test Scenarios:
   no features
     no config
       no fallbackComponent ✗
@@ -19,8 +19,8 @@ Test Scenarios: ✔ ✗
       with fallbackComponent
   with features
     config with initialFeatures
-      one feature enabled
-        with props ✗
+      one feature enabled ✔
+        with props
       two features enabled
       no features enabled
     config with initialFeatures plus overrides from URL search params
@@ -48,8 +48,57 @@ describe('integration of withFeatures() & configureFeature()', ({ test }) => {
     }
     {
       const msg = 'it should not render the Feature component';
-      const actual = $('.feature').length;
+      const actual = $('.help-chat').length;
       const expected = 0;
+      deepEqual(actual, expected, msg);
+    }
+    {
+      const msg = 'it should not render the Fallback component';
+      const actual = $('.fall-back').length;
+      const expected = 0;
+      deepEqual(actual, expected, msg);
+    }
+    end();
+  });
+
+  test('...config with initialFeatures, no fallbackComponent', ({ end, deepEqual }) => {
+    const initialFeatures = {
+      comments: {
+        enabled: false,
+        dependencies: []
+      },
+      help: {
+        enabled: true,
+        dependencies: []
+      },
+      sorting: {
+        enabled: false,
+        dependencies: []
+      }
+    };
+
+    const NotFound = () => <div className="not-found">No help for you today!</div>;
+    const HelpChatComponent = () => <div className="help-chat">Need help? Call XXX-XXX-XXXX</div>;
+    const FeatureComponent = withFeatures({ initialFeatures })(HelpChatComponent);
+    const ConfiguredFeature = configureFeature(NotFound)('help')(FeatureComponent);
+
+    const $ = dom.load(
+      render(
+        <FeatureComponent>
+          <ConfiguredFeature />
+        </FeatureComponent>
+      )
+    );
+    {
+      const msg = 'it should not render NotFound component';
+      const actual = $('.not-found').length;
+      const expected = 0;
+      deepEqual(actual, expected, msg);
+    }
+    {
+      const msg = 'it should render the Feature component';
+      const actual = $('.help-chat').length;
+      const expected = 1;
       deepEqual(actual, expected, msg);
     }
     {
