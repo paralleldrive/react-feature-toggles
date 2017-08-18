@@ -29,15 +29,16 @@ Test Scenarios:
 describe('integration of withFeatures() & configureFeature()', ({ test }) => {
   test('...no config (no features), no fallbackComponent', ({ end, deepEqual }) => {
     const NotFound = () => <div className="not-found">No help for you today!</div>;
+    const SomeComponent = () => <div></div>;
     const HelpChatComponent = () => <div className="help-chat">Need help? Call XXX-XXX-XXXX</div>;
-    const FeatureComponent = withFeatures()(HelpChatComponent);
-    const ConfiguredFeature = configureFeature(NotFound)('help')(FeatureComponent);
+    const Features = withFeatures()(SomeComponent);
+    const ConfiguredFeature = configureFeature(NotFound)('help')(HelpChatComponent);
 
     const $ = dom.load(
       render(
-        <FeatureComponent>
+        <Features>
           <ConfiguredFeature />
-        </FeatureComponent>
+        </Features>
       )
     );
     {
@@ -78,15 +79,16 @@ describe('integration of withFeatures() & configureFeature()', ({ test }) => {
     };
 
     const NotFound = () => <div className="not-found">No help for you today!</div>;
+    const SomeComponent = () => <div></div>;
     const HelpChatComponent = () => <div className="help-chat">Need help? Call XXX-XXX-XXXX</div>;
-    const FeatureComponent = withFeatures({ initialFeatures })(HelpChatComponent);
-    const ConfiguredFeature = configureFeature(NotFound)('help')(FeatureComponent);
+    const Features = withFeatures({ initialFeatures })(SomeComponent);
+    const ConfiguredFeature = configureFeature(NotFound)('help')(HelpChatComponent);
 
     const $ = dom.load(
       render(
-        <FeatureComponent>
+        <Features>
           <ConfiguredFeature />
-        </FeatureComponent>
+        </Features>
       )
     );
     {
