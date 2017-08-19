@@ -7,7 +7,7 @@ import createWrappedComponent from './create-wrapped-component';
 
 const render = ReactDOMServer.renderToStaticMarkup;
 
-describe('withFeatures', ({ test }) => {
+describe('withFeatures()', ({ test }) => {
   test('...no config', ({ end, deepEqual }) => {
     const WrappedComponent = createWrappedComponent();
     const Component = withFeatures()(WrappedComponent);
