@@ -8,7 +8,7 @@ import { withFeatures, configureFeature } from '../../../src/';
 const render = ReactDOMServer.renderToStaticMarkup;
 
 describe('test integration of withFeatures() & configureFeature()', ({ test }) => {
-  test('...passing an enabled feature renders the feature\'s component', ({ end, deepEqual }) => {
+  test('...enabled feature', ({ end, deepEqual }) => {
     const initialFeatures = {
       comments: {
         enabled: false,
@@ -52,7 +52,7 @@ describe('test integration of withFeatures() & configureFeature()', ({ test }) =
     end();
   });
 
-  test('...passing a disabled feature renders the NotFound component', ({ end, deepEqual }) => {
+  test('...disabled feature', ({ end, deepEqual }) => {
     const initialFeatures = {
       comments: {
         enabled: true,
