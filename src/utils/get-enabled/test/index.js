@@ -37,7 +37,7 @@ describe('getEnabled()', nest => {
       deepEqual(
         getEnabled(features),
         ['posts'],
-        'should return the the only active feature'
+        'should return the only active feature'
       );
       end();
     }
