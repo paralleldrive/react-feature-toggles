@@ -17,8 +17,11 @@ React Feature Toggles attempts to satisfy the following requirements:
 
 Creates an array of enabled features, then sets the features array into React context and passes it onto the wrapped component via props.
 
+
+
 ```javascript
-withFeatures = ({
+// withFeatures() function signature.
+const withFeatures = ({
   initialFeatures = {},
   windowLocationSearch = ""
 } = {}) => (WrappedComponent: ReactComponent) => ReactComponent
@@ -52,12 +55,12 @@ const windowLocationSearch = '?ft=comments'
 Conditionally renders components based on enabled features in the React context.
 
 ```javascript
-configureFeature =
+// configureFeatures() function signature
+const configureFeature =
   (NotFoundComponent: ReactComponent) =>
   (featureName: String) =>
   (FeatureComponent: ReactComponent, FallbackComponent = NotFoundComponent) => ReactComponent
 ```
-**🚧  _Work in Progress_ 🚧**
 
 ### Utils
 
