@@ -39,6 +39,7 @@
   },
   "pre-commit": [
     "test",
+    "test:integration",
     "lint"
   ],
   "scripts": {
