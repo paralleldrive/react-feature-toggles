@@ -23,6 +23,7 @@ describe('configureFeature()', ({ test }) => {
     const Feature = createTestComponent('feature');
     const Fallback = createTestComponent('fall-back');
 
+    // prettier-ignore
     const ConfiguredFeature =
       configureFeature(NotFound)('game')(Feature, Fallback);
 
@@ -65,6 +66,7 @@ describe('configureFeature()', ({ test }) => {
     const Feature = createTestComponent('feature');
     const Fallback = createTestComponent('fall-back');
 
+    // prettier-ignore
     const ConfiguredFeature =
       configureFeature(NotFound)('game')(Feature, Fallback);
 
