@@ -36,6 +36,7 @@
     "react-dom": "^15.6.1"
   },
   "pre-commit": [
+    "lint",
     "test",
     "test:integration"
   ],
