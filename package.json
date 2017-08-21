@@ -38,9 +38,9 @@
     "react-dom": "^15.6.1"
   },
   "pre-commit": [
+    "lint",
     "test",
-    "test:integration",
-    "lint"
+    "test:integration"
   ],
   "scripts": {
     "lint": "eslint src && echo '-- linting finished --'",
