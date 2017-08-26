@@ -1,94 +1,81 @@
-import describe from 'tape';
+import test from 'tape';
 import getEnabled from '../index';
 import deepFreeze from 'deep-freeze';
 
-const createFeature = ({ enabled = false, dependencies = [] } = {}) => ({
+const createFeature = ({ name= '', enabled = false, dependencies = [] } = {}) => ({
+  name,
   enabled,
   dependencies
 });
 
-describe('getEnabled()', nest => {
-  nest.test('...getEnabled() no arguments', ({ end, deepEqual }) => {
-    deepEqual(getEnabled(), [], 'It should return an empty array');
-    end();
-  });
 
-  nest.test('...getEnabled() with empty object', ({ end, deepEqual }) => {
-    const features = {};
-    deepFreeze(features);
-
-    deepEqual(getEnabled(features), [], 'posts -> should return true');
-    end();
-  });
-
-  nest.test(
-    '...getEnabled() features that have no dependencies',
-    ({ end, deepEqual }) => {
-      const features = {
-        posts: createFeature({
-          enabled: true
-        }),
-        reports: createFeature({
-          enabled: false
-        })
-      };
-      deepFreeze(features);
-
-      deepEqual(
-        getEnabled(features),
-        ['posts'],
-        'should return the only active feature'
-      );
-      end();
-    }
-  );
-
-  nest.test(
-    '...getEnabled() with feature dependencies',
-    ({ end, deepEqual }) => {
-      const features = {
-        posts: createFeature({
-          enabled: true
-        }),
-        'post-rating': createFeature({
-          enabled: false,
-          dependencies: ['posts']
-        }),
-        'post-rating-graph': createFeature({
-          enabled: true,
-          dependencies: ['post-rating']
-        }),
-        reports: createFeature({
-          enabled: false
-        }),
-        'report-rating': createFeature({
-          enabled: true,
-          dependencies: ['reports']
-        }),
-        'report-rating-graph': createFeature({
-          enabled: true,
-          dependencies: ['report-rating']
-        }),
-        comments: createFeature({
-          enabled: true
-        }),
-        'comment-rating': createFeature({
-          enabled: true,
-          dependencies: ['comments']
-        }),
-        'comment-rating-graph': createFeature({
-          enabled: true,
-          dependencies: ['comment-rating']
-        })
-      };
-      deepFreeze(features);
-
-      deepEqual(
-        getEnabled(features),
-        ['posts', 'comments', 'comment-rating', 'comment-rating-graph'],
-        'should return the correct enabled features'
-      );
-      end();
-    }
-  );
+test('getEnabled()', ({ end, deepEqual }) => {
+  const actual = getEnabled();
+  const expected = [];
+  const msg = 'It should return an empty array';
+  deepEqual(actual, expected, msg);
+  end();
 });
+
+test('getEnabled([])', ({ end, deepEqual }) => {
+  const actual = getEnabled([]);
+  const expected = [];
+  const msg = 'it should return an empty array';
+  deepEqual(actual, expected, msg, []);
+  end();
+});
+
+test('getEnabled([...Feature])', ({ end, deepEqual }) => {
+  const features = [ 
+    createFeature({
+      name: 'posts',
+      enabled: true
+    }),
+    createFeature({
+      name: 'post-rating',
+      enabled: false,
+      dependencies: ['posts']
+    }),
+    createFeature({
+      name: 'post-rating-graph',
+      enabled: true,
+      dependencies: ['post-rating']
+    }),
+    createFeature({
+      name: 'reports',
+      enabled: false
+    }),
+    createFeature({
+      name: 'report-rating',
+      enabled: true,
+      dependencies: ['reports']
+    }),
+    createFeature({
+      name: 'report-rating-graph',
+      enabled: true,
+      dependencies: ['report-rating']
+    }),
+    createFeature({
+      name: 'comments',
+      enabled: true
+    }),
+    createFeature({
+      name: 'comment-rating',
+      enabled: true,
+      dependencies: ['comments']
+    }),
+    createFeature({
+      name: 'comment-rating-graph',
+      enabled: true,
+      dependencies: ['comment-rating']
+    })
+  ];
+  deepFreeze(features);
+
+  const actual = getEnabled(features);
+  const expected = ['posts', 'comments', 'comment-rating', 'comment-rating-graph'];
+  const msg = 'it should return the correct enabled features';
+  deepEqual(actual, expected, msg);
+  end();
+});
+
