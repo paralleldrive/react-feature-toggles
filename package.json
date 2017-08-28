@@ -1,4 +1,5 @@
 {
+  "name": "@paralleldrive/react-feature-toggles",
   "version": "1.0.0",
   "description": "React Feature Toggles",
   "main": "dist/index.js",
@@ -49,7 +50,6 @@
     "watch": "watch 'reset && npm run --silent test' src",
     "precommit-msg": "echo 'Pre-commit checks...' && exit 0"
   },
-  "name": "@paralleldrive/react-feature-toggles",
   "keywords": [
     "react",
     "feature",
