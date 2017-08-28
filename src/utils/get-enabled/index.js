@@ -1,23 +1,13 @@
 import getIsEnabled from '../get-is-enabled';
+import { map, compose, filter, lensProp, view } from 'ramda';
 
-// compose = [...fs] => x => f(x); 
-const compose = (...fns) => x => fns.reduceRight((v, f) => f(v), x);
+const nameLens = lensProp('name');
+const getName = view(nameLens);
 
-// map = f => xs => fx
-const map = f => xs => xs.map(f);
-
-// getName = x => x.name
-const getName = x => x.name;
-
-// filter = f => xs => xs
-const filter = f => xs => xs.filter(f);
-
-// filterByEnabled => (s, i, xs) => boolean
-const filterByEnabled = (s, i, xs) => getIsEnabled(xs, getName(s)); 
-
-const test = compose(map(getName), filter(filterByEnabled));
+// filterDisabled = xs => xs;
+const filterDisabled = xs => filter((x) => getIsEnabled(xs, getName(x)), xs);
 
 // getEnabled = [...Feature] => [...String]
-const getEnabled = (features = []) => test(features); 
+const getEnabled = compose(map(getName), filterDisabled);
 
-export default getEnabled;
+export default (features = []) => getEnabled(features);

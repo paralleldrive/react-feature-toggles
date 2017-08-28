@@ -1,8 +1,7 @@
-// find = f => xs => x 
-const find = f => xs => xs.find(f);
+import { find, curry } from 'ramda';
 
-// findByName = s => x => x;
-const findByName = s => x => x.name === s;
+// matchName = s => x => x;
+const matchName = s => x => x.name === s;
 
 // enabled = x: Feature => boolean
 const enabled = x => x && x.enabled ? true : false;
@@ -15,7 +14,7 @@ const checkDependencies = xs => ss => ss.reduce((acc, x) => acc ? getIsEnabled(x
 
 // getIsEnabled = [...Feature] => String => boolean
 const getIsEnabled = (features = [], featureName = '') => {
-  const feature = find(findByName(featureName))(features);
+  const feature = find(matchName(featureName))(features);
   /**
    * If the feature doesn't exist or is not enabled then
    * return false immediatly.
@@ -28,11 +27,9 @@ const getIsEnabled = (features = [], featureName = '') => {
   if (!hasDependencies(feature)) return true;
 
   /**
-   * if the feature has dependencies, then create a map
-   * of each dependencies values, then check if any are
-   * disabled.
+   * If the feature has dependencies, then check for any disabled dependencies 
    */
   return checkDependencies(features)(feature.dependencies);
 };
 
-export default getIsEnabled;
+export default curry(getIsEnabled);

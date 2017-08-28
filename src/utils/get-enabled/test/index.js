@@ -1,12 +1,8 @@
 import test from 'tape';
 import getEnabled from '../index';
 import deepFreeze from 'deep-freeze';
+import createFeature from '../../../test/fixtures/createFeature';
 
-const createFeature = ({ name= '', enabled = false, dependencies = [] } = {}) => ({
-  name,
-  enabled,
-  dependencies
-});
 
 
 test('getEnabled()', ({ end, deepEqual }) => {
