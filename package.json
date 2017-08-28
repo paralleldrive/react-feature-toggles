@@ -1,5 +1,5 @@
 {
-  "name": "react-feature-toggles",
+  "name": "@paralleldrive/react-feature-toggles",
   "version": "1.0.0",
   "description": "React Feature Toggles",
   "main": "dist/index.js",
@@ -11,8 +11,8 @@
     "url": "https://github.com/paralleldrive/react-feature-toggles/issues"
   },
   "homepage": "https://github.com/paralleldrive/react-feature-toggles#readme",
-  "engines" : {
-    "node" : ">=8.3"
+  "engines": {
+    "node": ">=8.3"
   },
   "devDependencies": {
     "babel-cli": "6.24.1",
@@ -49,5 +49,13 @@
     "test:integration": "tape -r babel-register src/test/integration",
     "watch": "watch 'reset && npm run --silent test' src",
     "precommit-msg": "echo 'Pre-commit checks...' && exit 0"
-  }
+  },
+  "keywords": [
+    "react",
+    "feature",
+    "toggle",
+    "toggles"
+  ],
+  "author": "Parallel Drive, Inc",
+  "license": "MIT"
 }
