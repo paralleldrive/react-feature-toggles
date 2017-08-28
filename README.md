@@ -44,7 +44,7 @@ const initialFeatures = {
 
 __windowLocationSearch__
 
-Should be a string that is equivalent to the browser `window.location.search`; this is mostly used test for purposes.
+Should be a string that is equivalent to the browser `window.location.search`; this is mostly used for testing purposes.
 
 ```javascript
 const windowLocationSearch = '?ft=comments'
