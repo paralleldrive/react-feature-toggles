@@ -4,10 +4,10 @@ import { map, compose, filter, lensProp, view } from 'ramda';
 const nameLens = lensProp('name');
 const getName = view(nameLens);
 
-// filterDisabled = xs => xs;
-const filterDisabled = xs => filter((x) => getIsEnabled(xs, getName(x)), xs);
+// filterDisabled = [...Feature] => [...Feature];
+const filterDisabled = (features = []) => filter((x) => getIsEnabled(features, getName(x)), features);
 
 // getEnabled = [...Feature] => [...String]
 const getEnabled = compose(map(getName), filterDisabled);
 
-export default (features = []) => getEnabled(features);
+export default getEnabled;

@@ -1,12 +1,7 @@
 import test from 'tape';
 import updateFeaturesWithParams from '../index';
 import deepFreeze from 'deep-freeze';
-
-const createFeature = ({ name = '', enabled = false, dependencies = [] } = {}) => ({
-  name,
-  enabled,
-  dependencies
-});
+import createFeature from '../../../test/fixtures/createFeature';
 
 test('updateFeaturesWithParams()', ({ end, deepEqual }) => {
   const actual = updateFeaturesWithParams();

@@ -9,8 +9,8 @@ const enabled = x => x && x.enabled ? true : false;
 // hasDependencies = x: Feature => boolean
 const hasDependencies = x => x.dependencies && x.dependencies.length > 0 ? true : false;
 
-// checkDependencies = xs => ss => boolean;
-const checkDependencies = xs => ss => ss.reduce((acc, x) => acc ? getIsEnabled(xs, x) : acc ,true);
+// checkDependencies = [...Feature] => [...String] => boolean;
+const checkDependencies = features => names => names.reduce((acc, x) => acc ? getIsEnabled(features, x) : acc ,true);
 
 // getIsEnabled = [...Feature] => String => boolean
 const getIsEnabled = (features = [], featureName = '') => {
