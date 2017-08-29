@@ -32,7 +32,7 @@ __initialFeatures__
 ```javascript
 interface Feature {
   name: String,
-  enabled?: false,
+  enabled: false,
   dependencies?: [...featureName: String]
 }
 const initialFeatures = [ ...Feature]
