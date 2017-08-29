@@ -57,13 +57,13 @@ test('updateFeaturesWithParams([...Feature], String)', ({end, deepEqual}) => {
   {
     const actual = updateFeaturesWithParams(features, '');
     const expected = features; 
-    const msg = 'it should return the unmodified features';
+    const msg = 'it should return the unmodified features when a empty search string is provided';
     deepEqual(actual, expected, msg);
   }
   {
     const actual = updateFeaturesWithParams(features, '?');
     const expected = features; 
-    const msg = 'it should return the the unmodified features';
+    const msg = 'it should return the unmodified features when a search string does not have ft params';
     deepEqual(actual, expected, msg);
   }
   {
