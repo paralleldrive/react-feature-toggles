@@ -73,3 +73,14 @@ Returns the enabled value of a single feature. If the feature does not exist it 
 ```javascript
 getIsEnabled(featureName: String, features: Object) => enabled: Boolean
 ```
+
+## Enabling a feature from the url
+
+__NOTE:__ If you are using server rendering then overiding features from the url will cause react to throw a warning that client side html result is different from the server.
+
+Add comma seperated names to the `ft` search param. `?ft=FEATURE_NAME,FEATURE_NAME`
+
+__example__
+```
+http://www.domain.com/?ft=help,comments
+```
