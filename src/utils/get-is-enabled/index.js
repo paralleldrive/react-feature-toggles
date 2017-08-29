@@ -1,30 +1,35 @@
-// Returns the enabled value of a single feature. If the feature does not exist it is considered disabled
-// getIsEnabled(featureName: String, features: Object) => enabled: Boolean
+import { find, curry } from 'ramda';
 
-const getIsEnabled = (featureName = '', features = {}) => {
-  const feature = features[featureName];
+// matchName = s => x => x;
+const matchName = s => x => x.name === s;
 
+// enabled = x: Feature => boolean
+const enabled = x => x && x.enabled ? true : false;
+
+// hasDependencies = x: Feature => boolean
+const hasDependencies = x => x.dependencies && x.dependencies.length > 0 ? true : false;
+
+// checkDependencies = [...Feature] => [...String] => boolean;
+const checkDependencies = features => names => names.reduce((acc, x) => acc ? getIsEnabled(features, x) : acc ,true);
+
+// getIsEnabled = [...Feature] => String => boolean
+const getIsEnabled = (features = [], featureName = '') => {
+  const feature = find(matchName(featureName))(features);
   /**
    * If the feature doesn't exist or is not enabled then
-   * return false immediatly.
+   * return false.
    */
-  if (!feature || !feature.enabled) return false;
+  if (!enabled(feature)) return false;
 
   /**
-   * If the feature doesn't have any requirements, return
-   * its value.
+   * If the feature doesn't have any requirements, return true.
    */
-  if (feature.dependencies && feature.dependencies.length <= 0)
-    return feature.enabled;
+  if (!hasDependencies(feature)) return true;
 
   /**
-   * if the feature has dependencies, then create a map
-   * of each dependencies values, then check if any are
-   * disabled.
+   * If the feature has dependencies, then check for any disabled dependencies 
    */
-  return !feature.dependencies
-    .map(nextFeatureName => getIsEnabled(nextFeatureName, features))
-    .includes(false);
+  return checkDependencies(features)(feature.dependencies);
 };
 
-export default getIsEnabled;
+export default curry(getIsEnabled);

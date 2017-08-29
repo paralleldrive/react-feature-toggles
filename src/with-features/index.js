@@ -6,10 +6,10 @@ import PropTypes from 'prop-types';
 const getEnabledFeatures = (initialFeatures, windowLocationSearch) =>
   getEnabled(updateFeaturesWithParams(initialFeatures, windowLocationSearch));
 
-// withFeatures = (config?: { initialFeatures: Object, windowLocationSearch: String }) => Component => Component
+// withFeatures = (config?: { initialFeatures: Array, windowLocationSearch: String }) => Component => Component
 const withFeatures = (
   {
-    initialFeatures = {},
+    initialFeatures = [],
     windowLocationSearch = typeof window !== 'undefined'
       ? window.location.search
       : '',

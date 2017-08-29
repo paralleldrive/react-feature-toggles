@@ -2,27 +2,30 @@ import describe from 'tape';
 import dom from 'cheerio';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
-
+import createFeature from '../fixtures/createFeature';
 import { withFeatures, configureFeature } from '../../../src/';
 
 const render = ReactDOMServer.renderToStaticMarkup;
 
 describe('test integration of withFeatures() & configureFeature()', ({ test }) => {
   test('...enabled feature', ({ end, deepEqual }) => {
-    const initialFeatures = {
-      comments: {
+    const initialFeatures = [
+      createFeature({
+        name: 'comments',
         enabled: false,
         dependencies: []
-      },
-      help: {
+      }),
+      createFeature({
+        name: 'help',
         enabled: true,
         dependencies: []
-      },
-      sorting: {
+      }),
+      createFeature({
+        name: 'sorting',
         enabled: false,
         dependencies: []
-      }
-    };
+      })
+    ];
 
     const PresentationalComponent = ({children} = {}) => <div>{children}</div>;
     const NotFoundComponent = () => <div className="not-found">No help for you today!</div>;
@@ -53,20 +56,23 @@ describe('test integration of withFeatures() & configureFeature()', ({ test }) =
   });
 
   test('...disabled feature', ({ end, deepEqual }) => {
-    const initialFeatures = {
-      comments: {
+    const initialFeatures = [
+      createFeature({
+        name: 'comments',
         enabled: true,
         dependencies: []
-      },
-      help: {
+      }),
+      createFeature({
+        name: 'help',
         enabled: false,
         dependencies: []
-      },
-      sorting: {
+      }),
+      createFeature({
+        name: 'sorting',
         enabled: false,
         dependencies: []
-      }
-    };
+      })
+    ];
 
     const PresentationalComponent = ({children} = {}) => <div>{children}</div>;
     const NotFoundComponent = () => <div className="not-found">No help for you today!</div>;
