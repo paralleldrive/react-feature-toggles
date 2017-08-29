@@ -17,7 +17,7 @@ const getIsEnabled = (features = [], featureName = '') => {
   const feature = find(matchName(featureName))(features);
   /**
    * If the feature doesn't exist or is not enabled then
-   * return false immediatly.
+   * return false.
    */
   if (!enabled(feature)) return false;
 
