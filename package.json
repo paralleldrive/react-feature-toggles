@@ -1,5 +1,5 @@
 {
-  "name": "react-feature-toggles",
+  "name": "@paralleldrive/react-feature-toggles",
   "version": "1.0.0",
   "description": "React Feature Toggles",
   "main": "dist/index.js",
@@ -51,5 +51,13 @@
     "test:integration": "tape -r babel-register src/test/integration",
     "watch": "watch 'reset && npm run --silent test' src",
     "precommit-msg": "echo 'Pre-commit checks...' && exit 0"
-  }
+  },
+  "keywords": [
+    "react",
+    "feature",
+    "toggle",
+    "toggles"
+  ],
+  "author": "Parallel Drive, Inc",
+  "license": "MIT"
 }
