@@ -22,7 +22,7 @@ Creates an array of enabled features, then sets the features array into React co
 ```javascript
 // withFeatures() function signature.
 const withFeatures = ({
-  initialFeatures = {},
+  initialFeatures = [],
   windowLocationSearch = ""
 } = {}) => (WrappedComponent: ReactComponent) => ReactComponent
 ```
@@ -30,15 +30,12 @@ const withFeatures = ({
 __initialFeatures__
 
 ```javascript
-const initialFeatures = {
-  'comments': {
-    enabled: false,
-    dependencies: []
-  },
-  'user-ratings': {
-    enabled: false,
-    dependencies: ['comments']
-  }
+interface Feature {
+  enabled: Boolean,
+  dependencies: Array
+}
+interface IntialFeatures {
+  [featureName: String]: Feature
 }
 ```
 
