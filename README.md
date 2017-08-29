@@ -31,12 +31,11 @@ __initialFeatures__
 
 ```javascript
 interface Feature {
-  enabled: Boolean,
-  dependencies: Array
+  name: String,
+  enabled?: false,
+  dependencies?: [...featureName: String]
 }
-interface IntialFeatures {
-  [featureName: String]: Feature
-}
+const initialFeatures = [ ...Feature]
 ```
 
 __windowLocationSearch__
