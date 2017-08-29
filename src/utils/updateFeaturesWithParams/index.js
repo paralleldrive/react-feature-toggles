@@ -1,4 +1,10 @@
-// getParamFeatures(params: Object) => features: [...String]
+import { compose, lensProp, view, set, map, contains } from 'ramda';
+
+const enabledLens = lensProp('enabled');
+const nameLens = lensProp('name');
+
+
+// getParamFeatures(params: Object) => featureNames: [...String]
 const getParamFeatures = function getParamFeatures(params) {
   var { ft } = params;
   return ft ? ft.split(',') : [];
@@ -20,23 +26,20 @@ const getParams = (search = '') => {
   return params;
 };
 
-// getParams(search: String) => params: Object
-const overrideFeature = (acc, featureName) => {
-  acc[featureName] = Object.assign({}, acc[featureName], {
-    enabled: true,
-    dependencies: acc[featureName] ? acc[featureName].dependencies : []
-  });
-  return acc;
+const getFeatureOverrides = compose(getParamFeatures, getParams);
+
+const overrideFeature = names => feature => {
+  if (contains(view(nameLens, feature), names)) {
+    return set(enabledLens, true, feature);
+  } else {
+    return feature;
+  }
 };
 
-const overrideFeatures = (features = {}, params = []) => {
-  return params.reduce(overrideFeature, Object.assign({}, features));
-};
+// overrideFeatures = ([...Feature], [...String]) => [...Feature];
+const enableFeatures = (features = [], names = []) => map(overrideFeature(names), features);
 
-// updateFeaturesWithParams(features: Object, search: String) => features: Object
-
-const updateFeaturesWithParams = (features = {}, search = '') => {
-  return overrideFeatures(features, getParamFeatures(getParams(search)));
-};
+// updateFeaturesWithParams = ([...Feature], search: String) => [...Feature];
+const updateFeaturesWithParams = (features = [], search = '') => enableFeatures(features, getFeatureOverrides(search));
 
 export default updateFeaturesWithParams;

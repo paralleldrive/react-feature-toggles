@@ -1,75 +1,79 @@
-import describe from 'tape';
+import test from 'tape';
 import updateFeaturesWithParams from '../index';
 import deepFreeze from 'deep-freeze';
 
-const createFeature = ({ enabled = false, dependencies = [] } = {}) => ({
+const createFeature = ({ name = '', enabled = false, dependencies = [] } = {}) => ({
+  name,
   enabled,
   dependencies
 });
 
-describe('updateFeaturesWithParams()', nest => {
-  nest.test(
-    '...updateFeaturesWithParams() no arguments',
-    ({ end, deepEqual }) => {
-      deepEqual(
-        updateFeaturesWithParams(),
-        {},
-        'It should return an empty object'
-      );
-      end();
-    }
-  );
+test('updateFeaturesWithParams()', ({ end, deepEqual }) => {
+  const actual = updateFeaturesWithParams();
+  const expected = [];
+  const msg = 'it should return an empty array';
+  deepEqual(actual, expected, msg);
+  end();
+});
 
-  nest.test(
-    '...updateFeaturesWithParams(search: String)',
-    ({ end, deepEqual }) => {
-      const features = {
-        posts: createFeature({
-          enabled: true
-        }),
-        'post-rating': createFeature({
-          enabled: false,
-          dependencies: ['posts']
-        }),
-        'post-rating-graph': createFeature({
-          enabled: true,
-          dependencies: ['post-rating']
-        }),
-        reports: createFeature({
-          enabled: false
-        })
-      };
-      deepFreeze(features);
+test('updateFeaturesWithParams([])', ({ end, deepEqual }) => {
+  const actual = updateFeaturesWithParams([]);
+  const expected = [];
+  const msg = 'it should return an empty array';
+  deepEqual(actual, expected, msg);
+  end();
+});
 
-      deepEqual(
-        updateFeaturesWithParams(features, ''),
-        features,
-        'if an empty string is passed it then it should return the original object'
-      );
+test('updateFeaturesWithParams([], String)', ({end, deepEqual}) => {
+  const actual = updateFeaturesWithParams([], '?posts');
+  const expected = [];
+  const msg = 'it should return an empty array';
+  deepEqual(actual,expected,msg);
+  end();
+});
 
-      deepEqual(
-        updateFeaturesWithParams(features, '?'),
-        features,
-        'if an empty search string is passed it then it should return the original object'
-      );
-
-      deepEqual(
-        updateFeaturesWithParams(features, '?ft=post-rating,reports,login'),
-        Object.assign({}, features, {
-          'post-rating': Object.assign({}, features['post-rating'], {
-            enabled: true
-          }),
-          reports: Object.assign({}, features['reports'], {
-            enabled: true
-          }),
-          login: createFeature({
-            enabled: true,
-            dependencies: []
-          })
-        }),
-        'it should enable the correct features and add additional features that are not in the original feature object'
-      );
-      end();
-    }
-  );
+test('updateFeaturesWithParams([...Feature], String)', ({end, deepEqual}) => {
+  const features = [
+    createFeature({
+      name: 'posts',
+      enabled: true
+    }),
+    createFeature({
+      name: 'post-rating',
+      enabled: false,
+      dependencies: ['posts']
+    }),
+    createFeature({
+      name: 'post-rating-graph',
+      enabled: true,
+      dependencies: ['post-rating']
+    }),
+    createFeature({
+      name: 'reports',
+      enabled: false
+    })
+  ];
+  deepFreeze(features);
+  {
+    const actual = updateFeaturesWithParams(features, '');
+    const expected = features; 
+    const msg = 'it should return the unmodified features';
+    deepEqual(actual, expected, msg);
+  }
+  {
+    const actual = updateFeaturesWithParams(features, '?');
+    const expected = features; 
+    const msg = 'it should return the the unmodified features';
+    deepEqual(actual, expected, msg);
+  }
+  {
+    const expectedFeatures = [...features];
+    expectedFeatures[1] = {...expectedFeatures[1], enabled: true};
+    expectedFeatures[3] = {...expectedFeatures[3], enabled: true};
+    const actual = updateFeaturesWithParams(features, '?ft=post-rating,reports,login');
+    const expected = expectedFeatures; 
+    const msg = 'it should return the correct features';
+    deepEqual(actual, expected, msg);
+  }
+  end();
 });

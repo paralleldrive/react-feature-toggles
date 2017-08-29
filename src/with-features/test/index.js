@@ -4,6 +4,7 @@ import dom from 'cheerio';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import createWrappedComponent from './create-wrapped-component';
+import createFeature from '../../test/fixtures/createFeature';
 
 const render = ReactDOMServer.renderToStaticMarkup;
 
@@ -49,20 +50,23 @@ describe('withFeatures()', ({ test }) => {
   });
 
   test('...config with initialFeatures', ({ end, deepEqual }) => {
-    const initialFeatures = {
-      help: {
+    const initialFeatures = [ 
+      createFeature({
+        name: 'help',
         enabled: true,
         dependencies: []
-      },
-      comments: {
+      }),
+      createFeature({
+        name: 'comments',
         enabled: true,
         dependencies: []
-      },
-      sorting: {
+      }),
+      createFeature({
+        name: 'sorting',
         enabled: false,
         dependencies: []
-      }
-    };
+      })
+    ];
 
     const WrappedComponent = createWrappedComponent();
     const Component = withFeatures({ initialFeatures })(WrappedComponent);
@@ -85,20 +89,23 @@ describe('withFeatures()', ({ test }) => {
   });
 
   test('...url search param overrides', ({ end, deepEqual }) => {
-    const initialFeatures = {
-      game: {
+    const initialFeatures = [ 
+      createFeature({
+        name: 'game',
         enabled: false,
         dependencies: []
-      },
-      help: {
+      }),
+      createFeature({
+        name: 'help',
         enabled: false,
         dependencies: []
-      },
-      comments: {
+      }),
+      createFeature({
+        name: 'comments',
         enabled: false,
         dependencies: []
-      }
-    };
+      })
+    ];
 
     const WrappedComponent = createWrappedComponent();
     const Component = withFeatures({
