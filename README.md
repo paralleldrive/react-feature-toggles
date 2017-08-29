@@ -11,6 +11,34 @@ React Feature Toggles attempts to satisfy the following requirements:
 * Toggle features on with url parameters
 * Feature Dependency - if a feature depends on a another feature that is disabled, then neither of them should execute
 
+
+## Example
+### For a component inside a page.
+We are going to use the folder structure for nextjs for this example.
+```
+// game-component.js
+const NotFound = () => <div className="not-found">No help for you today!</div>;
+const HelpChatComponent = () => <div className="help-chat">Need help? Call XXX-XXXXX</div>
+const ConfiguredHelpChatComponent = configureFeature(NotFound)('help')(HelpChatComponent);
+const GameComponent = () => (
+  <div>Hello, how would you like to play bacon maze!</div>
+  <div>Click here to start</div>
+  <ConfiguredHelpChatComponent />
+);
+export default ConfiguredHelpChatComponent
+```
+
+```
+// game-page.js
+import { withFeatures } from 'react-feature-toggles';
+import GameComponent from './game-component';
+export default withFeatures({
+  initialFeatures: [
+    { name: 'game-help-chat', enabled: false, dependencies: [] }
+  ]
+})(GameComponent);
+```
+
 ## API
 
 ### withFeatures()
