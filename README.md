@@ -53,9 +53,9 @@ Conditionally renders components based on enabled features in the React context.
 ```javascript
 // configureFeatures() function signature
 const configureFeature =
-  (NotFoundComponent: ReactComponent) =>
+  (DefaultFallbackComponent: ReactComponent) =>
   (featureName: String) =>
-  (FeatureComponent: ReactComponent, FallbackComponent = NotFoundComponent) => ReactComponent
+  (FeatureComponent: ReactComponent, FallbackComponent = DefaultFallbackComponent) => ReactComponent
 ```
 
 ### Utils
