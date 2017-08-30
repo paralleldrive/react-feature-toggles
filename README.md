@@ -116,14 +116,14 @@ const configureFeature =
 Returns all the names of enabled features.
 
 ```javascript
-getEnabled(features: Object) => enabledFeatureNames: [...String]
+getEnabled(features: [...Feature]) => featureName: [...String]
 ```
 
 ### getIsEnabled
 Returns the enabled value of a single feature. If the feature does not exist it is considered disabled.
 
 ```javascript
-getIsEnabled(featureName: String, features: Object) => enabled: Boolean
+getIsEnabled(features: [...Feature], featureName: String, ) => enabled: Boolean
 ```
 
 ## Enabling a feature from the url
