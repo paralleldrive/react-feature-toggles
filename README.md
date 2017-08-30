@@ -84,7 +84,7 @@ __initialFeatures__
 ```javascript
 interface Feature {
   name: String,
-  enabled?: false,
+  enabled: false,
   dependencies?: [...featureName: String]
 }
 const initialFeatures = [ ...Feature]
@@ -124,4 +124,15 @@ Returns the enabled value of a single feature. If the feature does not exist it 
 
 ```javascript
 getIsEnabled(featureName: String, features: Object) => enabled: Boolean
+```
+
+## Enabling a feature from the url
+
+__NOTE:__ If you are using server rendering then overriding features from the url will cause React to throw a warning that the client-side HTML result is different from the server.
+
+Add comma-separated names to the `ft` search param. `?ft=FEATURE_NAME,FEATURE_NAME`
+
+__example__
+```
+http://www.domain.com/?ft=help,comments
 ```
