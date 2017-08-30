@@ -14,7 +14,7 @@ React Feature Toggles attempts to satisfy the following requirements:
 
 ## Example
 
-### A page
+### 404 page
 Imagine you have a help chat feature you want to keep hidden until the feature is ready to be released.
 If someone visits the help chat page, you want to show a 404 component.
 
