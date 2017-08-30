@@ -41,7 +41,7 @@ describe('test integration of withFeatures() & configureFeature()', ({ test }) =
       )
     );
     {
-      const msg = 'it should not render NotFound component';
+      const msg = 'it should not render DefaultFallbackComponent component';
       const actual = $('.default-fallback-component').length;
       const expected = 0;
       deepEqual(actual, expected, msg);
@@ -88,7 +88,7 @@ describe('test integration of withFeatures() & configureFeature()', ({ test }) =
       )
     );
     {
-      const msg = 'it should render NotFound component';
+      const msg = 'it should render DefaultFallbackComponent component';
       const actual = $('.default-fallback-component').length;
       const expected = 1;
       deepEqual(actual, expected, msg);
