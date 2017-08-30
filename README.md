@@ -18,35 +18,17 @@ React Feature Toggles attempts to satisfy the following requirements:
 Imagine you have a help chat feature you want to keep hidden until the feature is ready to be released.
 If someone visits the help chat page, you want to show a 404 component.
 
-A dull help chat component placeholder, it would render chat messages and stuff. 
+Lets create a dull help chat component placeholder to start, imagine it shows chat messages and what not. 
 ```javascript
 // help-chat-component.js
 const HelpChat = () => (<div className="help-chat">my real help chat stuff goes here..</div>
 export default HelpChat;
 ```
 
-Lets start by creating a reusable configure a feature that renders the apps 404 component by default when the given feature is not enabled.
-```javascript
-// feature-404.js
-import App404 from './my-404-component';
-import { configureFeature } from 'react-feature-toggles';
-export default configureFeature(App404);
-```
-
-We can now use `feature-404` anwhere we want to show a 404 page when a feature is disabled. Her
-
-```javascript
-// help-chat-container.js
-import feature404 from './feature-404.js'
-import HelpChat from './help-chat-component';
-
-const help404 = feature404('help');
-export default help404(HelpChat);
-```
+We then need to let our components know what features are enabled. To do this we can use the `withFeatures` hoc to wrap our page component
 
 ```javascript
 // help-chat-page.js
-import { compose } from 'ramda';
 import { withFeatures } from 'react-feature-toggles';
 import HelpChatContainer from './help-chat-container';
 export default withFeatures({
@@ -57,6 +39,29 @@ export default withFeatures({
   ]
 })(HelpChatContainer);
 ```
+
+
+We might have other features in the future that should render a 404 page by default when they are disabled, so lets create a reusable component that renders the apps 404 when the given feature is not enabled. We can use `configureFeature` to build this component.
+
+```javascript
+// feature-404.js
+import App404 from './app-404-component';
+import { configureFeature } from 'react-feature-toggles';
+export default configureFeature(App404);
+```
+
+We can now use `feature-404` anwhere we want to show a 404 page when a feature is disabled. Lets use it for our help chat container that gets rendered by the help chat page.
+
+```javascript
+// help-chat-container.js
+import feature404 from './feature-404.js'
+import HelpChat from './help-chat-component';
+
+const help404 = feature404('help');
+export default help404(HelpChat);
+```
+
+
 
 ## API
 
