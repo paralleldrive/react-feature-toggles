@@ -25,7 +25,7 @@ const HelpChat = () => <div>my real help chat stuff goes here..</div>;
 export default HelpChat;
 ```
 
-We then need to let our components know what features are enabled. To do this we can use the `withFeatures` hoc to wrap our page component
+We then need to let our components know what features are enabled. To do this we can use the `withFeatures` HOC to wrap our page component.
 
 ```javascript
 // help-chat-page.js
