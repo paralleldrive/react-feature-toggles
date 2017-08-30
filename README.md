@@ -25,22 +25,6 @@ const HelpChat = () => <div>my real help chat stuff goes here..</div>;
 export default HelpChat;
 ```
 
-We then need to let our components know what features are enabled. To do this we can use the `withFeatures` HOC to wrap our page component.
-
-```javascript
-// help-chat-page.js
-import { withFeatures } from 'react-feature-toggles';
-import HelpChatContainer from './help-chat-container';
-export default withFeatures({
-  initialFeatures: [
-    { name: 'help-chat', enabled: false, dependencies: [] }, // Specify the 'help-chat' feature
-    { name: 'a-feature', enabled: true, dependencies: [] },
-    { name: 'b-feature', enabled: false, dependencies: [] }
-  ]
-})(HelpChatContainer);
-```
-
-
 We might have other features in the future that should render a 404 page by default when they are disabled, so let's create a reusable component that renders the app's 404 when the given feature is not enabled. We can use `configureFeature` to build this component.
 
 ```javascript
@@ -60,6 +44,22 @@ import HelpChatComponent from './help-chat-component';
 const help404 = feature404('help-chat');
 export default help404(HelpChatComponent);
 ```
+
+We then need to let our components know what features are enabled. To do this we can use the `withFeatures` HOC to wrap our page component.
+
+```javascript
+// help-chat-page.js
+import { withFeatures } from 'react-feature-toggles';
+import HelpChatContainer from './help-chat-container';
+export default withFeatures({
+  initialFeatures: [
+    { name: 'help-chat', enabled: false, dependencies: [] }, // Specify the 'help-chat' feature
+    { name: 'a-feature', enabled: true, dependencies: [] },
+    { name: 'b-feature', enabled: false, dependencies: [] }
+  ]
+})(HelpChatContainer);
+```
+
 It should now only render the HelpChatComponent when `help-chat` is enabled, and the 404 component when its not enabled.
 
 
