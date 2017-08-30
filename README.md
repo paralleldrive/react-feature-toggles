@@ -33,7 +33,7 @@ import { withFeatures } from 'react-feature-toggles';
 import HelpChatContainer from './help-chat-container';
 export default withFeatures({
   initialFeatures: [
-    { name: 'help-chat', enabled: false, dependencies: [] },
+    { name: 'help-chat', enabled: false, dependencies: [] }, // Add the 'help-chat' feature
     { name: 'a-feature', enabled: true, dependencies: [] },
     { name: 'b-feature', enabled: false, dependencies: [] }
   ]
@@ -60,7 +60,7 @@ import HelpChat from './help-chat-component';
 const help404 = feature404('help');
 export default help404(HelpChat);
 ```
-
+It should now only render the HelpChat component when `help-chat` is enabled, and the 404 component when its not enabled.
 
 
 ## API
