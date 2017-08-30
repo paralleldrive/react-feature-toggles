@@ -13,30 +13,49 @@ React Feature Toggles attempts to satisfy the following requirements:
 
 
 ## Example
-### For a component inside a page.
-We are going to use the folder structure for nextjs for this example.
-```
-// game-component.js
-const NotFound = () => <div className="not-found">No help for you today!</div>;
-const HelpChatComponent = () => <div className="help-chat">Need help? Call XXX-XXXXX</div>
-const ConfiguredHelpChatComponent = configureFeature(NotFound)('help')(HelpChatComponent);
-const GameComponent = () => (
-  <div>Hello, how would you like to play bacon maze!</div>
-  <div>Click here to start</div>
-  <ConfiguredHelpChatComponent />
-);
-export default ConfiguredHelpChatComponent
+
+### A page
+Imagine you have a help chat feature you want to keep hidden until the feature is ready to be released.
+If someone visits the help chat page, you want to show a 404 component.
+
+A dull help chat component placeholder, it would render chat messages and stuff. 
+```javascript
+// help-chat-component.js
+const HelpChat = () => (<div className="help-chat">my real help chat stuff goes here..</div>
+export default HelpChat;
 ```
 
+Lets start by creating a reusable configure a feature that renders the apps 404 component by default when the given feature is not enabled.
+```javascript
+// feature-404.js
+import App404 from './my-404-component';
+import { configureFeature } from 'react-feature-toggles';
+export default configureFeature(App404);
 ```
-// game-page.js
+
+We can now use `feature-404` anwhere we want to show a 404 page when a feature is disabled. Her
+
+```javascript
+// help-chat-container.js
+import feature404 from './feature-404.js'
+import HelpChat from './help-chat-component';
+
+const help404 = feature404('help');
+export default help404(HelpChat);
+```
+
+```javascript
+// help-chat-page.js
+import { compose } from 'ramda';
 import { withFeatures } from 'react-feature-toggles';
-import GameComponent from './game-component';
+import HelpChatContainer from './help-chat-container';
 export default withFeatures({
   initialFeatures: [
-    { name: 'game-help-chat', enabled: false, dependencies: [] }
+    { name: 'help-chat', enabled: false, dependencies: [] },
+    { name: 'a-feature', enabled: true, dependencies: [] },
+    { name: 'b-feature', enabled: false, dependencies: [] }
   ]
-})(GameComponent);
+})(HelpChatContainer);
 ```
 
 ## API
