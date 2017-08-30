@@ -28,9 +28,9 @@ describe('test integration of withFeatures() & configureFeature()', ({ test }) =
     ];
 
     const PresentationalComponent = ({children} = {}) => <div>{children}</div>;
-    const NotFoundComponent = () => <div className="not-found">No help for you today!</div>;
+    const DefaultFallBackComponent = () => <div className="default-fallback-component">No help for you today!</div>;
     const FeatureComponent = () => <div className="feature">Need help? Call XXX-XXX-XXXX</div>;
-    const ConfiguredFeature = configureFeature(NotFoundComponent)('help')(FeatureComponent);
+    const ConfiguredFeature = configureFeature(DefaultFallBackComponent)('help')(FeatureComponent);
     const Features = withFeatures({ initialFeatures })(PresentationalComponent);
 
     const $ = dom.load(
@@ -42,7 +42,7 @@ describe('test integration of withFeatures() & configureFeature()', ({ test }) =
     );
     {
       const msg = 'it should not render NotFound component';
-      const actual = $('.not-found').length;
+      const actual = $('.default-fallback-component').length;
       const expected = 0;
       deepEqual(actual, expected, msg);
     }
@@ -75,9 +75,9 @@ describe('test integration of withFeatures() & configureFeature()', ({ test }) =
     ];
 
     const PresentationalComponent = ({children} = {}) => <div>{children}</div>;
-    const NotFoundComponent = () => <div className="not-found">No help for you today!</div>;
+    const DefaultFallBackComponent = () => <div className="default-fallback-component">No help for you today!</div>;
     const FeatureComponent = () => <div className="feature">Need help? Call XXX-XXX-XXXX</div>;
-    const ConfiguredFeature = configureFeature(NotFoundComponent)('help')(FeatureComponent);
+    const ConfiguredFeature = configureFeature(DefaultFallBackComponent)('help')(FeatureComponent);
     const Features = withFeatures({ initialFeatures })(PresentationalComponent);
 
     const $ = dom.load(
@@ -89,7 +89,7 @@ describe('test integration of withFeatures() & configureFeature()', ({ test }) =
     );
     {
       const msg = 'it should render NotFound component';
-      const actual = $('.not-found').length;
+      const actual = $('.default-fallback-component').length;
       const expected = 1;
       deepEqual(actual, expected, msg);
     }
