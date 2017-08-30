@@ -76,9 +76,9 @@ getIsEnabled(featureName: String, features: Object) => enabled: Boolean
 
 ## Enabling a feature from the url
 
-__NOTE:__ If you are using server rendering then overiding features from the url will cause React to throw a warning that client side html result is different from the server.
+__NOTE:__ If you are using server rendering then overriding features from the url will cause React to throw a warning that the client-side HTML result is different from the server.
 
-Add comma seperated names to the `ft` search param. `?ft=FEATURE_NAME,FEATURE_NAME`
+Add comma-separated names to the `ft` search param. `?ft=FEATURE_NAME,FEATURE_NAME`
 
 __example__
 ```
