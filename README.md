@@ -21,7 +21,7 @@ If someone visits the help chat page, you want to show a 404 component.
 Lets create a dull help chat component placeholder to start, imagine it shows chat messages and what not. 
 ```javascript
 // help-chat-component.js
-const HelpChat = () => (<div className="help-chat">my real help chat stuff goes here..</div>
+const HelpChat = () => <div>my real help chat stuff goes here..</div>;
 export default HelpChat;
 ```
 
@@ -33,7 +33,7 @@ import { withFeatures } from 'react-feature-toggles';
 import HelpChatContainer from './help-chat-container';
 export default withFeatures({
   initialFeatures: [
-    { name: 'help-chat', enabled: false, dependencies: [] }, // Add the 'help-chat' feature
+    { name: 'help-chat', enabled: false, dependencies: [] }, // Specify the 'help-chat' feature
     { name: 'a-feature', enabled: true, dependencies: [] },
     { name: 'b-feature', enabled: false, dependencies: [] }
   ]
@@ -57,7 +57,7 @@ We can now use `feature-404` anwhere we want to show a 404 page when a feature i
 import feature404 from './feature-404.js'
 import HelpChat from './help-chat-component';
 
-const help404 = feature404('help');
+const help404 = feature404('help-chat');
 export default help404(HelpChat);
 ```
 It should now only render the HelpChat component when `help-chat` is enabled, and the 404 component when its not enabled.
