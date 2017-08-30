@@ -19,12 +19,12 @@ describe('configureFeature()', ({ test }) => {
     end,
     deepEqual
   }) => {
-    const NotFound = createTestComponent('not-found');
+    const DefaultFallbackComponent = createTestComponent('default-fallback-component');
     const Feature = createTestComponent('feature');
-    const Fallback = createTestComponent('fall-back');
+    const FallbackComponent = createTestComponent('fallback-component');
 
     const ConfiguredFeature =
-      configureFeature(NotFound)('game')(Feature, Fallback);
+      configureFeature(DefaultFallbackComponent)('game')(Feature, FallbackComponent);
 
     const FeatureWithContext = withContext([])(ConfiguredFeature);
 
@@ -34,8 +34,8 @@ describe('configureFeature()', ({ test }) => {
       render(<FeatureWithContext someOtherProp={someOtherProp} />)
     );
     {
-      const msg = 'it should not render NotFound component';
-      const actual = $('.not-found').length;
+      const msg = 'it should not render DefaultFallbackComponent component';
+      const actual = $('.default-fallback-component').length;
       const expected = 0;
       deepEqual(actual, expected, msg);
     }
@@ -46,8 +46,8 @@ describe('configureFeature()', ({ test }) => {
       deepEqual(actual, expected, msg);
     }
     {
-      const msg = 'it should render the Fallback component';
-      const actual = $('.fall-back').length;
+      const msg = 'it should render the FallbackComponent component';
+      const actual = $('.fallback-component').length;
       const expected = 1;
       deepEqual(actual, expected, msg);
     }
@@ -61,12 +61,12 @@ describe('configureFeature()', ({ test }) => {
   });
 
   test('...feature enabled, with FallbackComponent', ({ end, deepEqual }) => {
-    const NotFound = createTestComponent('not-found');
+    const DefaultFallbackComponent = createTestComponent('default-fallback-component');
     const Feature = createTestComponent('feature');
-    const Fallback = createTestComponent('fall-back');
+    const FallbackComponent = createTestComponent('fallback-component');
 
     const ConfiguredFeature =
-      configureFeature(NotFound)('game')(Feature, Fallback);
+      configureFeature(DefaultFallbackComponent)('game')(Feature, FallbackComponent);
 
     const FeatureWithContext = withContext(['help', 'game', 'food'])(
       ConfiguredFeature
@@ -78,8 +78,8 @@ describe('configureFeature()', ({ test }) => {
       render(<FeatureWithContext someOtherProp={someOtherProp} />)
     );
     {
-      const msg = 'it should not render NotFound component';
-      const actual = $('.not-found').length;
+      const msg = 'it should not render DefaultFallbackComponent component';
+      const actual = $('.default-fallback-component').length;
       const expected = 0;
       deepEqual(actual, expected, msg);
     }
@@ -90,8 +90,8 @@ describe('configureFeature()', ({ test }) => {
       deepEqual(actual, expected, msg);
     }
     {
-      const msg = 'it should not render the Fallback component';
-      const actual = $('.fall-back').length;
+      const msg = 'it should not render the FallbackComponent component';
+      const actual = $('.fallback-component').length;
       const expected = 0;
       deepEqual(actual, expected, msg);
     }
@@ -105,9 +105,9 @@ describe('configureFeature()', ({ test }) => {
   });
 
   test('...feature not enabled, no FallbackComponent', ({ end, deepEqual }) => {
-    const NotFound = createTestComponent('not-found');
+    const DefaultFallbackComponent = createTestComponent('default-fallback-component');
     const Feature = createTestComponent('feature');
-    const ConfiguredFeature = configureFeature(NotFound)('game')(Feature);
+    const ConfiguredFeature = configureFeature(DefaultFallbackComponent)('game')(Feature);
     const FeatureWithContext = withContext([])(ConfiguredFeature);
 
     const someOtherProp = 'bacon and eggs';
@@ -116,8 +116,8 @@ describe('configureFeature()', ({ test }) => {
       render(<FeatureWithContext someOtherProp={someOtherProp} />)
     );
     {
-      const msg = 'it should render NotFound component';
-      const actual = $('.not-found').length;
+      const msg = 'it should render DefaultFallbackComponent component';
+      const actual = $('.default-fallback-component').length;
       const expected = 1;
       deepEqual(actual, expected, msg);
     }
@@ -128,8 +128,8 @@ describe('configureFeature()', ({ test }) => {
       deepEqual(actual, expected, msg);
     }
     {
-      const msg = 'it should not render the Fallback component';
-      const actual = $('.fall-back').length;
+      const msg = 'it should not render the FallbackComponent component';
+      const actual = $('.fallback-component').length;
       const expected = 0;
       deepEqual(actual, expected, msg);
     }
@@ -143,9 +143,9 @@ describe('configureFeature()', ({ test }) => {
   });
 
   test('...feature enabled, no FallbackComponent', ({ end, deepEqual }) => {
-    const NotFound = createTestComponent('not-found');
+    const DefaultFallbackComponent = createTestComponent('default-fallback-component');
     const Feature = createTestComponent('feature');
-    const ConfiguredFeature = configureFeature(NotFound)('game')(Feature);
+    const ConfiguredFeature = configureFeature(DefaultFallbackComponent)('game')(Feature);
     const FeatureWithContext = withContext(['lessions', 'game'])(
       ConfiguredFeature
     );
@@ -156,8 +156,8 @@ describe('configureFeature()', ({ test }) => {
       render(<FeatureWithContext someOtherProp={someOtherProp} />)
     );
     {
-      const msg = 'it should not render NotFound component';
-      const actual = $('.not-found').length;
+      const msg = 'it should not render DefaultFallbackComponent component';
+      const actual = $('.default-fallback-component').length;
       const expected = 0;
       deepEqual(actual, expected, msg);
     }
@@ -168,8 +168,8 @@ describe('configureFeature()', ({ test }) => {
       deepEqual(actual, expected, msg);
     }
     {
-      const msg = 'it should not render the Fallback component';
-      const actual = $('.fall-back').length;
+      const msg = 'it should not render the FallbackComponent component';
+      const actual = $('.fallback-component').length;
       const expected = 0;
       deepEqual(actual, expected, msg);
     }
