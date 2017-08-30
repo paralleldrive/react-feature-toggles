@@ -18,7 +18,7 @@ React Feature Toggles attempts to satisfy the following requirements:
 Imagine you have a help chat feature you want to keep hidden until the feature is ready to be released.
 If someone visits the help chat page, you want to show a 404 component.
 
-Lets create a dull help chat component placeholder to start, imagine it shows chat messages and what not. 
+Lets create a help chat component placeholder to start, imagine it shows chat messages and what not. 
 ```javascript
 // help-chat-component.js
 const HelpChat = () => <div>my real help chat stuff goes here..</div>;
