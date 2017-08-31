@@ -1,6 +1,6 @@
 {
   "name": "@paralleldrive/react-feature-toggles",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "React Feature Toggles",
   "main": "src/index.js",
   "repository": {
