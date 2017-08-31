@@ -47,6 +47,19 @@ const help404 = feature404('help-chat');
 export default help404(HelpChatComponent);
 ```
 
+Alternatively, if we want to override the default 404 fallback component for a feature, we can instead specify a different component to display if the feature is disabled.
+
+```javascript
+// help-chat-container.js
+import feature404 from './feature-404'
+import HelpChatComponent from './help-chat-component';
+import ComingSoonComponent from './coming-soon-component';
+
+const help404 = feature404('help-chat');
+
+export default help404(HelpChatComponent, ComingSoonComponent);
+```
+
 We then need to let our components know what features are enabled. To do this we can use the `withFeatures` HOC to wrap our page component.
 
 ```javascript
