@@ -11,6 +11,11 @@ React Feature Toggles attempts to satisfy the following requirements:
 * Toggle features on with url parameters
 * Feature Dependency - if a feature depends on a another feature that is disabled, then neither of them should execute
 
+## Install
+```
+npm install --save @paralleldrive/react-feature-toggles
+```
+
 ## Example
 
 ### 404 page
