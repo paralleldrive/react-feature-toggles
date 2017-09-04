@@ -2,7 +2,7 @@
   "name": "@paralleldrive/react-feature-toggles",
   "version": "1.0.3",
   "description": "React Feature Toggles",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/paralleldrive/react-feature-toggles.git"
@@ -50,7 +50,8 @@
     "test": "tape -r babel-register src/test",
     "test:integration": "tape -r babel-register src/test/integration",
     "watch": "watch 'reset && npm run --silent test' src",
-    "precommit-msg": "echo 'Pre-commit checks...' && exit 0"
+    "precommit-msg": "echo 'Pre-commit checks...' && exit 0",
+    "prepare": "npm run build"
   },
   "keywords": [
     "react",
