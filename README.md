@@ -16,7 +16,7 @@ React Feature Toggles attempts to satisfy the following requirements:
 npm install --save @paralleldrive/react-feature-toggles
 ```
 
-## Example
+## Setup
 
 Setup withFeatures in the page HOC composition
 
