@@ -50,7 +50,7 @@ import compose from 'lodash/fp/compose';
 
 import requiresFeature from '../hocs/requiresFeature';
 import MyComponent from '../components/my-component';
-import pageHOC from `../hocs/page';
+import pageHOC from '../hocs/page';
 
 const MyPage = compose(
   pageHOC, // withFeatures should be in there
