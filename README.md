@@ -22,7 +22,7 @@ Setup withFeatures in the page HOC composition
 
 ```javascript
 import { withFeatures } from '@paralleldrive/react-feature-toggles';
-import initalFeatures from '../config/initial-features';
+import initialFeatures from '../config/initial-features';
 
 const pageHOC = compose(
   withRedux,
