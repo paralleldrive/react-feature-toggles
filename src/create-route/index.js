@@ -6,7 +6,6 @@ const createRoute = ({
   featureName,
   path,
 } = {}, features, render) => (req, res, ...rest) => {
-  // const isEnabled = getIsEnabled(features, featureName);
   return render(
     req,
     handleResponse(res, getIsEnabled(features, featureName)),
