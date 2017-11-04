@@ -17,6 +17,7 @@
   "devDependencies": {
     "babel-cli": "6.24.1",
     "babel-eslint": "7.2.3",
+    "babel-polyfill": "6.26.0",
     "babel-preset-env": "1.6.0",
     "babel-preset-react": "6.24.1",
     "babel-preset-stage-2": "6.24.1",
@@ -30,6 +31,7 @@
     "ramda": "0.24.1",
     "react": "15.6.1",
     "react-dom": "15.6.1",
+    "riteway": "2.0.3",
     "tape": "4.6.3",
     "watch": "1.0.2"
   },
@@ -47,7 +49,7 @@
   "scripts": {
     "lint": "eslint src && echo '-- linting finished --'",
     "build": "babel src -d dist",
-    "test": "tape -r babel-register src/test",
+    "test": "tape -r babel-register -r babel-polyfill src/test",
     "test:integration": "tape -r babel-register src/test/integration",
     "watch": "watch 'reset && npm run --silent test' src",
     "precommit-msg": "echo 'Pre-commit checks...' && exit 0",
