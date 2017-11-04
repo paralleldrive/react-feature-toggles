@@ -83,5 +83,4 @@ describe('createRoute()', async should => {
 
     route(Request(), Response(), 'a', 'b', 'c');
   } 
-
 });

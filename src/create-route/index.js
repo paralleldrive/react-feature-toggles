@@ -1,3 +1,4 @@
+import { curry } from 'ramda';
 import getIsEnabled from '../utils/get-is-enabled';
 
 const handleResponse = (res, isEnabled) => isEnabled ? res.status(200) : res.status(404);
@@ -14,4 +15,4 @@ const createRoute = ({
   );
 };
 
-export default createRoute;
+export default curry(createRoute);
