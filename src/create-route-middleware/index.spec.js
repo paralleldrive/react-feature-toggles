@@ -21,14 +21,14 @@ describe('createRouteMiddleware()', async should => {
 
     assert({
       given: 'a feature that is enabled',
-      should: 'res should have the correct status code',
+      should: 'have the correct status code for res',
       actual: res.statusCode,
       expected: 200
     });
 
     assert({
       given: 'next callback',
-      should: 'should call next after completing',
+      should: 'call next after completing',
       actual: next.valueOf(),
       expected: true
     });
@@ -46,14 +46,14 @@ describe('createRouteMiddleware()', async should => {
 
     assert({
       given: 'a feature that is disabled',
-      should: 'res should have the correct status code',
+      should: 'have the correct status code for res',
       actual: res.statusCode,
       expected: 404
     });
 
     assert({
       given: 'next callback',
-      should: 'should call next after completing',
+      should: 'call next after completing',
       actual: next.valueOf(),
       expected: true
     });
@@ -71,14 +71,14 @@ describe('createRouteMiddleware()', async should => {
 
     assert({
       given: 'a feature that is disabled and a search string that enables it',
-      should: 'res should have the correct status code',
+      should: 'have the correct status code for res',
       actual: res.statusCode,
       expected: 200
     });
 
     assert({
       given: 'next callback',
-      should: 'should call next after completing',
+      should: 'call next after completing',
       actual: next.valueOf(),
       expected: true
     });
@@ -100,14 +100,14 @@ describe('createRouteMiddleware() auto curried', async should => {
 
     assert({
       given: 'a feature that is enabled',
-      should: 'res should have the correct status code',
+      should: 'have the correct status code for res',
       actual: res.statusCode,
       expected: 200
     });
 
     assert({
       given: 'next callback',
-      should: 'should call next after completing',
+      should: 'call next after completing',
       actual: next.valueOf(),
       expected: true
     });
