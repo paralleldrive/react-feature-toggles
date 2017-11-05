@@ -53,7 +53,7 @@ describe('createRouteMiddleware()', async should => {
 
     assert({
       given: 'next callback',
-      should: 'should call next after completeing',
+      should: 'should call next after completing',
       actual: next.valueOf(),
       expected: true
     });
@@ -78,7 +78,7 @@ describe('createRouteMiddleware()', async should => {
 
     assert({
       given: 'next callback',
-      should: 'should call next after completeing',
+      should: 'should call next after completing',
       actual: next.valueOf(),
       expected: true
     });
@@ -107,7 +107,7 @@ describe('createRouteMiddleware() auto curried', async should => {
 
     assert({
       given: 'next callback',
-      should: 'should call next after completeing',
+      should: 'should call next after completing',
       actual: next.valueOf(),
       expected: true
     });
