@@ -1,4 +1,4 @@
-import {describe} from 'riteway';
+import { describe } from 'riteway';
 import createFeatures from '../test/fixtures/createFeatures';
 import Response from './test/Response';
 import Request from './test/Request';
@@ -28,7 +28,7 @@ describe('createRouteMiddleware()', async should => {
 
     assert({
       given: 'next callback',
-      should: 'should call next after completeing',
+      should: 'should call next after completing',
       actual: next.valueOf(),
       expected: true
     });
