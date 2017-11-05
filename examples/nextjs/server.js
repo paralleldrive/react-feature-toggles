@@ -14,7 +14,7 @@ app.prepare().then(() => {
   const server = express();
 
   // This will check the feature and set the status the correct status for this route.
-  // 404 if the feature is not enabled, 200 if enabled.
+  // 200 if the feature is enabled, otherwise it will be 404.
   server.use('/profile', featureToggleHandler('profile'));
 
   // Then render the profile component at the same path.
