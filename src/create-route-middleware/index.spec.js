@@ -83,6 +83,31 @@ describe('createRouteMiddleware()', async should => {
       expected: true
     });
   }
+
+  {
+    const features = createFeatures();
+    const featureName = 'help';
+    const middleware = createRouteMiddleware(features, featureName);
+    const req = Request({ url: 'http://mydomain.com/help?ft=posts' });
+    const res = Response();
+    const next = Next();
+
+    middleware(req, res, next.next);
+
+    assert({
+      given: 'a feature that is disabled and an incorrect search string',
+      should: 'have the correct status code for res',
+      actual: res.statusCode,
+      expected: 404
+    });
+
+    assert({
+      given: 'next callback',
+      should: 'call next after completing',
+      actual: next.valueOf(),
+      expected: true
+    });
+  }
 });
 
 describe('createRouteMiddleware() auto curried', async should => {
