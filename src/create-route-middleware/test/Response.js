@@ -1,8 +1,8 @@
 const Response = ({
   statusCode
 } = {}) => ({
-  status: (n) => Response({ statusCode: n }),
-  statusCode: statusCode
+  status: (n) => statusCode = n,
+  get statusCode() { return statusCode; }
 });
 
 export default Response;
