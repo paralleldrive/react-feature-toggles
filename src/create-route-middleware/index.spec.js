@@ -84,3 +84,32 @@ describe('createRouteMiddleware()', async should => {
     });
   }
 });
+
+describe('createRouteMiddleware() auto curried', async should => {
+  const { assert } = should('update the status code correctly');
+
+  {
+    const features = createFeatures();
+    const featureName = 'posts';
+    const middleware = createRouteMiddleware(features)(featureName);
+    const req = Request();
+    const res = Response();
+    const next = Next();
+
+    middleware(req, res, next.next);
+
+    assert({
+      given: 'a feature that is enabled',
+      should: 'res should have the correct status code',
+      actual: res.statusCode,
+      expected: 200
+    });
+
+    assert({
+      given: 'next callback',
+      should: 'should call next after completeing',
+      actual: next.valueOf(),
+      expected: true
+    });
+  }
+});
