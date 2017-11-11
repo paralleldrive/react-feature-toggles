@@ -2,8 +2,8 @@ import describe from 'tape';
 import dom from 'cheerio';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
-import withContext from './with-context';
-import configureFeature from '../index';
+import withContext from './test/with-context';
+import configureFeature from './index';
 
 const render = ReactDOMServer.renderToStaticMarkup;
 

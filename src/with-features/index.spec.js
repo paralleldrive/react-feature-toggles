@@ -1,10 +1,10 @@
 import describe from 'tape';
-import withFeatures from '../index';
+import withFeatures from './index';
 import dom from 'cheerio';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
-import createWrappedComponent from './create-wrapped-component';
-import createFeature from '../../test/fixtures/createFeature';
+import createWrappedComponent from './test/create-wrapped-component';
+import createFeature from '../test/fixtures/createFeature';
 
 const render = ReactDOMServer.renderToStaticMarkup;
 
