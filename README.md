@@ -16,59 +16,51 @@ React Feature Toggles attempts to satisfy the following requirements:
 npm install --save @paralleldrive/react-feature-toggles
 ```
 
-## Example
+## Setup
 
-### 404 page
-Imagine you have a help chat feature you want to keep hidden until the feature is ready to be released.
-If someone visits the help chat page, you want to show a 404 component.
-
-Let's create a help chat component placeholder to start; imagine it shows chat messages and what not.
-```javascript
-// help-chat-component.js
-const HelpChat = () => <div>My real help chat stuff goes here...</div>;
-
-export default HelpChat;
-```
-
-We might have other features in the future that should render a 404 page by default when they are disabled, so let's create a reusable component that renders the app's 404 when the given feature is not enabled. We can use `configureFeature` to build this component.
+Setup withFeatures in the page HOC composition
 
 ```javascript
-// feature-404.js
-import { configureFeature } from 'react-feature-toggles';
-import App404 from './app-404-component';
+import { withFeatures } from '@paralleldrive/react-feature-toggles';
+import initialFeatures from '../config/initial-features';
 
-export default configureFeature(App404);
+const pageHOC = compose(
+  withRedux,
+  withFeatures({ initialFeatures }),
+  hoc1,
+  hoc2
+);
 ```
 
-We can now use `feature-404` anywhere we want to show a 404 page when a feature is disabled. Let's use it for our help chat container that gets rendered by the help chat page.
+Configure the component fallback:
 
 ```javascript
-// help-chat-container.js
-import feature404 from './feature-404'
-import HelpChatComponent from './help-chat-component';
+import NotFound from '../components/not-found-component';
+import { configureFeature } from '@paralleldrive/react-feature-toggles';
 
-const help404 = feature404('help-chat');
+const requiresFeature = configureFeature(NotFound);
 
-export default help404(HelpChatComponent);
+export default requiresFeature;
 ```
 
-We then need to let our components know what features are enabled. To do this we can use the `withFeatures` HOC to wrap our page component.
+Build your component that requires a specific feature:
 
 ```javascript
-// help-chat-page.js
-import { withFeatures } from 'react-feature-toggles';
-import HelpChatContainer from './help-chat-container';
+import compose from 'lodash/fp/compose';
 
-export default withFeatures({
-  initialFeatures: [
-    { name: 'help-chat', enabled: false, dependencies: [] }, // Specify the 'help-chat' feature
-    { name: 'a-feature', enabled: true, dependencies: [] },
-    { name: 'b-feature', enabled: false, dependencies: [] }
-  ]
-})(HelpChatContainer);
+import requiresFeature from '../hocs/requiresFeature';
+import MyComponent from '../components/my-component';
+import pageHOC from '../hocs/page';
+
+const MyPage = compose(
+  pageHOC, // withFeatures should be in there
+  requiresFeature('feature-name'),
+  // Optionally, anything special for this page should be here, e.g.,
+  // requiresRole('admin')
+)(MyComponent);
+
+export default MyPage;
 ```
-
-It should now only render the HelpChatComponent when `help-chat` is enabled, and the 404 component when its not enabled.
 
 ## API
 
@@ -141,3 +133,4 @@ __example__
 ```
 http://www.domain.com/?ft=help,comments
 ```
+
