@@ -5,7 +5,7 @@ const port = parseInt(process.env.PORT, 10) || 3000;
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
 const handle = app.getRequestHandler();
-const createRouteMiddleware = require('@paralleldrive/react-feature-toggles/dist/create-route-middleware');
+const { createRouteMiddleware } = require('@paralleldrive/react-feature-toggles');
 const features = require('./features');
 
 const featureToggleHandler = createRouteMiddleware(features);
