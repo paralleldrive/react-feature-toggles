@@ -114,12 +114,11 @@ describe('createRouteMiddleware() auto curried', async should => {
 
   {
     const features = createFeatures();
-    const requiredFeature = 'posts';
-    const middleware = createRouteMiddleware(features)({requiredFeature});
     const req = Request();
     const res = Response();
     const next = Next();
-
+    const middleware = createRouteMiddleware(features)({requiredFeature: 'posts'});
+    
     middleware(req, res, next.next);
 
     assert({
