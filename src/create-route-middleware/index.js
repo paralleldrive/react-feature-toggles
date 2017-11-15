@@ -13,7 +13,7 @@ const createRoute = (features, { requiredFeature, ...methods }) => (req, res, ne
   setStatus(res, getIsEnabled(updatedFeatures, requiredFeature));
 
   const handler = methods[req.method.toLowerCase()];
-  if (handler !== void 1 && typeof handler === 'function') {
+  if (handler !== undefined && typeof handler === 'function') {
     handler(req,res);
   }
 
