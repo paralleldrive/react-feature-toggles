@@ -8,21 +8,19 @@ const handle = app.getRequestHandler();
 const { createRouteMiddleware } = require('@paralleldrive/react-feature-toggles');
 const features = require('./features');
 
-const featureToggleHandler = createRouteMiddleware(features);
+const createHandler = createRouteMiddleware(features);
 
 app.prepare().then(() => {
   const server = express();
 
   // This will check the feature and set the correct status code for this route.
   // 200 if the feature is enabled, otherwise it will be 404.
-  server.use('/profile', featureToggleHandler('profile'));
-
-  // Then render the profile component at the same path.
-  // This is required. If you let this get to nextjs' default handler it will
-  // override the 404 with a 200 status.
-  server.get('/profile', (req, res) => {
-    return app.render(req, res, '/profile', req.query);
-  });
+  server.use('/profile', createHandler({
+    requiredFeature: 'profile',
+    get: (req, res) => {
+      return app.render(req, res, '/profile', req.query);
+    }
+  }));
 
   server.get('*', (req, res) => {
     return handle(req, res);
