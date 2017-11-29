@@ -168,7 +168,7 @@ describe('createRouteMiddleware() auto curried', async should => {
     });
 
     assert({
-      given: 'a method handler',
+      given: 'a method handler has been applied',
       should: 'do not call next after calling method handler',
       actual: next.valueOf(),
       expected: false
@@ -207,7 +207,7 @@ describe('createRouteMiddleware() auto curried', async should => {
     });
 
     assert({
-      given: 'a method handler',
+      given: 'a method handler has been applied',
       should: 'do not call next after calling method handler',
       actual: next.valueOf(),
       expected: false
@@ -246,7 +246,7 @@ describe('createRouteMiddleware() auto curried', async should => {
     });
 
     assert({
-      given: 'a method handler',
+      given: 'a method handler has been applied',
       should: 'do not call next after calling method handler',
       actual: next.valueOf(),
       expected: false
@@ -285,7 +285,7 @@ describe('createRouteMiddleware() auto curried', async should => {
     });
 
     assert({
-      given: 'a method handler',
+      given: 'a method handler has been applied',
       should: 'do not call next after calling method handler',
       actual: next.valueOf(),
       expected: false
