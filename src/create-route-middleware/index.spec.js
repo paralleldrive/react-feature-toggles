@@ -168,10 +168,10 @@ describe('createRouteMiddleware() auto curried', async should => {
     });
 
     assert({
-      given: 'next callback',
-      should: 'call next after completing',
+      given: 'a method handler',
+      should: 'do not call next after calling method handler',
       actual: next.valueOf(),
-      expected: true
+      expected: false
     });
   }
 
@@ -207,10 +207,10 @@ describe('createRouteMiddleware() auto curried', async should => {
     });
 
     assert({
-      given: 'next callback',
-      should: 'call next after completing',
+      given: 'a method handler',
+      should: 'do not call next after calling method handler',
       actual: next.valueOf(),
-      expected: true
+      expected: false
     });
   }
 
@@ -246,10 +246,10 @@ describe('createRouteMiddleware() auto curried', async should => {
     });
 
     assert({
-      given: 'next callback',
-      should: 'call next after completing',
+      given: 'a method handler',
+      should: 'do not call next after calling method handler',
       actual: next.valueOf(),
-      expected: true
+      expected: false
     });
   }
 
@@ -285,10 +285,10 @@ describe('createRouteMiddleware() auto curried', async should => {
     });
 
     assert({
-      given: 'next callback',
-      should: 'call next after completing',
+      given: 'a method handler',
+      should: 'do not call next after calling method handler',
       actual: next.valueOf(),
-      expected: true
+      expected: false
     });
   }
 
