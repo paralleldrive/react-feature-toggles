@@ -126,7 +126,9 @@ describe('createRouteMiddleware()', async should => {
         requiredFeature: 'posts',
         get: (req, res) => {
           // Simulate template rendering time
-          // This allows following express methods to be called, possibly causing errors or changing the status.
+          // This allows subsequent express methods to be called that could possibly
+          // cause errors or change the response status if the `next` callback is not
+          // used correctly.
           setTimeout(() => res.send(), 3000);
         }
       }
