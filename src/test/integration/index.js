@@ -1,2 +1,2 @@
 import './context';
-import '../../create-route-middleware/test/integration';
+import './create-route-middleware';
