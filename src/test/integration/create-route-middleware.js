@@ -119,6 +119,37 @@ describe('createRouteMiddleware()', async should => {
   {
     const app = express();
     const features = createFeatures();
+    const path = '/posts';
+    const handler = createRouteMiddleware(
+      features,
+      {
+        requiredFeature: 'posts',
+        get: (req, res) => {
+          // Simulate template rendering time
+          // This allows following express methods to be called, possibly causing errors or changing the status.
+          setTimeout(() => res.send(), 3000);
+        }
+      }
+    );
+    app.use(path, handler);
+    app.get('*', (req, res) => { res.status(404); res.send(); });
+
+    request(app)
+      .get(path)
+      .end(function(err, res) {
+        if (err) throw(err);
+        assert({
+          given: 'given more than one handler',
+          should: 'handler should not effect each other',
+          actual: res.statusCode,
+          expected: 200
+        });
+      });
+  }
+
+  {
+    const app = express();
+    const features = createFeatures();
     const handler = createRouteMiddleware(
       features,
       {
