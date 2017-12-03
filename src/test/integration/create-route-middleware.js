@@ -141,8 +141,8 @@ describe('createRouteMiddleware()', async should => {
       .end(function(err, res) {
         if (err) throw(err);
         assert({
-          given: 'given more than one handler',
-          should: 'handler should not effect each other',
+          given: 'given subsequent handlers',
+          should: 'not effect the correct handler response status',
           actual: res.statusCode,
           expected: 200
         });
