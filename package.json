@@ -35,7 +35,7 @@
     "react-dom": "15.6.1",
     "riteway": "2.0.3",
     "supertest": "3.0.0",
-    "tape": "4.6.3",
+    "tape": "4.8.0",
     "watch": "1.0.2"
   },
   "peerDependencies": {
