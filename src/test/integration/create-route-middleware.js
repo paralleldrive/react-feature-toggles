@@ -125,7 +125,7 @@ describe('createRouteMiddleware()', async should => {
       {
         requiredFeature: 'posts',
         get: (req, res) => {
-          // Simulate template rendering time
+          // Simulate async handler delay
           // This allows subsequent express methods to be called that could possibly
           // cause errors or change the response status if the `next` callback is not
           // used correctly.
