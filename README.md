@@ -62,21 +62,9 @@ const MyPage = compose(
 export default MyPage;
 ```
 
-## API
+## Interfaces
 
-### withFeatures()
-
-Creates an array of enabled features, then sets the features array into React context and passes it onto the wrapped component via props.
-
-```javascript
-// withFeatures() function signature.
-const withFeatures = ({
-  initialFeatures = [],
-  windowLocationSearch = ""
-} = {}) => (WrappedComponent: ReactComponent) => ReactComponent
-```
-
-__initialFeatures__
+### Feature
 
 ```javascript
 interface Feature {
@@ -84,30 +72,34 @@ interface Feature {
   enabled: false,
   dependencies?: [...featureName: String]
 }
-const initialFeatures = [ ...Feature]
 ```
 
-__windowLocationSearch__
+## API
 
-Should be a string that is equivalent to the browser `window.location.search`; this is mostly used for testing purposes.
+### withFeatures()
+
+Returns a higher order React context provider.
+
+#### Function Signature
 
 ```javascript
-const windowLocationSearch = '?ft=comments'
+const withFeatures = ({
+  initialFeatures = [ ...Feature ],
+  windowLocationSearch = ""
+} = {}) => (WrappedComponent: ReactComponent) => ReactComponent
 ```
 
 ### configureFeature()
+Conditionally render components enabled features in the React context.
 
-Conditionally renders components based on enabled features in the React context.
+#### Function Signature
 
 ```javascript
-// configureFeatures() function signature
 const configureFeature =
   (DefaultFallbackComponent: ReactComponent) =>
   (featureName: String) =>
   (FeatureComponent: ReactComponent, FallbackComponent = DefaultFallbackComponent) => ReactComponent
 ```
-
-### Utils
 
 ### getEnabled
 Returns all the names of enabled features.
@@ -116,11 +108,26 @@ Returns all the names of enabled features.
 getEnabled(features: [...Feature]) => featureNames: [...String]
 ```
 
+```javascript
+
+import { getEnabled } from '@paralleldrive/react-feature-toggles';
+
+const enabledFeatures = getEnabled(features);
+```
+
 ### getIsEnabled
 Returns the enabled value of a single feature. If the feature does not exist it is considered disabled.
 
 ```javascript
 getIsEnabled(features: [...Feature], featureName: String, ) => enabled: Boolean
+```
+
+```javascript
+
+import { getIsEnabled } from '@paralleldrive/react-feature-toggles';
+
+const helpIsEnabled = getIsEnabled(features, 'help');
+
 ```
 
 ## Enabling a feature from the url
