@@ -78,12 +78,12 @@ interface Feature {
 
 ### withFeatures()
 
-Returns a higher order React context provider.
+Returns a higher order React context provider component.
 
 #### Function Signature
 
 ```javascript
-const withFeatures = ({
+withFeatures = ({
   initialFeatures = [ ...Feature ],
   windowLocationSearch = ""
 } = {}) => (WrappedComponent: ReactComponent) => ReactComponent
@@ -95,7 +95,7 @@ Conditionally render components enabled features in the React context.
 #### Function Signature
 
 ```javascript
-const configureFeature =
+configureFeature =
   (DefaultFallbackComponent: ReactComponent) =>
   (featureName: String) =>
   (FeatureComponent: ReactComponent, FallbackComponent = DefaultFallbackComponent) => ReactComponent
@@ -104,12 +104,15 @@ const configureFeature =
 ### getEnabled
 Returns all the names of enabled features.
 
+#### Function Signature
+
 ```javascript
 getEnabled(features: [...Feature]) => featureNames: [...String]
 ```
 
-```javascript
+#### Function Signature
 
+```javascript
 import { getEnabled } from '@paralleldrive/react-feature-toggles';
 
 const enabledFeatures = getEnabled(features);
