@@ -1,3 +1,5 @@
+import { curry } from 'ramda';
+
 const isFeatureIncluded = (features = [], featureName = '') => features.includes(featureName);
 
-export default isFeatureIncluded;
+export default curry(isFeatureIncluded);
