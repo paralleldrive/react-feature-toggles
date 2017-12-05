@@ -14,7 +14,7 @@ const createRoute = (features, { requiredFeature, ...methods }) => (req, res, ne
 
   const handler = methods[req.method.toLowerCase()];
   if (handler !== undefined && typeof handler === 'function') {
-    handler(req,res);
+    return handler(req,res);
   }
 
   next();

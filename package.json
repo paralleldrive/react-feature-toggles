@@ -26,13 +26,15 @@
     "deep-freeze": "0.0.1",
     "eslint": "4.4.1",
     "eslint-plugin-react": "7.2.1",
+    "express": "4.16.2",
     "pre-commit": "1.2.2",
     "prop-types": "15.5.10",
     "ramda": "0.24.1",
     "react": "15.6.1",
     "react-dom": "15.6.1",
     "riteway": "2.0.3",
-    "tape": "4.6.3",
+    "supertest": "3.0.0",
+    "tape": "4.8.0",
     "watch": "1.0.2"
   },
   "peerDependencies": {
@@ -50,7 +52,7 @@
     "lint": "eslint src && echo '-- linting finished --'",
     "build": "babel src -d dist",
     "test": "tape -r babel-register -r babel-polyfill src/test",
-    "test:integration": "tape -r babel-register src/test/integration",
+    "test:integration": "tape -r babel-register -r babel-polyfill src/test/integration",
     "watch": "watch 'reset && npm run --silent test' src",
     "precommit-msg": "echo 'Pre-commit checks...' && exit 0",
     "prepare": "npm run build"
