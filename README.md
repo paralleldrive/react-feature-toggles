@@ -90,7 +90,7 @@ withFeatures = ({
 
 ### configureFeature()
 
-Conditionally render components based on enabled features.
+Conditionally render components based on enabled/disabled features.
 
 #### Function Signature
 
