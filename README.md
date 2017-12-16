@@ -111,7 +111,7 @@ Returns all the names of enabled features.
 getEnabled(features: [...Feature]) => featureNames: [...String]
 ```
 
-#### Function Signature
+#### Use it
 
 ```javascript
 import { getEnabled } from '@paralleldrive/react-feature-toggles';
@@ -123,9 +123,13 @@ const enabledFeatures = getEnabled(features);
 
 Returns the enabled value of a single feature. If the feature does not exist it is considered disabled.
 
+#### Function signature
+
 ```javascript
 getIsEnabled(features: [...Feature], featureName: String, ) => enabled: Boolean
 ```
+
+#### Use it
 
 ```javascript
 
