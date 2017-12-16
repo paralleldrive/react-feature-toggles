@@ -90,7 +90,7 @@ withFeatures = ({
 
 ### configureFeature()
 
-Conditionally render components enabled features in the React context.
+Conditionally render components based on enabled features.
 
 #### Function Signature
 
