@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import getEnabled from '../utils/get-enabled';
-import updateFeaturesWithParams from '../utils/updateFeaturesWithParams';
+import getEnabled from './utils/get-enabled';
+import updateFeaturesWithParams from './utils/updateFeaturesWithParams';
 import PropTypes from 'prop-types';
 
 const getEnabledFeatures = (initialFeatures, windowLocationSearch) =>

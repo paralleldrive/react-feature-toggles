@@ -1,3 +1,3 @@
 import '../utils/test';
-import '../with-features/test';
+import './with-features';
 import '../configure-feature/test';
