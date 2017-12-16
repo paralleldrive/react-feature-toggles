@@ -84,12 +84,12 @@ Returns a higher order React context provider component.
 
 ```javascript
 withFeatures = ({
-  initialFeatures = [ ...Feature ],
-  windowLocationSearch = ""
+  initialFeatures = [ ...Feature ]
 } = {}) => (WrappedComponent: ReactComponent) => ReactComponent
 ```
 
 ### configureFeature()
+
 Conditionally render components enabled features in the React context.
 
 #### Function Signature
@@ -102,6 +102,7 @@ configureFeature =
 ```
 
 ### getEnabled
+
 Returns all the names of enabled features.
 
 #### Function Signature
@@ -119,6 +120,7 @@ const enabledFeatures = getEnabled(features);
 ```
 
 ### getIsEnabled
+
 Returns the enabled value of a single feature. If the feature does not exist it is considered disabled.
 
 ```javascript
