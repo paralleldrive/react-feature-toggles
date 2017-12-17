@@ -72,7 +72,6 @@ Creates an array of enabled features, then sets the features array into React co
 // withFeatures() function signature.
 const withFeatures = ({
   initialFeatures = [],
-  windowLocationSearch = ""
 } = {}) => (WrappedComponent: ReactComponent) => ReactComponent
 ```
 
@@ -85,14 +84,6 @@ interface Feature {
   dependencies?: [...featureName: String]
 }
 const initialFeatures = [ ...Feature]
-```
-
-__windowLocationSearch__
-
-Should be a string that is equivalent to the browser `window.location.search`; this is mostly used for testing purposes.
-
-```javascript
-const windowLocationSearch = '?ft=comments'
 ```
 
 ### configureFeature()
@@ -133,4 +124,3 @@ __example__
 ```
 http://www.domain.com/?ft=help,comments
 ```
-
