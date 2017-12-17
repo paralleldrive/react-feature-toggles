@@ -62,20 +62,9 @@ const MyPage = compose(
 export default MyPage;
 ```
 
-## API
+## Interfaces
 
-### withFeatures()
-
-Creates an array of enabled features, then sets the features array into React context and passes it onto the wrapped component via props.
-
-```javascript
-// withFeatures() function signature.
-const withFeatures = ({
-  initialFeatures = [],
-} = {}) => (WrappedComponent: ReactComponent) => ReactComponent
-```
-
-__initialFeatures__
+### Feature
 
 ```javascript
 interface Feature {
@@ -83,35 +72,71 @@ interface Feature {
   enabled: false,
   dependencies?: [...featureName: String]
 }
-const initialFeatures = [ ...Feature]
+```
+
+## API
+
+### withFeatures()
+
+Returns a higher order React context provider component.
+
+#### Function Signature
+
+```javascript
+withFeatures = ({
+  initialFeatures = [ ...Feature ]
+} = {}) => (WrappedComponent: ReactComponent) => ReactComponent
 ```
 
 ### configureFeature()
 
-Conditionally renders components based on enabled features in the React context.
+Conditionally render components based on enabled/disabled features.
+
+#### Function Signature
 
 ```javascript
-// configureFeatures() function signature
-const configureFeature =
+configureFeature =
   (DefaultFallbackComponent: ReactComponent) =>
   (featureName: String) =>
   (FeatureComponent: ReactComponent, FallbackComponent = DefaultFallbackComponent) => ReactComponent
 ```
 
-### Utils
-
 ### getEnabled
+
 Returns all the names of enabled features.
+
+#### Function Signature
 
 ```javascript
 getEnabled(features: [...Feature]) => featureNames: [...String]
 ```
 
+#### Use it
+
+```javascript
+import { getEnabled } from '@paralleldrive/react-feature-toggles';
+
+const enabledFeatures = getEnabled(features);
+```
+
 ### getIsEnabled
+
 Returns the enabled value of a single feature. If the feature does not exist it is considered disabled.
+
+#### Function signature
 
 ```javascript
 getIsEnabled(features: [...Feature], featureName: String, ) => enabled: Boolean
+```
+
+#### Use it
+
+```javascript
+
+import { getIsEnabled } from '@paralleldrive/react-feature-toggles';
+
+const helpIsEnabled = getIsEnabled(features, 'help');
+
 ```
 
 ## Enabling a feature from the url
