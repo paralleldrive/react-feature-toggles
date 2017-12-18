@@ -1,4 +1,4 @@
-import getIsEnabled from '../get-is-enabled';
+import getIsEnabled from './get-is-enabled';
 import { map, compose, filter, lensProp, view } from 'ramda';
 
 const nameLens = lensProp('name');

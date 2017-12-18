@@ -1,7 +1,7 @@
 import test from 'tape';
-import getIsEnabled from '../index';
+import getIsEnabled from '../get-is-enabled';
 import deepFreeze from 'deep-freeze';
-import createFeature from '../../../test/fixtures/createFeature';
+import createFeature from './fixtures/createFeature';
 
 test('getIsEnabled([], String)', ({ end, deepEqual }) => {
   const actual = getIsEnabled([], 'posts');

@@ -1,33 +1,33 @@
 import test from 'tape';
-import updateFeaturesWithParams from '../index';
+import updateFeaturesWithQuery from '../update-features-with-query';
 import deepFreeze from 'deep-freeze';
-import createFeature from '../../../test/fixtures/createFeature';
+import createFeature from './fixtures/createFeature';
 
-test('updateFeaturesWithParams()', ({ end, deepEqual }) => {
-  const actual = updateFeaturesWithParams();
+test('updateFeaturesWithQuery()', ({ end, deepEqual }) => {
+  const actual = updateFeaturesWithQuery();
   const expected = [];
   const msg = 'it should return an empty array';
   deepEqual(actual, expected, msg);
   end();
 });
 
-test('updateFeaturesWithParams([])', ({ end, deepEqual }) => {
-  const actual = updateFeaturesWithParams([]);
+test('updateFeaturesWithQuery([])', ({ end, deepEqual }) => {
+  const actual = updateFeaturesWithQuery([]);
   const expected = [];
   const msg = 'it should return an empty array';
   deepEqual(actual, expected, msg);
   end();
 });
 
-test('updateFeaturesWithParams([], Object)', ({end, deepEqual}) => {
-  const actual = updateFeaturesWithParams([], { q: 'js'});
+test('updateFeaturesWithQuery([], Object)', ({end, deepEqual}) => {
+  const actual = updateFeaturesWithQuery([], { q: 'js'});
   const expected = [];
   const msg = 'it should return an empty array';
   deepEqual(actual,expected,msg);
   end();
 });
 
-test('updateFeaturesWithParams([...Feature], Object)', ({end, deepEqual}) => {
+test('updateFeaturesWithQuery([...Feature], Object)', ({end, deepEqual}) => {
   const features = [
     createFeature({
       name: 'posts',
@@ -50,13 +50,13 @@ test('updateFeaturesWithParams([...Feature], Object)', ({end, deepEqual}) => {
   ];
   deepFreeze(features);
   {
-    const actual = updateFeaturesWithParams(features, {});
+    const actual = updateFeaturesWithQuery(features, {});
     const expected = features;
     const msg = 'it should return the unmodified features when a empty query is provided';
     deepEqual(actual, expected, msg);
   }
   {
-    const actual = updateFeaturesWithParams(features, { q: 'js' });
+    const actual = updateFeaturesWithQuery(features, { q: 'js' });
     const expected = features;
     const msg = 'it should return the unmodified features when query does not have ft params';
     deepEqual(actual, expected, msg);
@@ -65,7 +65,7 @@ test('updateFeaturesWithParams([...Feature], Object)', ({end, deepEqual}) => {
     const expectedFeatures = [...features];
     expectedFeatures[1] = {...expectedFeatures[1], enabled: true};
     expectedFeatures[3] = {...expectedFeatures[3], enabled: true};
-    const actual = updateFeaturesWithParams(features, { ft: 'post-rating,reports,login' });
+    const actual = updateFeaturesWithQuery(features, { ft: 'post-rating,reports,login' });
     const expected = expectedFeatures;
     const msg = 'it should return the correct features';
     deepEqual(actual, expected, msg);
