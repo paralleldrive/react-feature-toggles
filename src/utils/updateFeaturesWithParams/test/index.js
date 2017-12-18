@@ -19,15 +19,15 @@ test('updateFeaturesWithParams([])', ({ end, deepEqual }) => {
   end();
 });
 
-test('updateFeaturesWithParams([], String)', ({end, deepEqual}) => {
-  const actual = updateFeaturesWithParams([], '?posts');
+test('updateFeaturesWithParams([], Object)', ({end, deepEqual}) => {
+  const actual = updateFeaturesWithParams([], { q: 'js'});
   const expected = [];
   const msg = 'it should return an empty array';
   deepEqual(actual,expected,msg);
   end();
 });
 
-test('updateFeaturesWithParams([...Feature], String)', ({end, deepEqual}) => {
+test('updateFeaturesWithParams([...Feature], Object)', ({end, deepEqual}) => {
   const features = [
     createFeature({
       name: 'posts',
@@ -50,23 +50,23 @@ test('updateFeaturesWithParams([...Feature], String)', ({end, deepEqual}) => {
   ];
   deepFreeze(features);
   {
-    const actual = updateFeaturesWithParams(features, '');
-    const expected = features; 
-    const msg = 'it should return the unmodified features when a empty search string is provided';
+    const actual = updateFeaturesWithParams(features, {});
+    const expected = features;
+    const msg = 'it should return the unmodified features when a empty query is provided';
     deepEqual(actual, expected, msg);
   }
   {
-    const actual = updateFeaturesWithParams(features, '?');
-    const expected = features; 
-    const msg = 'it should return the unmodified features when a search string does not have ft params';
+    const actual = updateFeaturesWithParams(features, { q: 'js' });
+    const expected = features;
+    const msg = 'it should return the unmodified features when query does not have ft params';
     deepEqual(actual, expected, msg);
   }
   {
     const expectedFeatures = [...features];
     expectedFeatures[1] = {...expectedFeatures[1], enabled: true};
     expectedFeatures[3] = {...expectedFeatures[3], enabled: true};
-    const actual = updateFeaturesWithParams(features, '?ft=post-rating,reports,login');
-    const expected = expectedFeatures; 
+    const actual = updateFeaturesWithParams(features, { ft: 'post-rating,reports,login' });
+    const expected = expectedFeatures;
     const msg = 'it should return the correct features';
     deepEqual(actual, expected, msg);
   }
