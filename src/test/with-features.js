@@ -50,7 +50,7 @@ describe('withFeatures()', ({ test }) => {
   });
 
   test('...config with initialFeatures', ({ end, deepEqual }) => {
-    const initialFeatures = [ 
+    const initialFeatures = [
       createFeature({
         name: 'help',
         enabled: true,
@@ -89,7 +89,7 @@ describe('withFeatures()', ({ test }) => {
   });
 
   test('...url search param overrides', ({ end, deepEqual }) => {
-    const initialFeatures = [ 
+    const initialFeatures = [
       createFeature({
         name: 'game',
         enabled: false,
@@ -109,10 +109,9 @@ describe('withFeatures()', ({ test }) => {
 
     const WrappedComponent = createWrappedComponent();
     const Component = withFeatures({
-      initialFeatures,
-      windowLocationSearch: '?ft=game,comments'
+      initialFeatures
     })(WrappedComponent);
-    const $ = dom.load(render(<Component />));
+    const $ = dom.load(render(<Component query={{ ft: 'game,comments' }} />));
     {
       const msg =
         'the react context features should have the correct enabled features';
