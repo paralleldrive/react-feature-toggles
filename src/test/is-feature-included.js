@@ -1,6 +1,6 @@
 import { describe } from 'riteway';
 import isFeatureIncluded from '../is-feature-included';
-import createClientFeatures from './fixtures/createClientFeatures';
+import createClientFeatures from '../test-fixtures/create-client-features';
 
 describe('isFeatureIncluded()', async should => {
   const { assert } = should();

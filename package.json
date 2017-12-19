@@ -52,7 +52,7 @@
     "lint": "eslint src && echo '-- linting finished --'",
     "build": "babel src -d dist",
     "test": "tape -r babel-register -r babel-polyfill src/test",
-    "test:integration": "tape -r babel-register -r babel-polyfill src/test/integration",
+    "test:integration": "tape -r babel-register -r babel-polyfill src/integration",
     "watch": "watch 'reset && npm run --silent test' src",
     "precommit-msg": "echo 'Pre-commit checks...' && exit 0",
     "prepare": "npm run build"

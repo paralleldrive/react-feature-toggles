@@ -1,7 +1,7 @@
 import test from 'tape';
 import updateFeaturesWithQuery from '../update-features-with-query';
 import deepFreeze from 'deep-freeze';
-import createFeature from './fixtures/createFeature';
+import createFeature from '../test-fixtures/create-feature';
 
 test('updateFeaturesWithQuery()', ({ end, deepEqual }) => {
   const actual = updateFeaturesWithQuery();
