@@ -12,5 +12,6 @@ export {
   createRouteMiddleware,
   getIsEnabled,
   getEnabled,
+  isFeatureIncluded,
   updateFeaturesWithQuery
 };
