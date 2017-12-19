@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import getEnabled from './utils/get-enabled';
-import updateFeaturesWithParams from './utils/updateFeaturesWithParams';
+import getEnabled from './get-enabled';
+import updateFeaturesWithQuery from './update-features-with-query';
 import PropTypes from 'prop-types';
 
 const getEnabledFeatures = (initialFeatures, query) =>
-  getEnabled(updateFeaturesWithParams(initialFeatures, query));
+  getEnabled(updateFeaturesWithQuery(initialFeatures, query));
 
 // withFeatures = (config?: { initialFeatures: Array, windowLocationSearch: String }) => Component => Component
 const withFeatures = (

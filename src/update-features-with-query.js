@@ -17,7 +17,7 @@ const overrideFeature = names => feature => {
 // overrideFeatures = ([...Feature], [...String]) => [...Feature];
 const enableFeatures = (features = [], names = []) => map(overrideFeature(names), features);
 
-// updateFeaturesWithParams = ([...Feature], query: Object) => [...Feature];
-const updateFeaturesWithParams = (features = [], query = {}) => enableFeatures(features, getParamFeatures(query));
+// updateFeaturesWithQuery = ([...Feature], query: Object) => [...Feature];
+const updateFeaturesWithQuery = (features = [], query = {}) => enableFeatures(features, getParamFeatures(query));
 
-export default updateFeaturesWithParams;
+export default updateFeaturesWithQuery;
