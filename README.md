@@ -31,6 +31,7 @@ const pageHOC = compose(
   hoc2
 );
 ```
+The `withFeatures` hoc must receive `query` via props. `query` should be a [parsed url](https://nodejs.org/api/url.html) query object. You can see an example of this happening in [react-redux-wrapper](https://github.com/kirill-konshin/next-redux-wrapper).
 
 Configure the component fallback:
 
