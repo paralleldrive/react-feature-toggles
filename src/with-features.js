@@ -1,22 +1,24 @@
 import React, { Component } from 'react';
-import getEnabled from '../utils/get-enabled';
-import updateFeaturesWithParams from '../utils/updateFeaturesWithParams';
+import getEnabled from './get-enabled';
+import updateFeaturesWithQuery from './update-features-with-query';
 import PropTypes from 'prop-types';
 
-const getEnabledFeatures = (initialFeatures, windowLocationSearch) =>
-  getEnabled(updateFeaturesWithParams(initialFeatures, windowLocationSearch));
+const getEnabledFeatures = (initialFeatures, query) =>
+  getEnabled(updateFeaturesWithQuery(initialFeatures, query));
 
 // withFeatures = (config?: { initialFeatures: Array, windowLocationSearch: String }) => Component => Component
 const withFeatures = (
   {
     initialFeatures = [],
-    windowLocationSearch = typeof window !== 'undefined'
-      ? window.location.search
-      : '',
-    features = getEnabledFeatures(initialFeatures, windowLocationSearch)
+    features = []
   } = {}
 ) => WrappedComponent => {
   class withFeaturesHOC extends Component {
+    constructor(props) {
+      super(props);
+      const { query } = props;
+      features = getEnabledFeatures(initialFeatures, query);
+    }
     static childContextTypes = {
       features: PropTypes.array
     };

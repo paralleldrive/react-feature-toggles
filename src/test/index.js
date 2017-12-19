@@ -1,3 +1,5 @@
-import '../utils/test';
-import '../with-features/test';
-import '../configure-feature/test';
+import './get-enabled';
+import './get-is-enabled';
+import './update-features-with-query';
+import './with-features';
+import './configure-feature';

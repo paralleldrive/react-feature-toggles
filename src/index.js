@@ -1,11 +1,15 @@
 import withFeatures from './with-features';
 import configureFeature from './configure-feature';
 import createRouteMiddleware from './create-route-middleware';
-import isFeatureIncluded from './utils/is-feature-included';
+import getIsEnabled from './get-is-enabled';
+import getEnabled from './get-enabled';
+import updateFeaturesWithQuery from './update-features-with-query';
 
 export {
   withFeatures,
   configureFeature,
   createRouteMiddleware,
-  isFeatureIncluded
+  getIsEnabled,
+  getEnabled,
+  updateFeaturesWithQuery
 };
