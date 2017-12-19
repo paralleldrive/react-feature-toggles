@@ -1,7 +1,7 @@
 import test from 'tape';
 import getEnabled from '../get-enabled';
 import deepFreeze from 'deep-freeze';
-import createFeature from './fixtures/createFeature';
+import createFeature from '../test-fixtures/create-feature';
 
 
 

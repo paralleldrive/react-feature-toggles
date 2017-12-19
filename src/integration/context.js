@@ -2,8 +2,8 @@ import describe from 'tape';
 import dom from 'cheerio';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
-import createFeature from '../fixtures/createFeature';
-import { withFeatures, configureFeature } from '../../../src/';
+import createFeature from '../test-fixtures/create-feature';
+import { withFeatures, configureFeature } from '../../src';
 
 const render = ReactDOMServer.renderToStaticMarkup;
 

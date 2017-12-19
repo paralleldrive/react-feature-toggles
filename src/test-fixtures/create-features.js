@@ -1,4 +1,4 @@
-import createFeature from './createFeature';
+import createFeature from './create-feature';
 
 export default () => [
   createFeature({
