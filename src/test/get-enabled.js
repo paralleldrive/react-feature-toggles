@@ -1,27 +1,28 @@
-import test from 'tape';
+import { describe } from 'riteway';
 import getEnabled from '../get-enabled';
 import deepFreeze from 'deep-freeze';
 import createFeature from '../test-fixtures/create-feature';
 
-
-
-test('getEnabled()', ({ end, deepEqual }) => {
-  const actual = getEnabled();
-  const expected = [];
-  const msg = 'It should return an empty array';
-  deepEqual(actual, expected, msg);
-  end();
+describe('getEnabled()', async should => {
+  const { assert } = should('return an empty array');
+  assert({
+    given: 'no arguments',
+    actual: getEnabled(),
+    expected: []
+  });
 });
 
-test('getEnabled([])', ({ end, deepEqual }) => {
-  const actual = getEnabled([]);
-  const expected = [];
-  const msg = 'it should return an empty array';
-  deepEqual(actual, expected, msg, []);
-  end();
+describe('getEnabled([])', async should => {
+  const { assert } = should('return an empty array');
+  assert({
+    given: 'an empty array',
+    actual: getEnabled(),
+    expected: []
+  });
 });
 
-test('getEnabled([...Feature])', ({ end, deepEqual }) => {
+describe('getEnabled([...Feature])', async should => {
+  const { assert } = should();
   const features = [ 
     createFeature({
       name: 'posts',
@@ -68,10 +69,11 @@ test('getEnabled([...Feature])', ({ end, deepEqual }) => {
   ];
   deepFreeze(features);
 
-  const actual = getEnabled(features);
-  const expected = ['posts', 'comments', 'comment-rating', 'comment-rating-graph'];
-  const msg = 'it should return the correct enabled features';
-  deepEqual(actual, expected, msg);
-  end();
-});
+  assert({
+    given: 'an array of features',
+    should: 'return the correct enabled features',
+    actual: getEnabled(features),
+    expected: ['posts', 'comments', 'comment-rating', 'comment-rating-graph']
+  });
 
+});
