@@ -119,6 +119,26 @@ import { getEnabled } from '@paralleldrive/react-feature-toggles';
 const enabledFeatures = getEnabled(features);
 ```
 
+### isFeatureIncluded
+
+Returns all the names of enabled features.
+
+#### Function Signature
+
+```javascript
+isFeatureIncluded([...Strings], String) => Boolean
+```
+
+#### Use it
+
+```javascript
+import { getEnabled, isFeatureIncluded } from '@paralleldrive/react-feature-toggles';
+
+const enabledFeatures = getEnabled(features);
+
+const helpIsEnabled = isFeatureIncluded(enabledFeatures, 'help');
+```
+
 ### getIsEnabled
 
 Returns the enabled value of a single feature. If the feature does not exist it is considered disabled.
