@@ -121,7 +121,7 @@ const enabledFeatures = getEnabled(features);
 
 ### isFeatureIncluded
 
-Returns all the names of enabled features.
+Returns true if the string is included in the array.
 
 #### Function Signature
 
