@@ -1,17 +1,41 @@
-import test from 'tape';
+import { describe } from 'riteway';
 import getIsEnabled from '../get-is-enabled';
 import deepFreeze from 'deep-freeze';
 import createFeature from '../test-fixtures/create-feature';
 
-test('getIsEnabled([], String)', ({ end, deepEqual }) => {
-  const actual = getIsEnabled([], 'posts');
-  const expected = false;
-  const msg = 'it should return false when the feature does not exist';
-  deepEqual(actual, expected, msg);
-  end();
+describe('getIsEnabled()', async should => {
+  const { assert } = should('return false');
+
+  assert({
+    given: 'no arguments',
+    actual: getIsEnabled(),
+    expected: false
+  });
 });
 
-test('getIsEnabled([...Features], String)', ({ end, deepEqual }) => {
+describe('getIsEnabled([])', async should => {
+  const { assert } = should('return false');
+  
+  assert({
+    given: 'an empty array',
+    actual: getIsEnabled([]),
+    expected: false
+  });
+});
+
+describe('getIsEnabled([], String)', async should => {
+  const { assert } = should('return false');
+
+  assert({
+    given: 'an empty array and a feature name',
+    actual: getIsEnabled([], 'posts'),
+    expected: false
+  });
+});
+
+describe('getIsEnabled([...Features], String)', async should => {
+  const { assert } = should();
+
   const features = [
     createFeature({
       name: 'posts',
@@ -58,54 +82,42 @@ test('getIsEnabled([...Features], String)', ({ end, deepEqual }) => {
   ];
   deepFreeze(features);
 
-  {
-    const actual = getIsEnabled(features, 'posts');
-    const expected = true;
-    const msg = 'it should return true when the feature is enabled';
-    deepEqual(actual, expected, msg);
-  }
-  {
-    const actual = getIsEnabled(features, 'post-rating');
-    const expected = false;
-    const msg = 'it should return false when the feature is disabled';
-    deepEqual(actual, expected, msg);
-  }
-  {
-    const actual = getIsEnabled(features, 'post-rating-graph');
-    const expected = false;
-    const msg = 'it should return false when the feature depends on a disabled feature';
-    deepEqual(actual, expected, msg);
-  }
-  {
-    const actual = getIsEnabled(features, 'report-rating-graph');
-    const expected = false;
-    const msg = 'it should return false when there is a disabled feature in the dependency chain';
-    deepEqual(actual, expected, msg);
-  }
-  {
-    const actual = getIsEnabled(features, 'comment-rating-graph');
-    const expected = true;
-    const msg = 'it should return true when all the features in the dependency chain are enabled';
-    deepEqual(actual, expected, msg);
-  }
+  assert({
+    given: 'features and a enabled feature name',
+    should: 'return true',
+    actual: getIsEnabled(features, 'posts'),
+    expected: true
+  });
 
-  end();
+  assert({
+    given: 'features and a disabled feature name',
+    should: 'return false',
+    actual: getIsEnabled(features, 'post-rating'),
+    expected: false
+  });
+  
+  assert({
+    given: 'features and a enabled feature name that depends on a disabled feature',
+    should: 'return false',
+    actual: getIsEnabled(features, 'post-rating-graph'),
+    expected: false
+  });
+
+  assert({
+    given: 'features and a enabled feature name that depends has a disabled feature in its dependency chain',
+    should: 'return false',
+    actual: getIsEnabled(features, 'report-rating-graph'),
+    expected: false
+  });
+
+  assert({
+    given: 'features and a enabled feature name that has all enabled features in its dependency chain',
+    should: 'return true',
+    actual: getIsEnabled(features, 'comment-rating-graph'),
+    expected: true
+  });
 });
 
-test('getIsEnabled()', ({ end, deepEqual }) => {
-  const actual = getIsEnabled();
-  const expected = false;
-  const msg = 'it should return false';
-  deepEqual(actual, expected, msg);
-  end();
-});
 
-test('getIsEnabled([])', ({ end, deepEqual }) => {
-  const actual = getIsEnabled([]);
-  const expected = false;
-  const msg = 'it should return false';
-  deepEqual(actual, expected, msg);
-  end();
-});
 
 
