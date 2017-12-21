@@ -1,6 +1,6 @@
 import { find, curry } from 'ramda';
 
-// matchName = s => x => x;
+// matchName = s => x => boolean;
 const matchName = s => x => x.name === s;
 
 // enabled = x: Feature => boolean
