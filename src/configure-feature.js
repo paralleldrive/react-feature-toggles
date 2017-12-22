@@ -1,25 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import isFeatureIncluded from './is-feature-included';
 
-//
-// const configureFeature =
-//   (DefaultFallbackComponent: ReactComponent) =>
-//   (featureName: String) =>
-//   (FeatureComponent: ReactComponent, FallbackComponent = DefaultFallbackComponent) => ReactComponent
-//
-
-const checkIfEnabled = (featureName, features) =>
-  features.indexOf(featureName) >= 0;
-
-const configureFeature = DefaultFallbackComponent => featureName => (
-  FeatureComponent,
-  FallbackComponent = DefaultFallbackComponent
+const configureFeature = Default => featureName => (
+  Feature,
+  Fallback = Default
 ) => {
   const ConfigureFeatureHOC = (props, context) => {
-    const isEnabled = checkIfEnabled(featureName, context.features);
+    const isEnabled = isFeatureIncluded(context.features, featureName);
     return isEnabled
-      ? <FeatureComponent {...props} />
-      : <FallbackComponent {...props} />;
+      ? <Feature {...props} />
+      : <Fallback {...props} />;
   };
   ConfigureFeatureHOC.contextTypes = {
     features: PropTypes.array

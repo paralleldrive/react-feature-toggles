@@ -1,4 +1,4 @@
-import describe from 'tape';
+import { describe } from 'riteway';
 import dom from 'cheerio';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
@@ -7,178 +7,187 @@ import configureFeature from '../configure-feature';
 
 const render = ReactDOMServer.renderToStaticMarkup;
 
-const createTestComponent = componentName => ({ someOtherProp } = {}) => (
+const createTestComponent = componentName => ({ propCheck } = {}) => (
   <div>
     <div className={componentName} />
-    <div className='some-other-prop'>{someOtherProp}</div>
+    <div className='prop-check'>{propCheck}</div>
   </div>
 );
 
-describe('configureFeature()', ({ test }) => {
-  test('...feature not enabled, with FallbackComponent', ({
-    end,
-    deepEqual
-  }) => {
-    const DefaultFallbackComponent = createTestComponent('default-fallback-component');
-    const Feature = createTestComponent('feature');
-    const FallbackComponent = createTestComponent('fallback-component');
+describe('configureFeature(Default)(FeatureName)(Feature, Fallback)', async should => {
+  const { assert } = should();
 
-    const ConfiguredFeature =
-      configureFeature(DefaultFallbackComponent)('game')(Feature, FallbackComponent);
+  const Default = createTestComponent('default');
+  const Feature = createTestComponent('feature');
+  const Fallback = createTestComponent('fallback');
 
-    const FeatureWithContext = withContext([])(ConfiguredFeature);
+  const ConfiguredFeature = configureFeature(Default)('game')(Feature, Fallback);
 
-    const someOtherProp = 'bacon and eggs';
+  const FeatureWithContext = withContext([])(ConfiguredFeature);
 
-    const $ = dom.load(
-      render(<FeatureWithContext someOtherProp={someOtherProp} />)
-    );
-    {
-      const msg = 'it should not render DefaultFallbackComponent component';
-      const actual = $('.default-fallback-component').length;
-      const expected = 0;
-      deepEqual(actual, expected, msg);
-    }
-    {
-      const msg = 'it should not render the Feature component';
-      const actual = $('.feature').length;
-      const expected = 0;
-      deepEqual(actual, expected, msg);
-    }
-    {
-      const msg = 'it should render the FallbackComponent component';
-      const actual = $('.fallback-component').length;
-      const expected = 1;
-      deepEqual(actual, expected, msg);
-    }
-    {
-      const msg = 'it should pass through received props';
-      const actual = $('.some-other-prop').text();
-      const expected = someOtherProp;
-      deepEqual(actual, expected, msg);
-    }
-    end();
+  const propCheck = 'bacon and eggs';
+
+  const $ = dom.load(render(<FeatureWithContext propCheck={propCheck} />));
+  
+  assert({
+    given: 'the feature is not enabled and there is a Fallback component',
+    should: 'not render the Default component',
+    actual: $('.default').length,
+    expected: 0
   });
 
-  test('...feature enabled, with FallbackComponent', ({ end, deepEqual }) => {
-    const DefaultFallbackComponent = createTestComponent('default-fallback-component');
-    const Feature = createTestComponent('feature');
-    const FallbackComponent = createTestComponent('fallback-component');
-
-    const ConfiguredFeature =
-      configureFeature(DefaultFallbackComponent)('game')(Feature, FallbackComponent);
-
-    const FeatureWithContext = withContext(['help', 'game', 'food'])(
-      ConfiguredFeature
-    );
-
-    const someOtherProp = 'bacon and eggs';
-
-    const $ = dom.load(
-      render(<FeatureWithContext someOtherProp={someOtherProp} />)
-    );
-    {
-      const msg = 'it should not render DefaultFallbackComponent component';
-      const actual = $('.default-fallback-component').length;
-      const expected = 0;
-      deepEqual(actual, expected, msg);
-    }
-    {
-      const msg = 'it should render the Feature component';
-      const actual = $('.feature').length;
-      const expected = 1;
-      deepEqual(actual, expected, msg);
-    }
-    {
-      const msg = 'it should not render the FallbackComponent component';
-      const actual = $('.fallback-component').length;
-      const expected = 0;
-      deepEqual(actual, expected, msg);
-    }
-    {
-      const msg = 'it should pass through received props';
-      const actual = $('.some-other-prop').text();
-      const expected = someOtherProp;
-      deepEqual(actual, expected, msg);
-    }
-    end();
+  assert({
+    given: 'the feature is not enabled and there is a Fallback component',
+    should: 'not render the Feature component',
+    actual: $('.feature').length,
+    expected: 0
   });
 
-  test('...feature not enabled, no FallbackComponent', ({ end, deepEqual }) => {
-    const DefaultFallbackComponent = createTestComponent('default-fallback-component');
-    const Feature = createTestComponent('feature');
-    const ConfiguredFeature = configureFeature(DefaultFallbackComponent)('game')(Feature);
-    const FeatureWithContext = withContext([])(ConfiguredFeature);
-
-    const someOtherProp = 'bacon and eggs';
-
-    const $ = dom.load(
-      render(<FeatureWithContext someOtherProp={someOtherProp} />)
-    );
-    {
-      const msg = 'it should render DefaultFallbackComponent component';
-      const actual = $('.default-fallback-component').length;
-      const expected = 1;
-      deepEqual(actual, expected, msg);
-    }
-    {
-      const msg = 'it should not render the Feature component';
-      const actual = $('.feature').length;
-      const expected = 0;
-      deepEqual(actual, expected, msg);
-    }
-    {
-      const msg = 'it should not render the FallbackComponent component';
-      const actual = $('.fallback-component').length;
-      const expected = 0;
-      deepEqual(actual, expected, msg);
-    }
-    {
-      const msg = 'it should pass through received props';
-      const actual = $('.some-other-prop').text();
-      const expected = someOtherProp;
-      deepEqual(actual, expected, msg);
-    }
-    end();
+  assert({
+    given: 'the feature is not enabled and there is a Fallback component',
+    should: 'render the Fallback component',
+    actual: $('.fallback').length,
+    expected: 1
   });
 
-  test('...feature enabled, no FallbackComponent', ({ end, deepEqual }) => {
-    const DefaultFallbackComponent = createTestComponent('default-fallback-component');
-    const Feature = createTestComponent('feature');
-    const ConfiguredFeature = configureFeature(DefaultFallbackComponent)('game')(Feature);
-    const FeatureWithContext = withContext(['lessions', 'game'])(
-      ConfiguredFeature
-    );
-
-    const someOtherProp = 'bacon and eggs';
-
-    const $ = dom.load(
-      render(<FeatureWithContext someOtherProp={someOtherProp} />)
-    );
-    {
-      const msg = 'it should not render DefaultFallbackComponent component';
-      const actual = $('.default-fallback-component').length;
-      const expected = 0;
-      deepEqual(actual, expected, msg);
-    }
-    {
-      const msg = 'it should render the Feature component';
-      const actual = $('.feature').length;
-      const expected = 1;
-      deepEqual(actual, expected, msg);
-    }
-    {
-      const msg = 'it should not render the FallbackComponent component';
-      const actual = $('.fallback-component').length;
-      const expected = 0;
-      deepEqual(actual, expected, msg);
-    }
-    {
-      const msg = 'it should pass through received props';
-      const actual = $('.some-other-prop').text();
-      const expected = someOtherProp;
-      deepEqual(actual, expected, msg);
-    }
-    end();
+  assert({
+    given: 'props',
+    should: 'pass through props',
+    actual: $('.prop-check').text(),
+    expected: propCheck
   });
+
+});
+
+describe('configureFeature(Default)(FeatureName)(Feature, Fallback)', async should => {
+  const { assert } = should();
+
+  const Default = createTestComponent('default');
+  const Feature = createTestComponent('feature');
+  const Fallback = createTestComponent('fallback');
+
+  const ConfiguredFeature = configureFeature(Default)('game')(Feature, Fallback);
+
+  const FeatureWithContext = withContext(['help', 'game', 'food'])(ConfiguredFeature);
+
+  const propCheck = 'bacon and eggs';
+
+  const $ = dom.load(render(<FeatureWithContext propCheck={propCheck} />));
+  
+  assert({
+    given: 'the feature is enabled',
+    should: 'not render the Default component',
+    actual: $('.default').length,
+    expected: 0
+  });
+
+  assert({
+    given: 'the feature is enabled',
+    should: 'render the Feature component',
+    actual: $('.feature').length,
+    expected: 1
+  });
+
+  assert({
+    given: 'the feature is enabled and there is a Fallback component',
+    should: 'not render the Fallback component',
+    actual: $('.fallback').length,
+    expected: 0
+  });
+
+  assert({
+    given: 'props',
+    should: 'pass through props',
+    actual: $('.prop-check').text(),
+    expected: propCheck
+  });
+
+});
+
+describe('configureFeature(Default)(FeatureName)(Feature)', async should => {
+  const { assert } = should();
+
+  const Default = createTestComponent('default');
+  const Feature = createTestComponent('feature');
+
+  const ConfiguredFeature = configureFeature(Default)('game')(Feature);
+
+  const FeatureWithContext = withContext([])(ConfiguredFeature);
+
+  const propCheck = 'bacon and eggs';
+
+  const $ = dom.load(render(<FeatureWithContext propCheck={propCheck} />));
+  
+  assert({
+    given: 'the feature is disabled and there is no Fallback component',
+    should: 'render the Default component',
+    actual: $('.default').length,
+    expected: 1
+  });
+
+  assert({
+    given: 'the feature is disabled',
+    should: 'not render the Feature component',
+    actual: $('.feature').length,
+    expected: 0
+  });
+
+  assert({
+    given: 'the feature is disabled and there is no Fallback component',
+    should: 'not render the Fallback component',
+    actual: $('.fallback').length,
+    expected: 0
+  });
+
+  assert({
+    given: 'props',
+    should: 'pass through props',
+    actual: $('.prop-check').text(),
+    expected: propCheck
+  });
+
+});
+
+describe('configureFeature(Default)(FeatureName)(Feature)', async should => {
+  const { assert } = should();
+
+  const Default = createTestComponent('default');
+  const Feature = createTestComponent('feature');
+
+  const ConfiguredFeature = configureFeature(Default)('game')(Feature);
+
+  const FeatureWithContext = withContext(['lessons', 'game'])(ConfiguredFeature);
+
+  const propCheck = 'bacon and eggs';
+
+  const $ = dom.load(render(<FeatureWithContext propCheck={propCheck} />));
+  
+  assert({
+    given: 'the feature is enabled',
+    should: 'no render the Default component',
+    actual: $('.default').length,
+    expected: 0
+  });
+
+  assert({
+    given: 'the feature is enabled',
+    should: 'render the Feature component',
+    actual: $('.feature').length,
+    expected: 1
+  });
+
+  assert({
+    given: 'the feature is enabled',
+    should: 'not render the Fallback component',
+    actual: $('.fallback').length,
+    expected: 0
+  });
+
+  assert({
+    given: 'props',
+    should: 'pass through props',
+    actual: $('.prop-check').text(),
+    expected: propCheck
+  });
+
 });
