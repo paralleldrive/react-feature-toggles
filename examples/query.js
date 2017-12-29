@@ -5,12 +5,13 @@ import parse from 'url-parse';
 
 const Component = ({ query }) => (
   <pre>
-    {JSON.stringify(query, null, 2)}
+    { JSON.stringify(query, undefined, 2) }
   </pre>
 );
 
 const withQuery = Component => () => {
-  const query = parse('https://github.com/foo/bar', true);
+  const parser = true;
+  const query = parse('https://github.com/foo/bar', parser);
 
   return (
     <Component query={query} />

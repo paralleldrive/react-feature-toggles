@@ -79,7 +79,15 @@ interface Feature {
 
 ### withFeatures()
 
-Returns a higher order React context provider component.
+Returns a higher order React context provider component. It requires the `query` prop. The query prop should be a [parsed url](https://nodejs.org/api/url.html) object.
+
+```javascript
+const Features = withFeatures = ({ initialFeatures: [] })();
+
+const Wrapper = () => (
+  <Features query={query} />
+)
+```
 
 #### Function Signature
 
