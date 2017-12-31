@@ -1,33 +1,41 @@
-import test from 'tape';
+import { describe } from 'riteway';
 import updateFeaturesWithQuery from '../update-features-with-query';
 import deepFreeze from 'deep-freeze';
 import createFeature from '../test-fixtures/create-feature';
 
-test('updateFeaturesWithQuery()', ({ end, deepEqual }) => {
-  const actual = updateFeaturesWithQuery();
-  const expected = [];
-  const msg = 'it should return an empty array';
-  deepEqual(actual, expected, msg);
-  end();
+describe('updateFeaturesWithQuery()', async should => {
+  const { assert } = should();
+  assert({
+    given: 'no arguments',
+    should: 'return an empty array',
+    actual: updateFeaturesWithQuery(),
+    expected: []
+  });
 });
 
-test('updateFeaturesWithQuery([])', ({ end, deepEqual }) => {
-  const actual = updateFeaturesWithQuery([]);
-  const expected = [];
-  const msg = 'it should return an empty array';
-  deepEqual(actual, expected, msg);
-  end();
+describe('updateFeaturesWithQuery([])', async should => {
+  const { assert } = should();
+  assert({
+    given: 'empty array of features',
+    should: 'return an empty array',
+    actual: updateFeaturesWithQuery([]),
+    expected: []
+  });
 });
 
-test('updateFeaturesWithQuery([], Object)', ({end, deepEqual}) => {
-  const actual = updateFeaturesWithQuery([], { q: 'js'});
-  const expected = [];
-  const msg = 'it should return an empty array';
-  deepEqual(actual,expected,msg);
-  end();
+describe('updateFeaturesWithQuery([], Query)', async should => {
+  const { assert } = should();
+  assert({
+    given: 'empty array of features and a Query',
+    should: 'return an empty array',
+    actual: updateFeaturesWithQuery([], { q: 'js'}),
+    expected: []
+  });
 });
 
-test('updateFeaturesWithQuery([...Feature], Object)', ({end, deepEqual}) => {
+describe('updateFeaturesWithQuery([...Feature], Query)', async should => {
+  const { assert } = should();
+
   const features = [
     createFeature({
       name: 'posts',
@@ -49,26 +57,37 @@ test('updateFeaturesWithQuery([...Feature], Object)', ({end, deepEqual}) => {
     })
   ];
   deepFreeze(features);
-  {
-    const actual = updateFeaturesWithQuery(features, {});
-    const expected = features;
-    const msg = 'it should return the unmodified features when a empty query is provided';
-    deepEqual(actual, expected, msg);
-  }
-  {
-    const actual = updateFeaturesWithQuery(features, { q: 'js' });
-    const expected = features;
-    const msg = 'it should return the unmodified features when query does not have ft params';
-    deepEqual(actual, expected, msg);
-  }
+
+  assert({
+    given: 'an array of features and no Query',
+    should: 'return an equivalent array of features',
+    actual: updateFeaturesWithQuery(features),
+    expected: features
+  });
+
+  assert({
+    given: 'an array of features and a empty Query object',
+    should: 'return an equivalent array of features',
+    actual: updateFeaturesWithQuery(features, {}),
+    expected: features
+  });
+
+  assert({
+    given: 'an array of features and a Query object that does not match any features',
+    should: 'return an equivalent array of features',
+    actual: updateFeaturesWithQuery(features, { q: 'js' }),
+    expected: features
+  });
+
   {
     const expectedFeatures = [...features];
     expectedFeatures[1] = {...expectedFeatures[1], enabled: true};
     expectedFeatures[3] = {...expectedFeatures[3], enabled: true};
-    const actual = updateFeaturesWithQuery(features, { ft: 'post-rating,reports,login' });
-    const expected = expectedFeatures;
-    const msg = 'it should return the correct features';
-    deepEqual(actual, expected, msg);
+    assert({
+      given: 'an array of features and a Query object that does not match any features',
+      should: 'return an equivalent array of features',
+      actual: updateFeaturesWithQuery(features, { ft: 'post-rating,reports,login' }),
+      expected: expectedFeatures
+    });
   }
-  end();
 });
