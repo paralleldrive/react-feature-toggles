@@ -28,7 +28,7 @@ describe('updateFeaturesWithQuery([], Query)', async should => {
   assert({
     given: 'empty array of features and a Query',
     should: 'return an empty array',
-    actual: updateFeaturesWithQuery([], { q: 'js'}),
+    actual: updateFeaturesWithQuery([], { q: 'js' }),
     expected: []
   });
 });
@@ -73,7 +73,8 @@ describe('updateFeaturesWithQuery([...Feature], Query)', async should => {
   });
 
   assert({
-    given: 'an array of features and a Query object that does not match any features',
+    given:
+      'an array of features and a Query object that does not match any features',
     should: 'return an equivalent array of features',
     actual: updateFeaturesWithQuery(features, { q: 'js' }),
     expected: features
@@ -81,12 +82,15 @@ describe('updateFeaturesWithQuery([...Feature], Query)', async should => {
 
   {
     const expectedFeatures = [...features];
-    expectedFeatures[1] = {...expectedFeatures[1], enabled: true};
-    expectedFeatures[3] = {...expectedFeatures[3], enabled: true};
+    expectedFeatures[1] = { ...expectedFeatures[1], enabled: true };
+    expectedFeatures[3] = { ...expectedFeatures[3], enabled: true };
     assert({
-      given: 'an array of features and a Query object that does not match any features',
+      given:
+        'an array of features and a Query object that does not match any features',
       should: 'return an equivalent array of features',
-      actual: updateFeaturesWithQuery(features, { ft: 'post-rating,reports,login' }),
+      actual: updateFeaturesWithQuery(features, {
+        ft: 'post-rating,reports,login'
+      }),
       expected: expectedFeatures
     });
   }

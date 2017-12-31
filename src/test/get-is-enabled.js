@@ -15,7 +15,7 @@ describe('getIsEnabled()', async should => {
 
 describe('getIsEnabled([])', async should => {
   const { assert } = should('return false');
-  
+
   assert({
     given: 'an empty array',
     actual: getIsEnabled([]),
@@ -95,29 +95,28 @@ describe('getIsEnabled([...Features], String)', async should => {
     actual: getIsEnabled(features, 'post-rating'),
     expected: false
   });
-  
+
   assert({
-    given: 'features and a enabled feature name that depends on a disabled feature',
+    given:
+      'features and a enabled feature name that depends on a disabled feature',
     should: 'return false',
     actual: getIsEnabled(features, 'post-rating-graph'),
     expected: false
   });
 
   assert({
-    given: 'features and a enabled feature name that depends has a disabled feature in its dependency chain',
+    given:
+      'features and a enabled feature name that depends has a disabled feature in its dependency chain',
     should: 'return false',
     actual: getIsEnabled(features, 'report-rating-graph'),
     expected: false
   });
 
   assert({
-    given: 'features and a enabled feature name that has all enabled features in its dependency chain',
+    given:
+      'features and a enabled feature name that has all enabled features in its dependency chain',
     should: 'return true',
     actual: getIsEnabled(features, 'comment-rating-graph'),
     expected: true
   });
 });
-
-
-
-

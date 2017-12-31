@@ -1,4 +1,8 @@
-const createFeature = ({ name= '', enabled = false, dependencies = [] } = {}) => ({
+const createFeature = ({
+  name = '',
+  enabled = false,
+  dependencies = []
+} = {}) => ({
   name,
   enabled,
   dependencies

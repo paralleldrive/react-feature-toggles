@@ -4,7 +4,7 @@ const enabledLens = lensProp('enabled');
 const nameLens = lensProp('name');
 
 // getParamFeatures(query: Object) => featureNames: [...String]
-const getParamFeatures = ({ ft }) => ft ? ft.split(',') : [];
+const getParamFeatures = ({ ft }) => (ft ? ft.split(',') : []);
 
 const overrideFeature = names => feature => {
   if (contains(view(nameLens, feature), names)) {
@@ -15,9 +15,11 @@ const overrideFeature = names => feature => {
 };
 
 // overrideFeatures = ([...Feature], [...String]) => [...Feature];
-const enableFeatures = (features = [], names = []) => map(overrideFeature(names), features);
+const enableFeatures = (features = [], names = []) =>
+  map(overrideFeature(names), features);
 
 // updateFeaturesWithQuery = ([...Feature], query: Object) => [...Feature];
-const updateFeaturesWithQuery = (features = [], query = {}) => enableFeatures(features, getParamFeatures(query));
+const updateFeaturesWithQuery = (features = [], query = {}) =>
+  enableFeatures(features, getParamFeatures(query));
 
 export default updateFeaturesWithQuery;

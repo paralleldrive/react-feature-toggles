@@ -4,13 +4,15 @@ import { find, curry } from 'ramda';
 const matchName = s => x => x.name === s;
 
 // enabled = x: Feature => boolean
-const enabled = x => x && x.enabled ? true : false;
+const enabled = x => (x && x.enabled ? true : false);
 
 // hasDependencies = x: Feature => boolean
-const hasDependencies = x => x.dependencies && x.dependencies.length > 0 ? true : false;
+const hasDependencies = x =>
+  x.dependencies && x.dependencies.length > 0 ? true : false;
 
 // checkDependencies = [...Feature] => [...String] => boolean;
-const checkDependencies = features => names => names.reduce((acc, x) => acc ? getIsEnabled(features, x) : acc ,true);
+const checkDependencies = features => names =>
+  names.reduce((acc, x) => (acc ? getIsEnabled(features, x) : acc), true);
 
 // getIsEnabled = [...Feature] => String => boolean
 const getIsEnabled = (features = [], featureName = '') => {
@@ -27,7 +29,7 @@ const getIsEnabled = (features = [], featureName = '') => {
   if (!hasDependencies(feature)) return true;
 
   /**
-   * If the feature has dependencies, then check for any disabled dependencies 
+   * If the feature has dependencies, then check for any disabled dependencies
    */
   return checkDependencies(features)(feature.dependencies);
 };
