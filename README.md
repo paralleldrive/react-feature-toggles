@@ -31,6 +31,7 @@ const pageHOC = compose(
   hoc2
 );
 ```
+The `withFeatures` hoc must receive `query` via props. `query` should be a [parsed url](https://nodejs.org/api/url.html) query object. You can see an example of this happening in [react-redux-wrapper](https://github.com/kirill-konshin/next-redux-wrapper).
 
 Configure the component fallback:
 
@@ -78,7 +79,15 @@ interface Feature {
 
 ### withFeatures()
 
-Returns a higher order React context provider component.
+Returns a higher order React context provider component. It requires the `query` prop. The query prop should be a [parsed url](https://nodejs.org/api/url.html) object.
+
+```javascript
+const Features = withFeatures = ({ initialFeatures: [] })();
+
+const Wrapper = () => (
+  <Features query={query} />
+)
+```
 
 #### Function Signature
 
