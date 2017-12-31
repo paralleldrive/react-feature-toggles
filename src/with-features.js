@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 const getEnabledFeatures = (initialFeatures, query) =>
   getEnabled(updateFeaturesWithQuery(initialFeatures, query));
 
-// withFeatures = (config?: { initialFeatures: Array, windowLocationSearch: String }) => Component => Component
+// withFeatures = (config?: { initialFeatures: Array }) => Component => Component
 const withFeatures = ({
   initialFeatures = [],
   features = []
@@ -19,6 +19,9 @@ const withFeatures = ({
     }
     static childContextTypes = {
       features: PropTypes.array
+    };
+    static propTypes = {
+      query: PropTypes.object.isRequired
     };
     getChildContext() {
       return {
