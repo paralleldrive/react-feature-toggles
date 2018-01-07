@@ -9,7 +9,7 @@
   "plugins": [
     "react"
   ],
-  "extends": "prettier",
+  "extends": ["eslint:recommended", "prettier"],
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
