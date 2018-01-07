@@ -7,8 +7,7 @@ const matchName = s => x => x.name === s;
 const enabled = x => (x && x.enabled ? true : false);
 
 // hasDependencies = x: Feature => boolean
-const hasDependencies = x =>
-  x.dependencies && x.dependencies.length > 0;
+const hasDependencies = x => x.dependencies && x.dependencies.length > 0;
 
 // checkDependencies = [...Feature] => [...String] => boolean;
 const checkDependencies = features => names =>
