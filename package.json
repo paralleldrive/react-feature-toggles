@@ -28,8 +28,7 @@
     "eslint-config-prettier": "2.9.0",
     "eslint-plugin-react": "7.2.1",
     "express": "4.16.2",
-    "husky": "0.14.3",
-    "lint-staged": "6.0.0",
+    "pre-commit": "1.2.2",
     "prettier": "1.9.2",
     "prop-types": "15.5.10",
     "ramda": "0.24.1",
@@ -55,19 +54,12 @@
   "scripts": {
     "lint": "eslint src && echo '-- linting finished --'",
     "build": "babel src -d dist",
-    "prettier": "prettier --write 'src/**/*.js'",
+    "prettier": "prettier --write 'src/**/*.js' && git add . && git status",
     "test": "tape -r babel-register -r babel-polyfill src/test",
     "test:integration": "tape -r babel-register -r babel-polyfill src/integration",
     "watch": "watch 'reset && npm run --silent test' src",
-    "precommit": "lint-staged",
+    "precommit-msg": "echo 'Pre-commit checks...' && exit 0",
     "prepare": "npm run build"
-  },
-  "lint-staged": {
-    "src/**/*.{js,json,css,md}": [
-      "eslint",
-      "prettier --write",
-      "git add"
-    ]
   },
   "keywords": [
     "react",
