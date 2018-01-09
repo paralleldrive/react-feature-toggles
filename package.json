@@ -28,8 +28,10 @@
     "eslint-config-prettier": "2.9.0",
     "eslint-plugin-react": "7.2.1",
     "express": "4.16.2",
+    "husky": "0.14.3",
     "pre-commit": "1.2.2",
     "prettier": "1.9.2",
+    "pretty-quick": "1.1.0",
     "prop-types": "15.5.10",
     "ramda": "0.24.1",
     "react": "15.6.1",
@@ -45,28 +47,20 @@
     "react": "^15.6.1",
     "react-dom": "^15.6.1"
   },
-  "pre-commit": [
-    "lint",
-    "prettier",
-    "test",
-    "test:integration"
-  ],
+  "pre-commit": ["lint", "pretty-quick", "test", "test:integration"],
   "scripts": {
     "lint": "eslint src && echo '-- linting finished --'",
     "build": "babel src -d dist",
-    "prettier": "prettier --write 'src/**/*.js' && git add . && git status",
+    "prettier": "prettier --write 'src/**/*.js'",
     "test": "tape -r babel-register -r babel-polyfill src/test",
-    "test:integration": "tape -r babel-register -r babel-polyfill src/integration",
+    "test:integration":
+      "tape -r babel-register -r babel-polyfill src/integration",
     "watch": "watch 'reset && npm run --silent test' src",
     "precommit-msg": "echo 'Pre-commit checks...' && exit 0",
+    "pretty-quick": "pretty-quick --staged",
     "prepare": "npm run build"
   },
-  "keywords": [
-    "react",
-    "feature",
-    "toggle",
-    "toggles"
-  ],
+  "keywords": ["react", "feature", "toggle", "toggles"],
   "author": "Parallel Drive, Inc",
   "license": "MIT"
 }
