@@ -7,7 +7,9 @@ import { withFeatures, configureFeature } from '../../src';
 
 const render = ReactDOMServer.renderToStaticMarkup;
 
-describe('test integration of withFeatures() & configureFeature()', ({ test }) => {
+describe('test integration of withFeatures() & configureFeature()', ({
+  test
+}) => {
   test('...enabled feature', ({ end, deepEqual }) => {
     const initialFeatures = [
       createFeature({
@@ -27,10 +29,18 @@ describe('test integration of withFeatures() & configureFeature()', ({ test }) =
       })
     ];
 
-    const PresentationalComponent = ({children} = {}) => <div>{children}</div>;
-    const DefaultFallBackComponent = () => <div className="default-fallback-component">No help for you today!</div>;
-    const FeatureComponent = () => <div className="feature">Need help? Call XXX-XXX-XXXX</div>;
-    const ConfiguredFeature = configureFeature(DefaultFallBackComponent)('help')(FeatureComponent);
+    const PresentationalComponent = ({ children } = {}) => (
+      <div>{children}</div>
+    );
+    const DefaultFallBackComponent = () => (
+      <div className="default-fallback-component">No help for you today!</div>
+    );
+    const FeatureComponent = () => (
+      <div className="feature">Need help? Call XXX-XXX-XXXX</div>
+    );
+    const ConfiguredFeature = configureFeature(DefaultFallBackComponent)(
+      'help'
+    )(FeatureComponent);
     const Features = withFeatures({ initialFeatures })(PresentationalComponent);
 
     const $ = dom.load(
@@ -74,10 +84,18 @@ describe('test integration of withFeatures() & configureFeature()', ({ test }) =
       })
     ];
 
-    const PresentationalComponent = ({children} = {}) => <div>{children}</div>;
-    const DefaultFallBackComponent = () => <div className="default-fallback-component">No help for you today!</div>;
-    const FeatureComponent = () => <div className="feature">Need help? Call XXX-XXX-XXXX</div>;
-    const ConfiguredFeature = configureFeature(DefaultFallBackComponent)('help')(FeatureComponent);
+    const PresentationalComponent = ({ children } = {}) => (
+      <div>{children}</div>
+    );
+    const DefaultFallBackComponent = () => (
+      <div className="default-fallback-component">No help for you today!</div>
+    );
+    const FeatureComponent = () => (
+      <div className="feature">Need help? Call XXX-XXX-XXXX</div>
+    );
+    const ConfiguredFeature = configureFeature(DefaultFallBackComponent)(
+      'help'
+    )(FeatureComponent);
     const Features = withFeatures({ initialFeatures })(PresentationalComponent);
 
     const $ = dom.load(

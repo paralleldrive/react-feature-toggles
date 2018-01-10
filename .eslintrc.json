@@ -9,7 +9,7 @@
   "plugins": [
     "react"
   ],
-  "extends": "eslint:recommended",
+  "extends": ["eslint:recommended", "prettier"],
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
@@ -19,28 +19,9 @@
   "rules": {
     "react/jsx-uses-react": 2,
     "react/jsx-uses-vars": 2,
-    "indent": [
-      "error",
-      2
-    ],
     "linebreak-style": [
       "error",
       "unix"
-    ],
-    "quotes": [
-      "error",
-      "single"
-    ],
-    "semi": [
-      "error",
-      "always"
-    ],
-    "no-unused-vars": [
-      1,
-      {
-        "vars": "all",
-        "args": "after-used"
-      }
     ]
   }
 }

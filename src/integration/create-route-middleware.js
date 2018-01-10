@@ -5,21 +5,17 @@ import createFeatures from '../test-fixtures/create-features';
 import { describe } from 'riteway';
 
 describe('createRouteMiddleware()', async should => {
-
   const { assert } = should();
-  
+
   {
     const app = express();
     const features = createFeatures();
-    const handler = createRouteMiddleware(
-      features,
-      {
-        requiredFeature: 'posts',
-        get: (req, res) => {
-          res.send();
-        }
+    const handler = createRouteMiddleware(features, {
+      requiredFeature: 'posts',
+      get: (req, res) => {
+        res.send();
       }
-    );
+    });
     const path = '/posts';
     app.use(path, handler);
 
@@ -38,15 +34,12 @@ describe('createRouteMiddleware()', async should => {
   {
     const app = express();
     const features = createFeatures();
-    const handler = createRouteMiddleware(
-      features,
-      {
-        requiredFeature : 'help',
-        get: (req, res) => {
-          res.send();
-        }
+    const handler = createRouteMiddleware(features, {
+      requiredFeature: 'help',
+      get: (req, res) => {
+        res.send();
       }
-    );
+    });
     const path = '/posts';
     app.use(path, handler);
 
@@ -65,15 +58,12 @@ describe('createRouteMiddleware()', async should => {
   {
     const app = express();
     const features = createFeatures();
-    const handler = createRouteMiddleware(
-      features,
-      {
-        requiredFeature : 'help',
-        get: (req, res) => {
-          res.send();
-        }
+    const handler = createRouteMiddleware(features, {
+      requiredFeature: 'help',
+      get: (req, res) => {
+        res.send();
       }
-    );
+    });
     const path = '/posts';
     app.use(path, handler);
 
@@ -81,7 +71,8 @@ describe('createRouteMiddleware()', async should => {
       .get(`${path}?ft=posts`)
       .end(function(err, res) {
         assert({
-          given: 'the path has param override that is not relevant to the given disabled feature',
+          given:
+            'the path has param override that is not relevant to the given disabled feature',
           should: 'set the correct response status code',
           actual: res.statusCode,
           expected: 404
@@ -92,15 +83,12 @@ describe('createRouteMiddleware()', async should => {
   {
     const app = express();
     const features = createFeatures();
-    const handler = createRouteMiddleware(
-      features,
-      {
-        requiredFeature : 'help',
-        get: (req, res) => {
-          res.send();
-        }
+    const handler = createRouteMiddleware(features, {
+      requiredFeature: 'help',
+      get: (req, res) => {
+        res.send();
       }
-    );
+    });
     const path = '/posts';
     app.use(path, handler);
 
@@ -120,26 +108,26 @@ describe('createRouteMiddleware()', async should => {
     const app = express();
     const features = createFeatures();
     const path = '/posts';
-    const handler = createRouteMiddleware(
-      features,
-      {
-        requiredFeature: 'posts',
-        get: (req, res) => {
-          // Simulate async handler delay
-          // This allows subsequent express methods to be called that could possibly
-          // cause errors or change the response status if the `next` callback is not
-          // used correctly.
-          setTimeout(() => res.send(), 3000);
-        }
+    const handler = createRouteMiddleware(features, {
+      requiredFeature: 'posts',
+      get: (req, res) => {
+        // Simulate async handler delay
+        // This allows subsequent express methods to be called that could possibly
+        // cause errors or change the response status if the `next` callback is not
+        // used correctly.
+        setTimeout(() => res.send(), 3000);
       }
-    );
+    });
     app.use(path, handler);
-    app.get('*', (req, res) => { res.status(404); res.send(); });
+    app.get('*', (req, res) => {
+      res.status(404);
+      res.send();
+    });
 
     request(app)
       .get(path)
       .end(function(err, res) {
-        if (err) throw(err);
+        if (err) throw err;
         assert({
           given: 'given subsequent handlers',
           should: 'not effect the correct handler response status',
@@ -152,15 +140,12 @@ describe('createRouteMiddleware()', async should => {
   {
     const app = express();
     const features = createFeatures();
-    const handler = createRouteMiddleware(
-      features,
-      {
-        requiredFeature: 'posts',
-        post: (req, res) => {
-          res.send();
-        }
+    const handler = createRouteMiddleware(features, {
+      requiredFeature: 'posts',
+      post: (req, res) => {
+        res.send();
       }
-    );
+    });
     const path = '/posts';
     app.use(path, handler);
 
@@ -179,15 +164,12 @@ describe('createRouteMiddleware()', async should => {
   {
     const app = express();
     const features = createFeatures();
-    const handler = createRouteMiddleware(
-      features,
-      {
-        requiredFeature: 'posts',
-        put: (req, res) => {
-          res.send();
-        }
+    const handler = createRouteMiddleware(features, {
+      requiredFeature: 'posts',
+      put: (req, res) => {
+        res.send();
       }
-    );
+    });
     const path = '/posts';
     app.use(path, handler);
 
@@ -202,5 +184,4 @@ describe('createRouteMiddleware()', async should => {
         });
       });
   }
-
 });

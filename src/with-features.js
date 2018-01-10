@@ -7,12 +7,10 @@ const getEnabledFeatures = (initialFeatures, query) =>
   getEnabled(updateFeaturesWithQuery(initialFeatures, query));
 
 // withFeatures = (config?: { initialFeatures: Array }) => Component => Component
-const withFeatures = (
-  {
-    initialFeatures = [],
-    features = []
-  } = {}
-) => WrappedComponent => {
+const withFeatures = ({
+  initialFeatures = [],
+  features = []
+} = {}) => WrappedComponent => {
   class withFeaturesHOC extends Component {
     constructor(props) {
       super(props);

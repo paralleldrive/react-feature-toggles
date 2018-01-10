@@ -23,7 +23,7 @@ describe('getEnabled([])', async should => {
 
 describe('getEnabled([...Feature])', async should => {
   const { assert } = should();
-  const features = [ 
+  const features = [
     createFeature({
       name: 'posts',
       enabled: true
@@ -75,5 +75,4 @@ describe('getEnabled([...Feature])', async should => {
     actual: getEnabled(features),
     expected: ['posts', 'comments', 'comment-rating', 'comment-rating-graph']
   });
-
 });

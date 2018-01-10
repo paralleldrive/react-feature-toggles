@@ -8,9 +8,7 @@ const configureFeature = Default => featureName => (
 ) => {
   const ConfigureFeatureHOC = (props, context) => {
     const isEnabled = isFeatureIncluded(context.features, featureName);
-    return isEnabled
-      ? <Feature {...props} />
-      : <Fallback {...props} />;
+    return isEnabled ? <Feature {...props} /> : <Fallback {...props} />;
   };
   ConfigureFeatureHOC.contextTypes = {
     features: PropTypes.array
