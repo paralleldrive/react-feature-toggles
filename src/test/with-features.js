@@ -15,15 +15,15 @@ describe('withFeatures()', async should => {
   const $ = dom.load(render(<Component />));
 
   assert({
-    given: 'the react context features',
-    should: 'have no enabled features',
+    given: 'no configuration or query prop',
+    should: 'set the react context to have no enabled features',
     actual: $('.context-features-string').text(),
     expected: ''
   });
 
   assert({
-    given: 'the prop features',
-    should: 'have no enabled features',
+    given: 'no configuration or query prop',
+    should: 'pass the correct features prop to the wrapped component',
     actual: $('.props-features-string').text(),
     expected: ''
   });
@@ -36,15 +36,15 @@ describe('withFeatures({})', async should => {
   const $ = dom.load(render(<Component />));
 
   assert({
-    given: 'the react context features',
-    should: 'have no enabled features',
+    given: 'empty configuration and no query prop',
+    should: 'set the react context to have no enabled features',
     actual: $('.context-features-string').text(),
     expected: ''
   });
 
   assert({
-    given: 'the prop features',
-    should: 'have no enabled features',
+    given: 'empty configuration and no query prop',
+    should: 'pass the correct features prop to the wrapped component',
     actual: $('.props-features-string').text(),
     expected: ''
   });
@@ -75,15 +75,15 @@ describe('withFeatures({ initialFeatures: [...Features] })', async should => {
   const $ = dom.load(render(<Component />));
 
   assert({
-    given: 'initial features',
-    should: 'set the correct react context correct enabled features',
+    given: 'initial features and no query prop',
+    should: 'set the correct features in react context',
     actual: $('.context-features-string').text(),
     expected: 'help,comments'
   });
 
   assert({
-    given: 'initial features',
-    should: 'should the correct enabled features to the features props',
+    given: 'initial features and no query prop',
+    should: 'pass the correct features prop to the wrapped component',
     actual: $('.props-features-string').text(),
     expected: 'help,comments'
   });
@@ -117,14 +117,16 @@ describe('withFeatures({ initialFeatures: [...Features] })({ query: {} })', asyn
 
   assert({
     given: 'initial features and a query',
-    should: 'the react context should have the correct enabled features',
+    should:
+      'update enabled features and set the correct features in react context',
     actual: $('.context-features-string').text(),
     expected: 'game,comments'
   });
 
   assert({
     given: 'initial features and a query',
-    should: 'the correct enabled features to the features props',
+    should:
+      'update enabled features and pass the correct features prop to the wrapped component',
     actual: $('.props-features-string').text(),
     expected: 'game,comments'
   });
@@ -139,8 +141,8 @@ describe('withFeatures()({ ...props })', async should => {
     const $ = dom.load(render(<Component name={name} />));
 
     assert({
-      given: 'props',
-      should: 'pass through props',
+      given: 'other props',
+      should: 'pass through other props to the wrapped component',
       actual: $('.props-name').text(),
       expected: name
     });
