@@ -1,4 +1,4 @@
-import describe from 'tape';
+import { describe } from 'riteway';
 import dom from 'cheerio';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
@@ -7,10 +7,10 @@ import { withFeatures, configureFeature } from '../../src';
 
 const render = ReactDOMServer.renderToStaticMarkup;
 
-describe('test integration of withFeatures() & configureFeature()', ({
-  test
-}) => {
-  test('...enabled feature', ({ end, deepEqual }) => {
+describe('integration of withFeatures() and configureFeature()', async should => {
+  const { assert } = should();
+
+  {
     const initialFeatures = [
       createFeature({
         name: 'comments',
@@ -50,22 +50,22 @@ describe('test integration of withFeatures() & configureFeature()', ({
         </Features>
       )
     );
-    {
-      const msg = 'it should not render DefaultFallbackComponent component';
-      const actual = $('.default-fallback-component').length;
-      const expected = 0;
-      deepEqual(actual, expected, msg);
-    }
-    {
-      const msg = 'it should render the Feature component';
-      const actual = $('.feature').length;
-      const expected = 1;
-      deepEqual(actual, expected, msg);
-    }
-    end();
-  });
 
-  test('...disabled feature', ({ end, deepEqual }) => {
+    assert({
+      given: 'the feature is enabled',
+      should: 'not render the DefaultFallbackComponent',
+      actual: $('.default-fallback-component').length,
+      expected: 0
+    });
+
+    assert({
+      given: 'the feature is enabled',
+      should: 'render the Feature component',
+      actual: $('.feature').length,
+      expected: 1
+    });
+  }
+  {
     const initialFeatures = [
       createFeature({
         name: 'comments',
@@ -105,18 +105,19 @@ describe('test integration of withFeatures() & configureFeature()', ({
         </Features>
       )
     );
-    {
-      const msg = 'it should render DefaultFallbackComponent component';
-      const actual = $('.default-fallback-component').length;
-      const expected = 1;
-      deepEqual(actual, expected, msg);
-    }
-    {
-      const msg = 'it should not render the Feature component';
-      const actual = $('.feature').length;
-      const expected = 0;
-      deepEqual(actual, expected, msg);
-    }
-    end();
-  });
+
+    assert({
+      given: 'the feature is disabled',
+      should: 'render DefaultFallbackComponent component',
+      actual: $('.default-fallback-component').length,
+      expected: 1
+    });
+
+    assert({
+      given: 'the feature is disabled',
+      should: 'not render the Feature component',
+      actual: $('.feature').length,
+      expected: 0
+    });
+  }
 });
