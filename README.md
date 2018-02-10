@@ -180,5 +180,5 @@ Add comma-separated names to the `ft` search param. `?ft=FEATURE_NAME,FEATURE_NA
 **example**
 
 ```
-http://www.domain.com/?ft=help,comments
+http://www.example.com/?ft=help,comments
 ```
