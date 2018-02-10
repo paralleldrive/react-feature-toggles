@@ -12,6 +12,7 @@ React Feature Toggles attempts to satisfy the following requirements:
 * Feature Dependency - if a feature depends on a another feature that is disabled, then neither of them should execute
 
 ## Install
+
 ```
 npm install --save @paralleldrive/react-feature-toggles
 ```
@@ -31,7 +32,8 @@ const pageHOC = compose(
   hoc2
 );
 ```
-The `withFeatures` hoc must receive `query` via props. `query` should be a [parsed url](https://nodejs.org/api/url.html) query object. You can see an example of this happening in [react-redux-wrapper](https://github.com/kirill-konshin/next-redux-wrapper).
+
+The `withFeatures` hoc must receive `query` via props or `context`. Next.js supplies `context` automatically from `getInitialProps()`. `query` should be a [parsed url](https://nodejs.org/api/url.html) query object. You can see an example of how to pass `query` through React components in [react-redux-wrapper](https://github.com/kirill-konshin/next-redux-wrapper).
 
 Configure the component fallback:
 
@@ -55,7 +57,7 @@ import pageHOC from '../hocs/page';
 
 const MyPage = compose(
   pageHOC, // withFeatures should be in there
-  requiresFeature('feature-name'),
+  requiresFeature('feature-name')
   // Optionally, anything special for this page should be here, e.g.,
   // requiresRole('admin')
 )(MyComponent);
@@ -79,22 +81,20 @@ interface Feature {
 
 ### withFeatures()
 
-Returns a higher order React context provider component. It requires the `query` prop. The query prop should be a [parsed url](https://nodejs.org/api/url.html) object.
+Returns a higher order React context provider component. It requires a `query` object that can be passed via props or `context`. `query` should be a [parsed url](https://nodejs.org/api/url.html) object.
 
 ```javascript
-const Features = withFeatures = ({ initialFeatures: [] })();
+const Features = (withFeatures = { initialFeatures: [] }());
 
-const Wrapper = () => (
-  <Features query={query} />
-)
+const Wrapper = () => <Features query={query} />;
 ```
 
 #### Function Signature
 
 ```javascript
-withFeatures = ({
-  initialFeatures = [ ...Feature ]
-} = {}) => (WrappedComponent: ReactComponent) => ReactComponent
+withFeatures = ({ initialFeatures = [...Feature] } = {}) => (
+  WrappedComponent: ReactComponent
+) => ReactComponent;
 ```
 
 ### configureFeature()
@@ -104,10 +104,12 @@ Conditionally render components based on enabled/disabled features.
 #### Function Signature
 
 ```javascript
-configureFeature =
-  (DefaultFallbackComponent: ReactComponent) =>
-  (featureName: String) =>
-  (FeatureComponent: ReactComponent, FallbackComponent = DefaultFallbackComponent) => ReactComponent
+configureFeature = (DefaultFallbackComponent: ReactComponent) => (
+  featureName: String
+) => (
+  FeatureComponent: ReactComponent,
+  FallbackComponent = DefaultFallbackComponent
+) => ReactComponent;
 ```
 
 ### getEnabled
@@ -141,7 +143,10 @@ isFeatureIncluded([...Strings], String) => Boolean
 #### Use it
 
 ```javascript
-import { getEnabled, isFeatureIncluded } from '@paralleldrive/react-feature-toggles';
+import {
+  getEnabled,
+  isFeatureIncluded
+} from '@paralleldrive/react-feature-toggles';
 
 const enabledFeatures = getEnabled(features);
 
@@ -161,20 +166,19 @@ getIsEnabled(features: [...Feature], featureName: String, ) => enabled: Boolean
 #### Use it
 
 ```javascript
-
 import { getIsEnabled } from '@paralleldrive/react-feature-toggles';
 
 const helpIsEnabled = getIsEnabled(features, 'help');
-
 ```
 
 ## Enabling a feature from the url
 
-__NOTE:__ If you are using server rendering then overriding features from the url will cause React to throw a warning that the client-side HTML result is different from the server.
+**NOTE:** If you are using server rendering then overriding features from the url will cause React to throw a warning that the client-side HTML result is different from the server.
 
 Add comma-separated names to the `ft` search param. `?ft=FEATURE_NAME,FEATURE_NAME`
 
-__example__
+**example**
+
 ```
 http://www.domain.com/?ft=help,comments
 ```
