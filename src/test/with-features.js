@@ -1,8 +1,11 @@
-import { describe } from 'riteway';
-import withFeatures from '../with-features';
-import dom from 'cheerio';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
+import { describe } from 'riteway';
+import dom from 'cheerio';
+import { compose } from 'ramda';
+
+import withFeatures from '../with-features';
+import withContext from '../test-fixtures/with-context';
 import createWrappedComponent from '../test-fixtures/create-wrapped-component';
 import createFeature from '../test-fixtures/create-feature';
 
@@ -145,6 +148,33 @@ describe('withFeatures()({ ...props })', async should => {
       should: 'pass through other props to the wrapped component',
       actual: $('.props-name').text(),
       expected: name
+    });
+  }
+});
+
+describe('withFeatures()', async should => {
+  {
+    const { assert } = should('get query from context');
+
+    const feature = 'test-feature';
+    const initialFeatures = [
+      {
+        name: feature,
+        enabled: false
+      }
+    ];
+    const WrappedComponent = createWrappedComponent();
+    const Component = compose(
+      withContext(undefined, { ft: feature }),
+      withFeatures({ initialFeatures })
+    )(WrappedComponent);
+
+    const $ = dom.load(render(<Component />));
+
+    assert({
+      given: 'no query prop, and query in context',
+      actual: $('.props-features-string').text(),
+      expected: feature
     });
   }
 });

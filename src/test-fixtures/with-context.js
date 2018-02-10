@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-const withContext = (enabledFeatures = []) => WrappedComponent => {
+const withContext = (enabledFeatures = [], query) => WrappedComponent => {
   class ContextHOC extends Component {
     static childContextTypes = {
-      features: PropTypes.array
+      features: PropTypes.array,
+      query: PropTypes.object
     };
     getChildContext() {
       return {
-        features: enabledFeatures
+        features: enabledFeatures,
+        query
       };
     }
     render() {

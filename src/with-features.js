@@ -12,16 +12,21 @@ const withFeatures = ({
   features = []
 } = {}) => WrappedComponent => {
   class withFeaturesHOC extends Component {
-    constructor(props) {
+    constructor(props, context) {
       super(props);
-      const { query } = props;
+
+      const query = props.query || context.query;
+
       features = getEnabledFeatures(initialFeatures, query);
     }
+    static contextTypes = {
+      query: PropTypes.object
+    };
     static childContextTypes = {
       features: PropTypes.array
     };
     static propTypes = {
-      query: PropTypes.object.isRequired
+      query: PropTypes.object
     };
     getChildContext() {
       return {
