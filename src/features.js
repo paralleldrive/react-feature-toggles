@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import getEnabled from './get-enabled';
 import updateFeaturesWithQuery from './update-features-with-query';
 import PropTypes from 'prop-types';
@@ -7,22 +7,33 @@ const getEnabledFeatures = (initialFeatures, query) =>
   getEnabled(updateFeaturesWithQuery(initialFeatures, query));
 
 class Features extends Component {
-  state = {}
+  constructor(props, context) {
+    super(props);
+    this.update(props, context);
+  }
+  state = {
+    features: []
+  };
   static contextTypes = {
     query: PropTypes.object
   };
   static childContextTypes = {
     hasFeature: PropTypes.func
   };
-  hasFeature = () => {
-    
+  update(props) {
+    this.setState(() => ({
+      features: getEnabledFeatures(props.initialFeatures, props.query)
+    }));
   }
+  hasFeature = featureName => {
+    return this.state.features.includes(featureName);
+  };
   getChildContext() {
     return {
       hasFeature: this.hasFeature
     };
   }
-  render () {
+  render() {
     const { children } = this.props;
     return children({ hasFeature: this.hasFeature });
   }
@@ -32,22 +43,20 @@ export default Features;
 
 // withFeatures = (config?: { initialFeatures: Array }) => Component => Component
 
-  // class withFeaturesHOC extends Component {
-  //   constructor(props, context) {
-  //     super(props);
+// class withFeaturesHOC extends Component {
+//   constructor(props, context) {
+//     super(props);
 
-  //     const query = props.query || context.query;
+//     const query = props.query || context.query;
 
-  //     features = getEnabledFeatures(initialFeatures, query);
-  //   }
+//     features = getEnabledFeatures(initialFeatures, query);
+//   }
 
+//   static propTypes = {
+//     query: PropTypes.object
+//   };
 
-  //   static propTypes = {
-  //     query: PropTypes.object
-  //   };
-
-  //   render() {
-  //     return <WrappedComponent {...this.props} features={features} />;
-  //   }
-  // }
-
+//   render() {
+//     return <WrappedComponent {...this.props} features={features} />;
+//   }
+// }
