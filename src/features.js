@@ -16,6 +16,9 @@ class Features extends Component {
   static childContextTypes = {
     hasFeature: PropTypes.func
   };
+  static propTypes = {
+    initialFeatures: PropTypes.array
+  };
   componentWillReceiveProps(props, context) {
     this.setState(() => ({
       features: this.getEnabledFeatures(props, context)
