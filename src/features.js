@@ -3,19 +3,11 @@ import getEnabled from './get-enabled';
 import updateFeaturesWithQuery from './update-features-with-query';
 import PropTypes from 'prop-types';
 
-const getEnabledFeatures = (props, context) =>
-  getEnabled(
-    updateFeaturesWithQuery(props.initialFeatures, props.query || context.query)
-  );
-
 class Features extends Component {
-  state = {
-    features: []
-  };
   constructor(props, context) {
     super(props);
     this.state = {
-      features: getEnabledFeatures(props, context)
+      features: this.getEnabledFeatures(props, context)
     };
   }
   static contextTypes = {
@@ -26,12 +18,20 @@ class Features extends Component {
   };
   componentWillReceiveProps(props, context) {
     this.setState(() => ({
-      features: getEnabledFeatures(props, context)
+      features: this.getEnabledFeatures(props, context)
     }));
   }
   hasFeature = featureName => {
     return this.state.features.includes(featureName);
   };
+  getEnabledFeatures(props, context) {
+    return getEnabled(
+      updateFeaturesWithQuery(
+        props.initialFeatures,
+        props.query || context.query
+      )
+    );
+  }
   getChildContext() {
     return {
       hasFeature: this.hasFeature
