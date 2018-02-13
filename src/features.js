@@ -3,26 +3,30 @@ import getEnabled from './get-enabled';
 import updateFeaturesWithQuery from './update-features-with-query';
 import PropTypes from 'prop-types';
 
-const getEnabledFeatures = (initialFeatures, query) =>
-  getEnabled(updateFeaturesWithQuery(initialFeatures, query));
+const getEnabledFeatures = (props, context) =>
+  getEnabled(
+    updateFeaturesWithQuery(props.initialFeatures, props.query || context.query)
+  );
 
 class Features extends Component {
-  constructor(props, context) {
-    super(props);
-    this.update(props, context);
-  }
   state = {
     features: []
   };
+  constructor(props, context) {
+    super(props);
+    this.state = {
+      features: getEnabledFeatures(props, context)
+    };
+  }
   static contextTypes = {
     query: PropTypes.object
   };
   static childContextTypes = {
     hasFeature: PropTypes.func
   };
-  update(props) {
+  componentWillReceiveProps(props, context) {
     this.setState(() => ({
-      features: getEnabledFeatures(props.initialFeatures, props.query)
+      features: getEnabledFeatures(props, context)
     }));
   }
   hasFeature = featureName => {
@@ -40,23 +44,3 @@ class Features extends Component {
 }
 
 export default Features;
-
-// withFeatures = (config?: { initialFeatures: Array }) => Component => Component
-
-// class withFeaturesHOC extends Component {
-//   constructor(props, context) {
-//     super(props);
-
-//     const query = props.query || context.query;
-
-//     features = getEnabledFeatures(initialFeatures, query);
-//   }
-
-//   static propTypes = {
-//     query: PropTypes.object
-//   };
-
-//   render() {
-//     return <WrappedComponent {...this.props} features={features} />;
-//   }
-// }
