@@ -1,7 +1,8 @@
 import { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import getEnabled from './get-enabled';
 import updateFeaturesWithQuery from './update-features-with-query';
-import PropTypes from 'prop-types';
 
 class Features extends Component {
   constructor(props, context) {
