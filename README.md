@@ -83,12 +83,6 @@ interface Feature {
 
 Returns a higher order React context provider component. It requires a `query` object that can be passed via props or `context`. `query` should be a [parsed url](https://nodejs.org/api/url.html) object.
 
-```javascript
-const Features = (withFeatures = { initialFeatures: [] }());
-
-const Wrapper = () => <Features query={query} />;
-```
-
 #### Function Signature
 
 ```javascript
