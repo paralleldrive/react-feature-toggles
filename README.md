@@ -164,15 +164,3 @@ import { getIsEnabled } from '@paralleldrive/react-feature-toggles';
 
 const helpIsEnabled = getIsEnabled(features, 'help');
 ```
-
-## Enabling a feature from the url
-
-**NOTE:** If you are using server rendering then overriding features from the url will cause React to throw a warning that the client-side HTML result is different from the server.
-
-Add comma-separated names to the `ft` search param. `?ft=FEATURE_NAME,FEATURE_NAME`
-
-**example**
-
-```
-http://www.example.com/?ft=help,comments
-```
