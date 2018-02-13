@@ -17,7 +17,8 @@ class Features extends Component {
     hasFeature: PropTypes.func
   };
   static propTypes = {
-    initialFeatures: PropTypes.array
+    initialFeatures: PropTypes.array,
+    query: PropTypes.object
   };
   componentWillReceiveProps(props, context) {
     this.setState(() => ({
