@@ -29,14 +29,14 @@ class Features extends Component {
   hasFeature = featureName => {
     return this.state.features.includes(featureName);
   };
-  getEnabledFeatures(props, context) {
+  getEnabledFeatures = (props, context) => {
     return getEnabled(
       updateFeaturesWithQuery(
         props.initialFeatures,
         props.query || context.query
       )
     );
-  }
+  };
   getChildContext() {
     return {
       hasFeature: this.hasFeature
