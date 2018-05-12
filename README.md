@@ -209,7 +209,7 @@ deactivate(currentFeatures, ['fish', 'bar', 'cat']); // ['foo', 'baz']
 
 #### isActive
 
-`(featureName = "", features = [...String]) => boolean`
+`(String, [...String]) => boolean`
 
 Returns true if a feature name is in the array else it returns false.
 
