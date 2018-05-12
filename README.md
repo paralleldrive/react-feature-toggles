@@ -220,9 +220,9 @@ isActive('cat', currentFeatures); // false
 ```
 
 
-## Applying query overrides
+## Enabling features from the URL
 
-Query logic has been moved out of the provider component, you should now handle this logic before passing features to `FeatureToggles`
+In v2, query logic has been moved out of the provider component. You should now handle this logic before passing features to `FeatureToggles`
 
 ```js
 import { FeatureToggles, mergeFeatures, parseQuery } from '@paralleldrive/react-feature-toggles';
