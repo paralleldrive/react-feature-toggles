@@ -89,7 +89,7 @@ const MyApp = () => {
 }
 ```
 
-Alternatively, you can use `Feature` as a render prop component by passing a function for the children.
+Alternatively, you can use `Feature` as a render prop component. Do this by passing a function as the children to the `Feature` component. Note: This will only work if an `activeComponent` is not provided.
 
 ```js
 import { FeatureToggles, Feature, isActive } from '@paralleldrive/react-feature-toggles';
