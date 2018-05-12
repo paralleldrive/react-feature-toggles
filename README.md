@@ -17,162 +17,226 @@ React Feature Toggles attempts to satisfy the following requirements:
 npm install --save @paralleldrive/react-feature-toggles
 ```
 
-## Setup
+## Basic Usage
 
-Setup withFeatures in the page HOC composition
+```js
+import { FAQComponent } from '../features/faq';
+import { NotFoundComponent } from '../features/404-page';
+import { FeatureToggles, Feature } from '@paralleldrive/react-feature-toggles';
 
-```javascript
-import { withFeatures } from '@paralleldrive/react-feature-toggles';
-import initialFeatures from '../config/initial-features';
+const features = ['faq', 'foo', 'bar'];
 
-const pageHOC = compose(
-  withRedux,
-  withFeatures({ initialFeatures }),
-  hoc1,
-  hoc2
-);
-```
-
-The `withFeatures` hoc must receive `query` via props or `context`. Next.js supplies `context` automatically from `getInitialProps()`. `query` should be a [parsed url](https://nodejs.org/api/url.html) query object. You can see an example of how to pass `query` through React components in [react-redux-wrapper](https://github.com/kirill-konshin/next-redux-wrapper).
-
-Configure the component fallback:
-
-```javascript
-import NotFound from '../components/not-found-component';
-import { configureFeature } from '@paralleldrive/react-feature-toggles';
-
-const requiresFeature = configureFeature(NotFound);
-
-export default requiresFeature;
-```
-
-Build your component that requires a specific feature:
-
-```javascript
-import compose from 'lodash/fp/compose';
-
-import requiresFeature from '../hocs/requiresFeature';
-import MyComponent from '../components/my-component';
-import pageHOC from '../hocs/page';
-
-const MyPage = compose(
-  pageHOC, // withFeatures should be in there
-  requiresFeature('feature-name')
-  // Optionally, anything special for this page should be here, e.g.,
-  // requiresRole('admin')
-)(MyComponent);
-
-export default MyPage;
-```
-
-## Interfaces
-
-### Feature
-
-```javascript
-interface Feature {
-  name: String,
-  enabled: false,
-  dependencies?: [...featureName: String]
+const MyApp = () => {
+  return (
+    <FeatureToggles features={features}>
+      <Feature name="faq" inactiveComponent={NotFoundComponent} activeComponent={FAQComponent}/>
+    </FeatureToggles>
+  )
 }
 ```
 
 ## API
 
-### withFeatures()
+### Interfaces
 
-Returns a higher order React context provider component. It requires a `query` object that can be passed via props or `context`. `query` should be a [parsed url](https://nodejs.org/api/url.html) object.
+#### Feature
 
-#### Function Signature
-
-```javascript
-withFeatures = ({ initialFeatures = [...Feature] } = {}) => (
-  WrappedComponent: ReactComponent
-) => ReactComponent;
+```js
+interface Feature {
+  name: String,
+  isActive: false,
+  dependencies?: [...String]
+}
 ```
 
-### configureFeature()
+### Functions
 
-Conditionally render components based on enabled/disabled features.
+#### getEnabledFeatures
 
-#### Function Signature
+`([...Feature]) => [...String]`
 
-```javascript
-configureFeature = (DefaultFallbackComponent: ReactComponent) => (
-  featureName: String
-) => (
-  FeatureComponent: ReactComponent,
-  FallbackComponent = DefaultFallbackComponent
-) => ReactComponent;
+Takes an array of feature objects and returns an array of enabled feature names.
+
+#### parseQuery
+
+`(query = {}) => [...String]`
+
+Takes a [query object](https://nodejs.org/api/url.html) and returns an array of enabled feature names.
+
+```js
+const query = { ft='foo,bar,help' }
+parseQuery(query); // ['foo', 'bar', 'help']
 ```
 
-### getEnabled
+#### mergeFeatures
 
-Returns all the names of enabled features.
+`(...[...String]) => [...String]`
 
-#### Function Signature
+Merge feature names without duplicating.
 
-```javascript
-getEnabled(features: [...Feature]) => featureNames: [...String]
+```js
+const currentFeatures = ['foo', 'bar', 'baz'];
+mergeFeatures(currentFeatures, ['fish', 'bar', 'cat']); // ['foo', 'bar', 'baz', 'fish', 'cat']
 ```
 
-#### Use it
+#### deactivate
 
-```javascript
-import { getEnabled } from '@paralleldrive/react-feature-toggles';
+`([...String], [...String]) => [...String]`
 
-const enabledFeatures = getEnabled(features);
+Removes feature names
+
+```js
+const currentFeatures = ['foo', 'bar', 'baz', 'cat'];
+deactivate(currentFeatures, ['fish', 'bar', 'cat']); // ['foo', 'baz']
 ```
 
-### isFeatureIncluded
+#### isActive
 
-Returns true if the string is included in the array.
+`(featureName = "", features = [...String]) => boolean`
 
-#### Function Signature
+Returns true if a feature name is in the array else it returns false.
 
-```javascript
-isFeatureIncluded([...Strings], String) => Boolean
+```js
+const currentFeatures = ['foo', 'bar', 'baz'];
+isActive('bar', currentFeatures); // true
+isActive('cat', currentFeatures); // false
 ```
 
-#### Use it
+### Components
 
-```javascript
-import {
-  getEnabled,
-  isFeatureIncluded
-} from '@paralleldrive/react-feature-toggles';
+#### FeatureToggles
 
-const enabledFeatures = getEnabled(features);
+FeatureToggles is a provider component.
 
-const helpIsEnabled = isFeatureIncluded(enabledFeatures, 'help');
+**props**   
+- features = []
+
+```js
+import { FeatureToggles } from '@paralleldrive/react-feature-toggles';
+
+const features = ['foo', 'bar', 'baz', 'cat'];
+
+const MyApp = () => {
+  return (
+    <FeatureToggles features={features}>
+      {... stuff}
+    </FeatureToggles>
+  )
+}
 ```
 
-### getIsEnabled
+#### Feature
 
-Returns the enabled value of a single feature. If the feature does not exist it is considered disabled.
+`Feature` is a consumer component. 
 
-#### Function signature
+If the feature is enabled then the *activeComponent* will render else it renders the *inactiveComponent*.
 
-```javascript
-getIsEnabled(features: [...Feature], featureName: String, ) => enabled: Boolean
+Feature takes these **props**   
+- name = ""
+- inactiveComponent = noop
+- activeComponent = null
+
+
+Feature will pass these **props** to both the *inactiveComponent* and the *activeComponent*
+- features = []
+- name = ""
+
+```js
+import { FeatureToggles, Feature } from '@paralleldrive/react-feature-toggles';
+
+const MyApp = () => {
+  return (
+    <FeatureToggles>
+      <Feature name="faq" inactiveComponent={NotFoundComponent} activeComponent={FAQComponent}/>
+      <Feature name="help" inactiveComponent={NotFoundComponent} activeComponent={HelpComponent}/>
+    </FeatureToggles>
+  )
+}
 ```
 
-#### Use it
+Alternatively, you can use `Feature` as a render prop component by passing a function for the children.
 
-```javascript
-import { getIsEnabled } from '@paralleldrive/react-feature-toggles';
+```js
+import { FeatureToggles, Feature, isActive } from '@paralleldrive/react-feature-toggles';
 
-const helpIsEnabled = getIsEnabled(features, 'help');
+const MyApp = () => {
+  return (
+    <FeatureToggles>
+      <Feature>
+        {({ features }) => isActive('bacon', features) ? 'The bacon feature is active' : 'Bacon is inactive' }
+      </Feature>
+    </FeatureToggles>
+  )
+}
 ```
 
-## Enabling a feature from the url
+### HOCs ( Higher Order Components )
 
-**NOTE:** If you are using server rendering then overriding features from the url will cause React to throw a warning that the client-side HTML result is different from the server.
+#### withFeatureToggles
 
-Add comma-separated names to the `ft` search param. `?ft=FEATURE_NAME,FEATURE_NAME`
+`({ features = [...String] } = {}) => Component => Component`
 
-**example**
+You can use `withFeatureToggles` to compose your page functionality.
+
+```js
+import MyPage from '../feautures/my-page';
+import { withFeatureToggles } from '@paralleldrive/react-feature-toggles';
+
+const features = ['foo', 'bar', 'baz', 'cat'];
+
+export default = compose(
+  withFeatureToggles({ features }),
+  // ... other page HOC imports
+  hoc1,
+  hoc2,
+);
+```
+
+Depending on your requirements, you might need something slightly different than the default `withFeatureToggles`. The default `withFeatureToggles` should serve as a good example to create your own.
+
+#### configureFeature
+
+`(inactiveComponent, feature, activeComponent) => Component`
+
+`configureFeature` is a higher order component that allows you to configure a `Feature` component. configureFeature is auto curried so that you can partially apply the props.
+
+
+```js
+import { FeatureToggles } from '@paralleldrive/react-feature-toggles';
+const NotFoundPage = () => <div>404</div>;
+const ChatPage = () => <div>Chat</div>;
+
+const featureOr404 = configureFeature(NotFoundPage);
+const Chat = featureOr404('chat', ChatPage);
+
+const features = ['foo', 'bar', 'chat'];
+
+const myPage = () => (
+  <FeatureToggles features={features}>
+    <Chat />
+  </FeatureToggles>
+);
 
 ```
-http://www.example.com/?ft=help,comments
+
+## Applying query overrides
+
+Query logic has been moved out of the provider component, you should now handle this logic before passing features to `FeatureToggles`
+
+```js
+import { FeatureToggles, mergeFeatures, parseQuery } from '@paralleldrive/react-feature-toggles';
+import parse from 'url-parse';
+
+const url = 'https://domain.com/foo?ft=foo,bar';
+const query = parse(url, true);
+const initialFeatures = ['faq', 'foo', 'bar'];
+const features = mergeFeatures(initialFeatures, parseQuery(query));
+
+const MyApp = () => {
+  return (
+    <FeatureToggles features={features}>
+      {...stuff}
+    </FeatureToggles>
+  )
+}
 ```
