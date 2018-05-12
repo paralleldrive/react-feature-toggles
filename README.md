@@ -41,7 +41,7 @@ const MyApp = () => {
 
 #### FeatureToggles
 
-FeatureToggles is a provider component.
+`FeatureToggles` is a provider component.
 
 **props**   
 - features = []
