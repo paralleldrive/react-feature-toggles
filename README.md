@@ -71,11 +71,6 @@ Feature takes these **props**
 - inactiveComponent = noop
 - activeComponent = null
 
-
-Feature will pass these **props** to both the *inactiveComponent* and the *activeComponent*
-- features = []
-- name = ""
-
 ```js
 import { FeatureToggles, Feature } from '@paralleldrive/react-feature-toggles';
 
