@@ -37,71 +37,6 @@ const MyApp = () => {
 
 ## API
 
-### Interfaces
-
-#### Feature
-
-```js
-interface Feature {
-  name: String,
-  isActive: false,
-  dependencies?: [...String]
-}
-```
-
-### Functions
-
-#### getEnabledFeatures
-
-`([...Feature]) => [...String]`
-
-Takes an array of feature objects and returns an array of enabled feature names.
-
-#### parseQuery
-
-`(query = {}) => [...String]`
-
-Takes a [query object](https://nodejs.org/api/url.html) and returns an array of enabled feature names.
-
-```js
-const query = { ft='foo,bar,help' }
-parseQuery(query); // ['foo', 'bar', 'help']
-```
-
-#### mergeFeatures
-
-`(...[...String]) => [...String]`
-
-Merge feature names without duplicating.
-
-```js
-const currentFeatures = ['foo', 'bar', 'baz'];
-mergeFeatures(currentFeatures, ['fish', 'bar', 'cat']); // ['foo', 'bar', 'baz', 'fish', 'cat']
-```
-
-#### deactivate
-
-`([...String], [...String]) => [...String]`
-
-Removes feature names
-
-```js
-const currentFeatures = ['foo', 'bar', 'baz', 'cat'];
-deactivate(currentFeatures, ['fish', 'bar', 'cat']); // ['foo', 'baz']
-```
-
-#### isActive
-
-`(featureName = "", features = [...String]) => boolean`
-
-Returns true if a feature name is in the array else it returns false.
-
-```js
-const currentFeatures = ['foo', 'bar', 'baz'];
-isActive('bar', currentFeatures); // true
-isActive('cat', currentFeatures); // false
-```
-
 ### Components
 
 #### FeatureToggles
@@ -218,6 +153,72 @@ const myPage = () => (
 );
 
 ```
+
+### Interfaces
+
+#### Feature
+
+```js
+interface Feature {
+  name: String,
+  isActive: false,
+  dependencies?: [...String]
+}
+```
+
+### Functions
+
+#### getEnabledFeatures
+
+`([...Feature]) => [...String]`
+
+Takes an array of feature objects and returns an array of enabled feature names.
+
+#### parseQuery
+
+`(query = {}) => [...String]`
+
+Takes a [query object](https://nodejs.org/api/url.html) and returns an array of enabled feature names.
+
+```js
+const query = { ft='foo,bar,help' }
+parseQuery(query); // ['foo', 'bar', 'help']
+```
+
+#### mergeFeatures
+
+`(...[...String]) => [...String]`
+
+Merge feature names without duplicating.
+
+```js
+const currentFeatures = ['foo', 'bar', 'baz'];
+mergeFeatures(currentFeatures, ['fish', 'bar', 'cat']); // ['foo', 'bar', 'baz', 'fish', 'cat']
+```
+
+#### deactivate
+
+`([...String], [...String]) => [...String]`
+
+Removes feature names
+
+```js
+const currentFeatures = ['foo', 'bar', 'baz', 'cat'];
+deactivate(currentFeatures, ['fish', 'bar', 'cat']); // ['foo', 'baz']
+```
+
+#### isActive
+
+`(featureName = "", features = [...String]) => boolean`
+
+Returns true if a feature name is in the array else it returns false.
+
+```js
+const currentFeatures = ['foo', 'bar', 'baz'];
+isActive('bar', currentFeatures); // true
+isActive('cat', currentFeatures); // false
+```
+
 
 ## Applying query overrides
 
