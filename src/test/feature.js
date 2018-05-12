@@ -136,14 +136,14 @@ describe('Feature()', async should => {
     );
 
     assert({
-      given: 'the no active component prop',
+      given: 'no active component prop',
       should: 'act as a render prop component',
       actual: $('.active').length,
       expected: 1
     });
 
     assert({
-      given: 'the no active component prop',
+      given: 'no active component prop',
       should: 'act as a render prop component',
       actual: $('.inactive').length,
       expected: 0
