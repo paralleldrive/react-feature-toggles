@@ -9,7 +9,7 @@ export const Feature = ({
   children,
   inactiveComponent = noop,
   name
-} = {}) => (
+}) => (
   <Consumer>
     {features => {
       const Component = features.includes(name)
