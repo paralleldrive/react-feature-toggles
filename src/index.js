@@ -6,6 +6,8 @@ import getEnabled from './get-enabled';
 import updateFeaturesWithQuery from './update-features-with-query';
 
 export { isActive } from './is-active';
+export { FeatureToggles } from './feature-toggles';
+export { Feature } from './feature';
 
 export {
   withFeatures,
