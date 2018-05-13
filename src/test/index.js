@@ -4,5 +4,6 @@ import './update-features-with-query';
 import './with-features';
 import './configure-feature';
 import './is-feature-included';
+import './features';
 import './feature-toggles';
 import './feature';
