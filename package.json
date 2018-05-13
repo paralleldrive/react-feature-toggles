@@ -32,33 +32,42 @@
     "pre-commit": "1.2.2",
     "prettier": "1.9.2",
     "pretty-quick": "1.1.0",
-    "prop-types": "15.5.10",
-    "react": "15.6.1",
-    "react-dom": "15.6.1",
+    "prop-types": "15.6.1",
+    "react": "16.3.2",
+    "react-dom": "16.3.2",
     "riteway": "2.0.3",
     "supertest": "3.0.0",
     "tape": "4.8.0",
     "watch": "1.0.2"
   },
   "peerDependencies": {
-    "prop-types": ">=15.5.10",
-    "react": ">=15.6.1",
-    "react-dom": ">=15.6.1"
+    "prop-types": ">=15.6.1",
+    "react": ">=16.3.2",
+    "react-dom": ">=16.3.2"
   },
-  "pre-commit": ["lint", "pretty-quick", "test", "test:integration"],
+  "pre-commit": [
+    "lint",
+    "pretty-quick",
+    "test",
+    "test:integration"
+  ],
   "scripts": {
     "lint": "eslint src && echo '-- linting finished --'",
     "build": "babel src -d dist",
     "prettier": "prettier --write 'src/**/*.js'",
     "test": "tape -r babel-register -r babel-polyfill src/test",
-    "test:integration":
-      "tape -r babel-register -r babel-polyfill src/integration",
+    "test:integration": "tape -r babel-register -r babel-polyfill src/integration",
     "watch": "watch 'reset && npm run --silent test' src",
     "precommit-msg": "echo 'Pre-commit checks...' && exit 0",
     "pretty-quick": "pretty-quick --staged",
     "prepare": "npm run build"
   },
-  "keywords": ["react", "feature", "toggle", "toggles"],
+  "keywords": [
+    "react",
+    "feature",
+    "toggle",
+    "toggles"
+  ],
   "author": "Parallel Drive, Inc",
   "license": "MIT",
   "dependencies": {

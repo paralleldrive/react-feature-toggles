@@ -6,3 +6,5 @@ import './configure-feature';
 import './is-feature-included';
 import './features';
 import './merge-features';
+import './feature-toggles';
+import './feature';
