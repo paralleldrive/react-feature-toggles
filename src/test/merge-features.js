@@ -5,24 +5,18 @@ import { mergeFeatures } from '../merge-features';
 
 describe('mergeFeatures()', async should => {
   const { assert } = should();
-  
+
   assert({
     given: 'one array',
     should: 'return an empty array',
-    actual: mergeFeatures(
-      deepFreeze([]),
-    ),
+    actual: mergeFeatures(deepFreeze([])),
     expected: []
   });
 
   assert({
     given: 'two or more empty arrays',
     should: 'return an empty array',
-    actual: mergeFeatures(
-      deepFreeze([]),
-      deepFreeze([]),
-      deepFreeze([])
-    ),
+    actual: mergeFeatures(deepFreeze([]), deepFreeze([]), deepFreeze([])),
     expected: []
   });
 
