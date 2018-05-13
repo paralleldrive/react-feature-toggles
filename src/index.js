@@ -6,6 +6,9 @@ import getEnabled from './get-enabled';
 import isFeatureIncluded from './is-feature-included';
 import updateFeaturesWithQuery from './update-features-with-query';
 
+export { FeatureToggles } from './feature-toggles';
+export { Feature } from './feature';
+
 export {
   withFeatures,
   configureFeature,
