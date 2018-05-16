@@ -8,14 +8,14 @@ describe('mergeFeatures()', async should => {
 
   assert({
     given: 'one array',
-    should: 'return an empty array',
+    should: 'return an new empty array',
     actual: mergeFeatures(deepFreeze([])),
     expected: []
   });
 
   assert({
     given: 'two or more empty arrays',
-    should: 'return an empty array',
+    should: 'return an new empty array',
     actual: mergeFeatures(deepFreeze([]), deepFreeze([]), deepFreeze([])),
     expected: []
   });
