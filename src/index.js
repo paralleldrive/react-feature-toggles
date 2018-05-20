@@ -1,4 +1,3 @@
-import withFeatures from './with-features';
 import configureFeature from './configure-feature';
 import createRouteMiddleware from './create-route-middleware';
 import getIsEnabled from './get-is-enabled';
@@ -12,7 +11,6 @@ export { Feature } from './feature';
 export { deactivateFeatures } from './deactivate-features';
 
 export {
-  withFeatures,
   configureFeature,
   createRouteMiddleware,
   getIsEnabled,
