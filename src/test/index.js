@@ -9,3 +9,4 @@ import './merge-features';
 import './feature-toggles';
 import './feature';
 import './deactivate-features';
+import './parse-query';
