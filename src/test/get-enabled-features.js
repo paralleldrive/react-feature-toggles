@@ -1,27 +1,27 @@
 import { describe } from 'riteway';
-import getEnabled from '../get-enabled';
+import getEnabledFeatures from '../get-enabled-features';
 import deepFreeze from 'deep-freeze';
 import createFeature from '../test-fixtures/create-feature';
 
-describe('getEnabled()', async should => {
+describe('getEnabledFeatures()', async should => {
   const { assert } = should('return an empty array');
   assert({
     given: 'no arguments',
-    actual: getEnabled(),
+    actual: getEnabledFeatures(),
     expected: []
   });
 });
 
-describe('getEnabled([])', async should => {
+describe('getEnabledFeatures([])', async should => {
   const { assert } = should('return an empty array');
   assert({
     given: 'an empty array',
-    actual: getEnabled(),
+    actual: getEnabledFeatures(),
     expected: []
   });
 });
 
-describe('getEnabled([...Feature])', async should => {
+describe('getEnabledFeatures([...Feature])', async should => {
   const { assert } = should();
   const features = [
     createFeature({
@@ -72,7 +72,7 @@ describe('getEnabled([...Feature])', async should => {
   assert({
     given: 'an array of features',
     should: 'return the correct enabled features',
-    actual: getEnabled(features),
+    actual: getEnabledFeatures(features),
     expected: ['posts', 'comments', 'comment-rating', 'comment-rating-graph']
   });
 });

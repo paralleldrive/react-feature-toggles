@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import getEnabled from './get-enabled';
+import getEnabled from './get-enabled-features';
 import updateFeaturesWithQuery from './update-features-with-query';
 import PropTypes from 'prop-types';
 

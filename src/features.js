@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import getEnabled from './get-enabled';
+import getEnabledFeatures from './get-enabled-features';
 import updateFeaturesWithQuery from './update-features-with-query';
 
 class Features extends Component {
@@ -30,7 +30,7 @@ class Features extends Component {
     return this.state.features.includes(featureName);
   };
   getEnabledFeatures = (props, context) => {
-    return getEnabled(
+    return getEnabledFeatures(
       updateFeaturesWithQuery(
         props.initialFeatures,
         props.query || context.query
