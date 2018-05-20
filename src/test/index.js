@@ -3,7 +3,6 @@ import './get-is-enabled';
 import './update-features-with-query';
 import './configure-feature';
 import './is-active';
-import './features';
 import './merge-features';
 import './feature-toggles';
 import './feature';
