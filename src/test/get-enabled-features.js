@@ -26,48 +26,49 @@ describe('getEnabledFeatures([...Feature])', async should => {
   const features = [
     createFeature({
       name: 'posts',
-      enabled: true
+      isActive: true
     }),
     createFeature({
       name: 'post-rating',
-      enabled: false,
+      isActive: false,
       dependencies: ['posts']
     }),
     createFeature({
       name: 'post-rating-graph',
-      enabled: true,
+      isActive: true,
       dependencies: ['post-rating']
     }),
     createFeature({
       name: 'reports',
-      enabled: false
+      isActive: false
     }),
     createFeature({
       name: 'report-rating',
-      enabled: true,
+      isActive: true,
       dependencies: ['reports']
     }),
     createFeature({
       name: 'report-rating-graph',
-      enabled: true,
+      isActive: true,
       dependencies: ['report-rating']
     }),
     createFeature({
       name: 'comments',
-      enabled: true
+      isActive: true
     }),
     createFeature({
       name: 'comment-rating',
-      enabled: true,
+      isActive: true,
       dependencies: ['comments']
     }),
     createFeature({
       name: 'comment-rating-graph',
-      enabled: true,
+      isActive: true,
       dependencies: ['comment-rating']
     })
   ];
   deepFreeze(features);
+  console.log('features',features);
 
   assert({
     given: 'an array of features',

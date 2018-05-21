@@ -3,44 +3,44 @@ import createFeature from './create-feature';
 export default () => [
   createFeature({
     name: 'posts',
-    enabled: true
+    isActive: true
   }),
   createFeature({
     name: 'post-rating',
-    enabled: false,
+    isActive: false,
     dependencies: ['posts']
   }),
   createFeature({
     name: 'post-rating-graph',
-    enabled: true,
+    isActive: true,
     dependencies: ['post-rating']
   }),
   createFeature({
     name: 'help',
-    enabled: false
+    isActive: false
   }),
   createFeature({
     name: 'help-rating',
-    enabled: true,
+    isActive: true,
     dependencies: ['help']
   }),
   createFeature({
     name: 'help-rating-graph',
-    enabled: true,
+    isActive: true,
     dependencies: ['help-rating']
   }),
   createFeature({
     name: 'comments',
-    enabled: true
+    isActive: true
   }),
   createFeature({
     name: 'comment-rating',
-    enabled: true,
+    isActive: true,
     dependencies: ['comments']
   }),
   createFeature({
     name: 'comment-rating-graph',
-    enabled: true,
+    isActive: true,
     dependencies: ['comment-rating']
   })
 ];
