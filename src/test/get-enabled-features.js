@@ -1,69 +1,69 @@
 import { describe } from 'riteway';
-import getEnabled from '../get-enabled';
+import getEnabledFeatures from '../get-enabled-features';
 import deepFreeze from 'deep-freeze';
 import createFeature from '../test-fixtures/create-feature';
 
-describe('getEnabled()', async should => {
+describe('getEnabledFeatures()', async should => {
   const { assert } = should('return an empty array');
   assert({
     given: 'no arguments',
-    actual: getEnabled(),
+    actual: getEnabledFeatures(),
     expected: []
   });
 });
 
-describe('getEnabled([])', async should => {
+describe('getEnabledFeatures([])', async should => {
   const { assert } = should('return an empty array');
   assert({
     given: 'an empty array',
-    actual: getEnabled(),
+    actual: getEnabledFeatures(),
     expected: []
   });
 });
 
-describe('getEnabled([...Feature])', async should => {
+describe('getEnabledFeatures([...Feature])', async should => {
   const { assert } = should();
   const features = [
     createFeature({
       name: 'posts',
-      enabled: true
+      isActive: true
     }),
     createFeature({
       name: 'post-rating',
-      enabled: false,
+      isActive: false,
       dependencies: ['posts']
     }),
     createFeature({
       name: 'post-rating-graph',
-      enabled: true,
+      isActive: true,
       dependencies: ['post-rating']
     }),
     createFeature({
       name: 'reports',
-      enabled: false
+      isActive: false
     }),
     createFeature({
       name: 'report-rating',
-      enabled: true,
+      isActive: true,
       dependencies: ['reports']
     }),
     createFeature({
       name: 'report-rating-graph',
-      enabled: true,
+      isActive: true,
       dependencies: ['report-rating']
     }),
     createFeature({
       name: 'comments',
-      enabled: true
+      isActive: true
     }),
     createFeature({
       name: 'comment-rating',
-      enabled: true,
+      isActive: true,
       dependencies: ['comments']
     }),
     createFeature({
       name: 'comment-rating-graph',
-      enabled: true,
+      isActive: true,
       dependencies: ['comment-rating']
     })
   ];
@@ -72,7 +72,7 @@ describe('getEnabled([...Feature])', async should => {
   assert({
     given: 'an array of features',
     should: 'return the correct enabled features',
-    actual: getEnabled(features),
+    actual: getEnabledFeatures(features),
     expected: ['posts', 'comments', 'comment-rating', 'comment-rating-graph']
   });
 });

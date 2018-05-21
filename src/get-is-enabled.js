@@ -3,8 +3,8 @@ import { find, curry } from 'ramda';
 // matchName = s => x => boolean;
 const matchName = s => x => x.name === s;
 
-// enabled = x: Feature => boolean
-const enabled = x => (x && x.enabled ? true : false);
+// isActive = x: Feature => boolean
+const isActive = x => (x && x.isActive ? true : false);
 
 // hasDependencies = x: Feature => boolean
 const hasDependencies = x => x.dependencies && x.dependencies.length > 0;
@@ -20,7 +20,7 @@ const getIsEnabled = (features = [], featureName = '') => {
    * If the feature doesn't exist or is not enabled then
    * return false.
    */
-  if (!enabled(feature)) return false;
+  if (!isActive(feature)) return false;
 
   /**
    * If the feature doesn't have any requirements, return true.

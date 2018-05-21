@@ -1,10 +1,10 @@
 const createFeature = ({
   name = '',
-  enabled = false,
+  isActive = false,
   dependencies = []
 } = {}) => ({
   name,
-  enabled,
+  isActive,
   dependencies
 });
 

@@ -1,4 +1,4 @@
-import './get-enabled';
+import './get-enabled-features';
 import './get-is-enabled';
 import './update-features-with-query';
 import './configure-feature';

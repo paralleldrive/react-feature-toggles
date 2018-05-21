@@ -1,6 +1,6 @@
 import { lensProp, view, set, map, contains } from 'ramda';
 
-const enabledLens = lensProp('enabled');
+const enabledLens = lensProp('isActive');
 const nameLens = lensProp('name');
 
 // getParamFeatures(query: Object) => featureNames: [...String]
