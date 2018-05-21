@@ -39,21 +39,21 @@ describe('updateFeaturesWithQuery([...Feature], Query)', async should => {
   const features = [
     createFeature({
       name: 'posts',
-      enabled: true
+      isActive: true
     }),
     createFeature({
       name: 'post-rating',
-      enabled: false,
+      isActive: false,
       dependencies: ['posts']
     }),
     createFeature({
       name: 'post-rating-graph',
-      enabled: true,
+      isActive: true,
       dependencies: ['post-rating']
     }),
     createFeature({
       name: 'reports',
-      enabled: false
+      isActive: false
     })
   ];
   deepFreeze(features);
@@ -82,8 +82,8 @@ describe('updateFeaturesWithQuery([...Feature], Query)', async should => {
 
   {
     const expectedFeatures = [...features];
-    expectedFeatures[1] = { ...expectedFeatures[1], enabled: true };
-    expectedFeatures[3] = { ...expectedFeatures[3], enabled: true };
+    expectedFeatures[1] = { ...expectedFeatures[1], isActive: true };
+    expectedFeatures[3] = { ...expectedFeatures[3], isActive: true };
     assert({
       given:
         'an array of features and a Query object that does not match any features',

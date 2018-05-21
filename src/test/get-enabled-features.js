@@ -68,7 +68,6 @@ describe('getEnabledFeatures([...Feature])', async should => {
     })
   ];
   deepFreeze(features);
-  console.log('features',features);
 
   assert({
     given: 'an array of features',
