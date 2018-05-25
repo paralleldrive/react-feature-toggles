@@ -100,7 +100,7 @@ const MyApp = () => {
 }
 ```
 
-### HOCs ( Higher Order Components )
+### Higher Order Components
 
 #### withFeatureToggles
 
