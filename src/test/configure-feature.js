@@ -33,14 +33,14 @@ describe('configureFeature(inactiveComponent)(name)(activeComponent)', async sho
     );
 
     assert({
-      given: 'the feature is not enabled and there is a Inactive component',
+      given: 'the feature is not enabled',
       should: 'not render the Active component',
       actual: $('.active').length,
       expected: 0
     });
 
     assert({
-      given: 'the feature is not enabled and there is a Inactive component',
+      given: 'the feature is not enabled',
       should: 'render the Inactive component',
       actual: $('.inactive').length,
       expected: 1
@@ -136,14 +136,14 @@ describe('configureFeature(inactiveComponent)(name, activeComponent)', async sho
     );
 
     assert({
-      given: 'the feature is not enabled and there is a Inactive component',
+      given: 'the feature is not enabled',
       should: 'not render the Active component',
       actual: $('.active').length,
       expected: 0
     });
 
     assert({
-      given: 'the feature is not enabled and there is a Inactive component',
+      given: 'the feature is not enabled',
       should: 'render the Inactive component',
       actual: $('.inactive').length,
       expected: 1
@@ -208,14 +208,14 @@ describe('configureFeature(inactiveComponent, name, activeComponent)', async sho
     );
 
     assert({
-      given: 'the feature is not enabled and there is a Inactive component',
+      given: 'the feature is not enabled',
       should: 'not render the Active component',
       actual: $('.active').length,
       expected: 0
     });
 
     assert({
-      given: 'the feature is not enabled and there is a Inactive component',
+      given: 'the feature is not enabled',
       should: 'render the Inactive component',
       actual: $('.inactive').length,
       expected: 1
