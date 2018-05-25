@@ -1,7 +1,7 @@
 import { describe } from 'riteway';
-import getIsEnabled from '../get-is-enabled';
+import { getIsEnabled } from '../get-is-enabled';
 import deepFreeze from 'deep-freeze';
-import createFeature from '../test-fixtures/create-feature';
+import { createFeature } from '../test-fixtures/create-feature';
 
 describe('getIsEnabled()', async should => {
   const { assert } = should('return false');

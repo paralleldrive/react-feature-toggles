@@ -1,7 +1,7 @@
 import { describe } from 'riteway';
-import updateFeaturesWithQuery from '../update-features-with-query';
+import { updateFeaturesWithQuery } from '../update-features-with-query';
 import deepFreeze from 'deep-freeze';
-import createFeature from '../test-fixtures/create-feature';
+import { createFeature } from '../test-fixtures/create-feature';
 
 describe('updateFeaturesWithQuery()', async should => {
   const { assert } = should();

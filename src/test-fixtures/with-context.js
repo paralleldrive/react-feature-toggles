@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-const withContext = (enabledFeatures = [], query) => WrappedComponent => {
+export const withContext = (
+  enabledFeatures = [],
+  query
+) => WrappedComponent => {
   class ContextHOC extends Component {
     static childContextTypes = {
       features: PropTypes.array,
@@ -19,5 +22,3 @@ const withContext = (enabledFeatures = [], query) => WrappedComponent => {
   }
   return ContextHOC;
 };
-
-export default withContext;

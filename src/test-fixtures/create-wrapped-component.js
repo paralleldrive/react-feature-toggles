@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const constCreateWrappedComponent = () => {
+export const constCreateWrappedComponent = () => {
   const WrappedComponent = (props, context) => (
     <div>
       <div className="context-features-string">
@@ -16,5 +16,3 @@ const constCreateWrappedComponent = () => {
 
   return WrappedComponent;
 };
-
-export default constCreateWrappedComponent;
