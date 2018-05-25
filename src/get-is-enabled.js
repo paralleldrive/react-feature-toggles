@@ -1,4 +1,5 @@
-import { find, curry } from 'ramda';
+import find from 'ramda/src/find';
+import curry from 'ramda/src/curry';
 
 // matchName = s => x => boolean;
 const matchName = s => x => x.name === s;

@@ -1,7 +1,8 @@
-import { curry } from 'ramda';
+import curry from 'ramda/src/curry';
+import { parse } from 'url';
+
 import { getIsEnabled } from './get-is-enabled';
 import { updateFeaturesWithQuery } from './update-features-with-query';
-import { parse } from 'url';
 
 const setStatus = (res, isEnabled) =>
   isEnabled ? res.status(200) : res.status(404);
