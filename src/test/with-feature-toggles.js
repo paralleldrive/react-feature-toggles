@@ -24,9 +24,15 @@ describe('withFeatureToggles()', async should => {
     const $ = dom.load(render(<Page />));
 
     assert({
-      given: 'no features prop',
-      should:
-        'it should provide an empty array of features via context for each component',
+      given: 'no features argument',
+      should: 'render the component',
+      actual: $('.Component').length,
+      expected: 1
+    });
+
+    assert({
+      given: 'no features argument',
+      should: 'provide an empty array of features via context',
       actual: $('.Component').text(),
       expected: ''
     });
@@ -41,8 +47,15 @@ describe('withFeatureToggles()', async should => {
     const $ = dom.load(render(<Page />));
 
     assert({
+      given: 'an empty features array',
+      should: 'render the component',
+      actual: $('.Component').length,
+      expected: 1
+    });
+
+    assert({
       given: 'empty features array',
-      should: 'it should provide the correct features via context',
+      should: 'provide the correct features via context',
       actual: $('.Component').text(),
       expected: ''
     });
@@ -55,13 +68,6 @@ describe('withFeatureToggles()', async should => {
     const Page = withFeatureToggles({ features })(Component);
 
     const $ = dom.load(render(<Page />));
-
-    assert({
-      given: 'features array',
-      should: 'provide the correct features via context',
-      actual: $('.Component').length,
-      expected: 1
-    });
 
     assert({
       given: 'features array',
