@@ -1,14 +1,12 @@
 import React from 'react';
+import { curry } from 'ramda';
 import PropTypes from 'prop-types';
 import { isActive } from './is-active';
 
-const configureFeature = Default => featureName => (
-  Feature,
-  Fallback = Default
-) => {
+export const configureFeature = (Default, feature, Feature) => {
   const ConfigureFeatureHOC = (props, context) => {
-    const isEnabled = isActive(featureName, context.features);
-    return isEnabled ? <Feature {...props} /> : <Fallback {...props} />;
+    const isEnabled = isActive(feature, context.features);
+    return isEnabled ? <Feature {...props} /> : <Default {...props} />;
   };
   ConfigureFeatureHOC.contextTypes = {
     features: PropTypes.array
@@ -16,4 +14,4 @@ const configureFeature = Default => featureName => (
   return ConfigureFeatureHOC;
 };
 
-export default configureFeature;
+export default curry(configureFeature);

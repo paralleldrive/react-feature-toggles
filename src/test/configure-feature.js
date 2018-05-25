@@ -4,27 +4,22 @@ import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import withContext from '../test-fixtures/with-context';
 import configureFeature from '../configure-feature';
-
 const render = ReactDOMServer.renderToStaticMarkup;
 
-const createTestComponent = componentName => ({ propCheck } = {}) => (
+const createTestComponent = componentName => ({ propCheck }) => (
   <div>
     <div className={componentName} />
     <div className="prop-check">{propCheck}</div>
   </div>
 );
 
-describe('configureFeature(Default)(FeatureName)(Feature, Fallback)', async should => {
+describe('configureFeature(Inactive)(FeatureName)(Feature)', async should => {
   const { assert } = should();
 
-  const Default = createTestComponent('default');
+  const Inactive = createTestComponent('inactive');
   const Feature = createTestComponent('feature');
-  const Fallback = createTestComponent('fallback');
 
-  const ConfiguredFeature = configureFeature(Default)('game')(
-    Feature,
-    Fallback
-  );
+  const ConfiguredFeature = configureFeature(Inactive)('game')(Feature);
 
   const FeatureWithContext = withContext([])(ConfiguredFeature);
 
@@ -33,23 +28,16 @@ describe('configureFeature(Default)(FeatureName)(Feature, Fallback)', async shou
   const $ = dom.load(render(<FeatureWithContext propCheck={propCheck} />));
 
   assert({
-    given: 'the feature is not enabled and there is a Fallback component',
-    should: 'not render the Default component',
-    actual: $('.default').length,
-    expected: 0
-  });
-
-  assert({
-    given: 'the feature is not enabled and there is a Fallback component',
+    given: 'the feature is not enabled and there is a Inactive component',
     should: 'not render the Feature component',
     actual: $('.feature').length,
     expected: 0
   });
 
   assert({
-    given: 'the feature is not enabled and there is a Fallback component',
-    should: 'render the Fallback component',
-    actual: $('.fallback').length,
+    given: 'the feature is not enabled and there is a Inactive component',
+    should: 'render the Inactive component',
+    actual: $('.inactive').length,
     expected: 1
   });
 
@@ -61,17 +49,13 @@ describe('configureFeature(Default)(FeatureName)(Feature, Fallback)', async shou
   });
 });
 
-describe('configureFeature(Default)(FeatureName)(Feature, Fallback)', async should => {
+describe('configureFeature(Inactive)(FeatureName)(Feature)', async should => {
   const { assert } = should();
 
-  const Default = createTestComponent('default');
+  const Inactive = createTestComponent('inactive');
   const Feature = createTestComponent('feature');
-  const Fallback = createTestComponent('fallback');
 
-  const ConfiguredFeature = configureFeature(Default)('game')(
-    Feature,
-    Fallback
-  );
+  const ConfiguredFeature = configureFeature(Inactive)('game')(Feature);
 
   const FeatureWithContext = withContext(['help', 'game', 'food'])(
     ConfiguredFeature
@@ -83,8 +67,8 @@ describe('configureFeature(Default)(FeatureName)(Feature, Fallback)', async shou
 
   assert({
     given: 'the feature is enabled',
-    should: 'not render the Default component',
-    actual: $('.default').length,
+    should: 'not render the Inactive component',
+    actual: $('.inactive').length,
     expected: 0
   });
 
@@ -96,13 +80,6 @@ describe('configureFeature(Default)(FeatureName)(Feature, Fallback)', async shou
   });
 
   assert({
-    given: 'the feature is enabled and there is a Fallback component',
-    should: 'not render the Fallback component',
-    actual: $('.fallback').length,
-    expected: 0
-  });
-
-  assert({
     given: 'props',
     should: 'pass through props',
     actual: $('.prop-check').text(),
@@ -110,26 +87,18 @@ describe('configureFeature(Default)(FeatureName)(Feature, Fallback)', async shou
   });
 });
 
-describe('configureFeature(Default)(FeatureName)(Feature)', async should => {
+describe('configureFeature()(FeatureName)(Feature)', async should => {
   const { assert } = should();
 
-  const Default = createTestComponent('default');
   const Feature = createTestComponent('feature');
 
-  const ConfiguredFeature = configureFeature(Default)('game')(Feature);
+  const ConfiguredFeature = configureFeature()('game')(Feature);
 
   const FeatureWithContext = withContext([])(ConfiguredFeature);
 
   const propCheck = 'bacon and eggs';
 
   const $ = dom.load(render(<FeatureWithContext propCheck={propCheck} />));
-
-  assert({
-    given: 'the feature is disabled and there is no Fallback component',
-    should: 'render the Default component',
-    actual: $('.default').length,
-    expected: 1
-  });
 
   assert({
     given: 'the feature is disabled',
@@ -139,27 +108,20 @@ describe('configureFeature(Default)(FeatureName)(Feature)', async should => {
   });
 
   assert({
-    given: 'the feature is disabled and there is no Fallback component',
-    should: 'not render the Fallback component',
-    actual: $('.fallback').length,
-    expected: 0
-  });
-
-  assert({
     given: 'props',
-    should: 'pass through props',
+    should: 'not pass through props',
     actual: $('.prop-check').text(),
-    expected: propCheck
+    expected: ''
   });
 });
 
-describe('configureFeature(Default)(FeatureName)(Feature)', async should => {
+describe('configureFeature(Inactive)(FeatureName, Feature)', async should => {
   const { assert } = should();
 
-  const Default = createTestComponent('default');
+  const Inactive = createTestComponent('inactive');
   const Feature = createTestComponent('feature');
 
-  const ConfiguredFeature = configureFeature(Default)('game')(Feature);
+  const ConfiguredFeature = configureFeature(Inactive)('game', Feature);
 
   const FeatureWithContext = withContext(['lessons', 'game'])(
     ConfiguredFeature
@@ -171,8 +133,8 @@ describe('configureFeature(Default)(FeatureName)(Feature)', async should => {
 
   assert({
     given: 'the feature is enabled',
-    should: 'no render the Default component',
-    actual: $('.default').length,
+    should: 'no render the Inactive component',
+    actual: $('.inactive').length,
     expected: 0
   });
 
@@ -181,13 +143,6 @@ describe('configureFeature(Default)(FeatureName)(Feature)', async should => {
     should: 'render the Feature component',
     actual: $('.feature').length,
     expected: 1
-  });
-
-  assert({
-    given: 'the feature is enabled',
-    should: 'not render the Fallback component',
-    actual: $('.fallback').length,
-    expected: 0
   });
 
   assert({
