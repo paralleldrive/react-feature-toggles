@@ -13,7 +13,7 @@ const createTestComponent = () => ({ propCheck } = {}) => (
     {features => {
       return (
         <div>
-          <div className="component">{features.toString()}</div>
+          <div className="features">{features.toString()}</div>
           <div className="prop-check">{propCheck}</div>
         </div>
       );
@@ -32,14 +32,14 @@ describe('withFeatureToggles()', async should => {
     assert({
       given: 'no features argument',
       should: 'render the component',
-      actual: $('.component').length,
+      actual: $('.features').length,
       expected: 1
     });
 
     assert({
       given: 'no features argument',
       should: 'provide an empty array of features via context',
-      actual: $('.component').text(),
+      actual: $('.features').text(),
       expected: ''
     });
   }
@@ -55,14 +55,14 @@ describe('withFeatureToggles()', async should => {
     assert({
       given: 'an empty features array',
       should: 'render the component',
-      actual: $('.component').length,
+      actual: $('.features').length,
       expected: 1
     });
 
     assert({
       given: 'empty features array',
       should: 'provide the correct features via context',
-      actual: $('.component').text(),
+      actual: $('.features').text(),
       expected: ''
     });
   }
@@ -78,7 +78,7 @@ describe('withFeatureToggles()', async should => {
     assert({
       given: 'features array',
       should: 'provide the correct features via context',
-      actual: $('.component').text(),
+      actual: $('.features').text(),
       expected: features.toString()
     });
   }
