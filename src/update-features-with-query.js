@@ -23,7 +23,5 @@ const enableFeatures = (features = [], names = []) =>
   map(overrideFeature(names), features);
 
 // updateFeaturesWithQuery = ([...Feature], query: Object) => [...Feature];
-const updateFeaturesWithQuery = (features = [], query = {}) =>
+export const updateFeaturesWithQuery = (features = [], query = {}) =>
   enableFeatures(features, getParamFeatures(query));
-
-export default updateFeaturesWithQuery;

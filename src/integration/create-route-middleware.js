@@ -1,7 +1,7 @@
 import express from 'express';
 import request from 'supertest';
-import createRouteMiddleware from '../create-route-middleware';
-import createFeatures from '../test-fixtures/create-features';
+import { createRouteMiddleware } from '../create-route-middleware';
+import { createFeatures } from '../test-fixtures/create-features';
 import { describe } from 'riteway';
 
 describe('createRouteMiddleware()', async should => {

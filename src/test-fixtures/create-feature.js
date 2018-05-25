@@ -1,4 +1,4 @@
-const createFeature = ({
+export const createFeature = ({
   name = '',
   isActive = false,
   dependencies = []
@@ -7,5 +7,3 @@ const createFeature = ({
   isActive,
   dependencies
 });
-
-export default createFeature;
