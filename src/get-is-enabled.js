@@ -14,7 +14,7 @@ const checkDependencies = features => names =>
   names.reduce((acc, x) => (acc ? getIsEnabled(features, x) : acc), true);
 
 // getIsEnabled = [...Feature] => String => boolean
-const getIsEnabled = (features = [], featureName = '') => {
+export const getIsEnabled = curry((features = [], featureName = '') => {
   const feature = find(matchName(featureName))(features);
   /**
    * If the feature doesn't exist or is not enabled then
@@ -31,6 +31,4 @@ const getIsEnabled = (features = [], featureName = '') => {
    * If the feature has dependencies, then check for any disabled dependencies
    */
   return checkDependencies(features)(feature.dependencies);
-};
-
-export default curry(getIsEnabled);
+});

@@ -1,6 +1,6 @@
-import createFeature from './create-feature';
+import { createFeature } from './create-feature';
 
-export default () => [
+export const createFeatures = () => [
   createFeature({
     name: 'posts',
     isActive: true
