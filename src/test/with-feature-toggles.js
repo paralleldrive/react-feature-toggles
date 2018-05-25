@@ -9,7 +9,7 @@ import { Consumer } from '../context';
 const render = ReactDOMServer.renderToStaticMarkup;
 
 const createTestComponent = () => ({ propCheck } = {}) => (
-  <Consumer propCheck={propCheck}>
+  <Consumer>
     {features => {
       return (
         <div>
