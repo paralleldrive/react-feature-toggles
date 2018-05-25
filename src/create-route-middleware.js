@@ -1,4 +1,4 @@
-import { curry } from 'ramda';
+import curry from 'ramda/src/curry';
 import getIsEnabled from './get-is-enabled';
 import updateFeatures from './update-features-with-query';
 import { parse } from 'url';
