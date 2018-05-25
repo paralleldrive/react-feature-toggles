@@ -3,8 +3,8 @@ import { FeatureToggles } from './feature-toggles';
 
 // ({ features = [...String] } = {}) => Component => Component
 
-export const withFeatureToggles = ({ features } = {}) => Component => () => (
+export const withFeatureToggles = ({ features } = {}) => Component => props => (
   <FeatureToggles features={features}>
-    <Component />
+    <Component {...props} />
   </FeatureToggles>
 );
