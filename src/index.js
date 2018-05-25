@@ -1,5 +1,4 @@
 import createRouteMiddleware from './create-route-middleware';
-import getIsEnabled from './get-is-enabled';
 import getEnabledFeatures from './get-enabled-features';
 import updateFeaturesWithQuery from './update-features-with-query';
 
@@ -14,7 +13,6 @@ export { withFeatureToggles } from './with-feature-toggles';
 
 export {
   createRouteMiddleware,
-  getIsEnabled,
   getEnabledFeatures,
   updateFeaturesWithQuery
 };
