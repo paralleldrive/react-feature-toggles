@@ -9,6 +9,7 @@ export { FeatureToggles } from './feature-toggles';
 export { Feature } from './feature';
 export { deactivateFeatures } from './deactivate-features';
 export { parseQuery } from './parse-query';
+export { withFeatureToggles } from './with-feature-toggles';
 
 export {
   createRouteMiddleware,
