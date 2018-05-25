@@ -1,7 +1,7 @@
 import { describe } from 'riteway';
 import { getEnabledFeatures } from '../get-enabled-features';
 import deepFreeze from 'deep-freeze';
-import createFeature from '../test-fixtures/create-feature';
+import { createFeature } from '../test-fixtures/create-feature';
 
 describe('getEnabledFeatures()', async should => {
   const { assert } = should('return an empty array');

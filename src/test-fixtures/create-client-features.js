@@ -1,4 +1,4 @@
-export default () => [
+export const createClientFeatures = () => [
   'posts',
   'post-rating',
   'post-rating-graph',
