@@ -13,6 +13,7 @@ const createTestComponent = componentName => () => (
 
 describe('configureFeature(inactiveComponent)(name)(activeComponent)', async should => {
   const { assert } = should();
+
   {
     const ActiveComponent = createTestComponent('active');
     const InactiveComponent = createTestComponent('inactive');
@@ -82,72 +83,142 @@ describe('configureFeature(inactiveComponent)(name)(activeComponent)', async sho
 describe('configureFeature(inactiveComponent)(name, activeComponent)', async should => {
   const { assert } = should();
 
-  const ActiveComponent = createTestComponent('active');
-  const InactiveComponent = createTestComponent('inactive');
+  {
+    const ActiveComponent = createTestComponent('active');
+    const InactiveComponent = createTestComponent('inactive');
 
-  const ConfiguredFeature = configureFeature(InactiveComponent)(
-    'game',
-    ActiveComponent
-  );
+    const ConfiguredFeature = configureFeature(InactiveComponent)(
+      'game',
+      ActiveComponent
+    );
 
-  const features = ['game', 'bar', 'baz'];
+    const features = ['game', 'bar', 'baz'];
 
-  const $ = dom.load(
-    render(
-      <Provider value={features}>
-        <ConfiguredFeature />
-      </Provider>
-    )
-  );
+    const $ = dom.load(
+      render(
+        <Provider value={features}>
+          <ConfiguredFeature />
+        </Provider>
+      )
+    );
 
-  assert({
-    given: 'the feature is enabled',
-    should: 'not render the Inactive component',
-    actual: $('.inactive').length,
-    expected: 0
-  });
+    assert({
+      given: 'the feature is enabled',
+      should: 'not render the Inactive component',
+      actual: $('.inactive').length,
+      expected: 0
+    });
 
-  assert({
-    given: 'the feature is enabled',
-    should: 'render the Active component',
-    actual: $('.active').length,
-    expected: 1
-  });
+    assert({
+      given: 'the feature is enabled',
+      should: 'render the Active component',
+      actual: $('.active').length,
+      expected: 1
+    });
+  }
+  {
+    const ActiveComponent = createTestComponent('active');
+    const InactiveComponent = createTestComponent('inactive');
+
+    const ConfiguredFeature = configureFeature(InactiveComponent)(
+      'game',
+      ActiveComponent
+    );
+
+    const features = [];
+
+    const $ = dom.load(
+      render(
+        <Provider value={features}>
+          <ConfiguredFeature />
+        </Provider>
+      )
+    );
+
+    assert({
+      given: 'the feature is not enabled and there is a Inactive component',
+      should: 'not render the Active component',
+      actual: $('.active').length,
+      expected: 0
+    });
+
+    assert({
+      given: 'the feature is not enabled and there is a Inactive component',
+      should: 'render the Inactive component',
+      actual: $('.inactive').length,
+      expected: 1
+    });
+  }
 });
 
 describe('configureFeature(inactiveComponent, name, activeComponent)', async should => {
   const { assert } = should();
+  {
+    const ActiveComponent = createTestComponent('active');
+    const InactiveComponent = createTestComponent('inactive');
 
-  const ActiveComponent = createTestComponent('active');
-  const InactiveComponent = createTestComponent('inactive');
+    const ConfiguredFeature = configureFeature(
+      InactiveComponent,
+      'game',
+      ActiveComponent
+    );
 
-  const ConfiguredFeature = configureFeature(
-    InactiveComponent,
-    'game',
-    ActiveComponent
-  );
+    const features = ['game', 'bar', 'baz'];
 
-  const features = ['game', 'bar', 'baz'];
+    const $ = dom.load(
+      render(
+        <Provider value={features}>
+          <ConfiguredFeature />
+        </Provider>
+      )
+    );
 
-  const $ = dom.load(
-    render(
-      <Provider value={features}>
-        <ConfiguredFeature />
-      </Provider>
-    )
-  );
+    assert({
+      given: 'the feature is enabled',
+      should: 'not render the Inactive component',
+      actual: $('.inactive').length,
+      expected: 0
+    });
 
-  assert({
-    given: 'the feature is enabled',
-    should: 'not render the Inactive component',
-    actual: $('.inactive').length,
-    expected: 0
-  });
+    assert({
+      given: 'the feature is enabled',
+      should: 'render the Active component',
+      actual: $('.active').length,
+      expected: 1
+    });
+  }
+  {
+    const ActiveComponent = createTestComponent('active');
+    const InactiveComponent = createTestComponent('inactive');
 
-  assert({
-    given: 'the feature is enabled',
-    should: 'render the Active component',
-    actual: $('.active').length,
-    expected: 1
-  });
+    const ConfiguredFeature = configureFeature(
+      InactiveComponent,
+      'game',
+      ActiveComponent
+    );
+
+    const features = [];
+
+    const $ = dom.load(
+      render(
+        <Provider value={features}>
+          <ConfiguredFeature />
+        </Provider>
+      )
+    );
+
+    assert({
+      given: 'the feature is not enabled and there is a Inactive component',
+      should: 'not render the Active component',
+      actual: $('.active').length,
+      expected: 0
+    });
+
+    assert({
+      given: 'the feature is not enabled and there is a Inactive component',
+      should: 'render the Inactive component',
+      actual: $('.inactive').length,
+      expected: 1
+    });
+  }
 });
