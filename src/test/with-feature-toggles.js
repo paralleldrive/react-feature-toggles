@@ -8,12 +8,12 @@ import { Consumer } from '../context';
 
 const render = ReactDOMServer.renderToStaticMarkup;
 
-const createTestHOCComponent = componentName => ({ propCheck } = {}) => (
+const createTestComponent = () => ({ propCheck } = {}) => (
   <Consumer propCheck={propCheck}>
     {features => {
       return (
         <div>
-          <div className={componentName}>{features.toString()}</div>
+          <div className="component">{features.toString()}</div>
           <div className="prop-check">{propCheck}</div>
         </div>
       );
@@ -25,7 +25,7 @@ describe('withFeatureToggles()', async should => {
   const { assert } = should();
 
   {
-    const Component = createTestHOCComponent('component');
+    const Component = createTestComponent();
     const Page = withFeatureToggles()(Component);
     const $ = dom.load(render(<Page />));
 
@@ -46,7 +46,7 @@ describe('withFeatureToggles()', async should => {
 
   {
     const { assert } = should();
-    const Component = createTestHOCComponent('component');
+    const Component = createTestComponent();
     const features = [];
     const Page = withFeatureToggles({ features })(Component);
 
@@ -68,7 +68,7 @@ describe('withFeatureToggles()', async should => {
   }
   {
     const { assert } = should();
-    const Component = createTestHOCComponent('component');
+    const Component = createTestComponent();
     const features = ['foo', 'bar', 'baz'];
 
     const Page = withFeatureToggles({ features })(Component);
@@ -84,7 +84,7 @@ describe('withFeatureToggles()', async should => {
   }
 
   {
-    const Component = createTestHOCComponent('component');
+    const Component = createTestComponent();
     const Page = withFeatureToggles()(Component);
     const propCheck = 'bacon and eggs';
     const $ = dom.load(render(<Page propCheck={propCheck} />));
