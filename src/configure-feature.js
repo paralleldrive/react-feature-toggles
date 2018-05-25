@@ -3,9 +3,9 @@ import curry from 'ramda/src/curry';
 import { Feature } from './feature';
 
 export const configureFeature = curry(
-  (inactiveComponent, feature, activeComponent) => () => (
+  (inactiveComponent, name, activeComponent) => () => (
     <Feature
-      name={feature}
+      name={name}
       inactiveComponent={inactiveComponent}
       activeComponent={activeComponent}
     />
