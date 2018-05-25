@@ -8,3 +8,4 @@ import './feature-toggles';
 import './feature';
 import './deactivate-features';
 import './parse-query';
+import './with-feature-toggles';

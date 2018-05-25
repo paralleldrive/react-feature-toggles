@@ -3,7 +3,12 @@ import ReactDOMServer from 'react-dom/server';
 import { describe } from 'riteway';
 import dom from 'cheerio';
 
-import { FeatureToggles, Feature, configureFeature } from '../index';
+import {
+  FeatureToggles,
+  Feature,
+  configureFeature,
+  withFeatureToggles
+} from '../index';
 
 const render = ReactDOMServer.renderToStaticMarkup;
 
@@ -85,6 +90,61 @@ describe('FeatureToggles and configureFeature', async should => {
           <ConfiguredFoo />
           <ConfiguredHelp />
         </FeatureToggles>
+      )
+    );
+
+    assert({
+      given: 'feature is active',
+      should: 'render the active component',
+      actual: $('.foo-active').length,
+      expected: 1
+    });
+
+    assert({
+      given: 'feature is active',
+      should: 'not render the inactive component',
+      actual: $('.foo-inactive').length,
+      expected: 0
+    });
+
+    assert({
+      given: 'feature is inactive',
+      should: 'render the inactive component',
+      actual: $('.help-inactive').length,
+      expected: 1
+    });
+
+    assert({
+      given: 'feature is inactive',
+      should: 'not render the active component',
+      actual: $('.help-active').length,
+      expected: 0
+    });
+  }
+});
+
+describe('withFeatureToggles and configureFeature', async should => {
+  const { assert } = should();
+
+  {
+    const FooActive = createTestComponent('foo-active');
+    const FooInactive = createTestComponent('foo-inactive');
+    const HelpActive = createTestComponent('help-active');
+    const HelpInactive = createTestComponent('help-inactive');
+
+    const ConfiguredFoo = configureFeature(FooInactive)('foo')(FooActive);
+    const ConfiguredHelp = configureFeature(HelpInactive)('help')(HelpActive);
+    const features = ['foo', 'bar'];
+
+    const FooPage = withFeatureToggles({ features })(ConfiguredFoo);
+    const HelpPage = withFeatureToggles({ features })(ConfiguredHelp);
+
+    const $ = dom.load(
+      render(
+        <div>
+          <FooPage />
+          <HelpPage />
+        </div>
       )
     );
 
