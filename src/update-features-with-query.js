@@ -1,4 +1,8 @@
-import { lensProp, view, set, map, contains } from 'ramda';
+import lensProp from 'ramda/src/lensProp';
+import view from 'ramda/src/view';
+import set from 'ramda/src/set';
+import map from 'ramda/src/map';
+import contains from 'ramda/src/contains';
 
 const enabledLens = lensProp('isActive');
 const nameLens = lensProp('name');

@@ -1,5 +1,9 @@
 import getIsEnabled from './get-is-enabled';
-import { map, compose, filter, lensProp, view } from 'ramda';
+import map from 'ramda/src/map';
+import compose from 'ramda/src/compose';
+import filter from 'ramda/src/filter';
+import lensProp from 'ramda/src/lensProp';
+import view from 'ramda/src/view';
 
 const nameLens = lensProp('name');
 const getName = view(nameLens);
