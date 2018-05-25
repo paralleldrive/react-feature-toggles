@@ -2,198 +2,223 @@ import { describe } from 'riteway';
 import dom from 'cheerio';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
-import withContext from '../test-fixtures/with-context';
-import configureFeature from '../configure-feature';
+
+import { configureFeature } from '../configure-feature';
+import { Provider } from '../context';
 
 const render = ReactDOMServer.renderToStaticMarkup;
-
-const createTestComponent = componentName => ({ propCheck } = {}) => (
-  <div>
-    <div className={componentName} />
-    <div className="prop-check">{propCheck}</div>
-  </div>
+const createTestComponent = componentName => () => (
+  <div className={componentName} />
 );
 
-describe('configureFeature(Default)(FeatureName)(Feature, Fallback)', async should => {
+describe('configureFeature(inactiveComponent)(name)(activeComponent)', async should => {
   const { assert } = should();
 
-  const Default = createTestComponent('default');
-  const Feature = createTestComponent('feature');
-  const Fallback = createTestComponent('fallback');
+  {
+    const ActiveComponent = createTestComponent('active');
+    const InactiveComponent = createTestComponent('inactive');
 
-  const ConfiguredFeature = configureFeature(Default)('game')(
-    Feature,
-    Fallback
-  );
+    const ConfiguredFeature = configureFeature(InactiveComponent)('game')(
+      ActiveComponent
+    );
 
-  const FeatureWithContext = withContext([])(ConfiguredFeature);
+    const features = [];
 
-  const propCheck = 'bacon and eggs';
+    const $ = dom.load(
+      render(
+        <Provider value={features}>
+          <ConfiguredFeature />
+        </Provider>
+      )
+    );
 
-  const $ = dom.load(render(<FeatureWithContext propCheck={propCheck} />));
+    assert({
+      given: 'the feature is not enabled',
+      should: 'not render the Active component',
+      actual: $('.active').length,
+      expected: 0
+    });
 
-  assert({
-    given: 'the feature is not enabled and there is a Fallback component',
-    should: 'not render the Default component',
-    actual: $('.default').length,
-    expected: 0
-  });
+    assert({
+      given: 'the feature is not enabled',
+      should: 'render the Inactive component',
+      actual: $('.inactive').length,
+      expected: 1
+    });
+  }
+  {
+    const ActiveComponent = createTestComponent('active');
+    const InactiveComponent = createTestComponent('inactive');
 
-  assert({
-    given: 'the feature is not enabled and there is a Fallback component',
-    should: 'not render the Feature component',
-    actual: $('.feature').length,
-    expected: 0
-  });
+    const ConfiguredFeature = configureFeature(InactiveComponent)('game')(
+      ActiveComponent
+    );
 
-  assert({
-    given: 'the feature is not enabled and there is a Fallback component',
-    should: 'render the Fallback component',
-    actual: $('.fallback').length,
-    expected: 1
-  });
+    const features = ['game', 'bar', 'baz'];
 
-  assert({
-    given: 'props',
-    should: 'pass through props',
-    actual: $('.prop-check').text(),
-    expected: propCheck
-  });
+    const $ = dom.load(
+      render(
+        <Provider value={features}>
+          <ConfiguredFeature />
+        </Provider>
+      )
+    );
+
+    assert({
+      given: 'the feature is enabled',
+      should: 'not render the Inactive component',
+      actual: $('.inactive').length,
+      expected: 0
+    });
+
+    assert({
+      given: 'the feature is enabled',
+      should: 'render the Active component',
+      actual: $('.active').length,
+      expected: 1
+    });
+  }
 });
 
-describe('configureFeature(Default)(FeatureName)(Feature, Fallback)', async should => {
+describe('configureFeature(inactiveComponent)(name, activeComponent)', async should => {
   const { assert } = should();
 
-  const Default = createTestComponent('default');
-  const Feature = createTestComponent('feature');
-  const Fallback = createTestComponent('fallback');
+  {
+    const ActiveComponent = createTestComponent('active');
+    const InactiveComponent = createTestComponent('inactive');
 
-  const ConfiguredFeature = configureFeature(Default)('game')(
-    Feature,
-    Fallback
-  );
+    const ConfiguredFeature = configureFeature(InactiveComponent)(
+      'game',
+      ActiveComponent
+    );
 
-  const FeatureWithContext = withContext(['help', 'game', 'food'])(
-    ConfiguredFeature
-  );
+    const features = ['game', 'bar', 'baz'];
 
-  const propCheck = 'bacon and eggs';
+    const $ = dom.load(
+      render(
+        <Provider value={features}>
+          <ConfiguredFeature />
+        </Provider>
+      )
+    );
 
-  const $ = dom.load(render(<FeatureWithContext propCheck={propCheck} />));
+    assert({
+      given: 'the feature is enabled',
+      should: 'not render the Inactive component',
+      actual: $('.inactive').length,
+      expected: 0
+    });
 
-  assert({
-    given: 'the feature is enabled',
-    should: 'not render the Default component',
-    actual: $('.default').length,
-    expected: 0
-  });
+    assert({
+      given: 'the feature is enabled',
+      should: 'render the Active component',
+      actual: $('.active').length,
+      expected: 1
+    });
+  }
+  {
+    const ActiveComponent = createTestComponent('active');
+    const InactiveComponent = createTestComponent('inactive');
 
-  assert({
-    given: 'the feature is enabled',
-    should: 'render the Feature component',
-    actual: $('.feature').length,
-    expected: 1
-  });
+    const ConfiguredFeature = configureFeature(InactiveComponent)(
+      'game',
+      ActiveComponent
+    );
 
-  assert({
-    given: 'the feature is enabled and there is a Fallback component',
-    should: 'not render the Fallback component',
-    actual: $('.fallback').length,
-    expected: 0
-  });
+    const features = [];
 
-  assert({
-    given: 'props',
-    should: 'pass through props',
-    actual: $('.prop-check').text(),
-    expected: propCheck
-  });
+    const $ = dom.load(
+      render(
+        <Provider value={features}>
+          <ConfiguredFeature />
+        </Provider>
+      )
+    );
+
+    assert({
+      given: 'the feature is not enabled',
+      should: 'not render the Active component',
+      actual: $('.active').length,
+      expected: 0
+    });
+
+    assert({
+      given: 'the feature is not enabled',
+      should: 'render the Inactive component',
+      actual: $('.inactive').length,
+      expected: 1
+    });
+  }
 });
 
-describe('configureFeature(Default)(FeatureName)(Feature)', async should => {
+describe('configureFeature(inactiveComponent, name, activeComponent)', async should => {
   const { assert } = should();
+  {
+    const ActiveComponent = createTestComponent('active');
+    const InactiveComponent = createTestComponent('inactive');
 
-  const Default = createTestComponent('default');
-  const Feature = createTestComponent('feature');
+    const ConfiguredFeature = configureFeature(
+      InactiveComponent,
+      'game',
+      ActiveComponent
+    );
 
-  const ConfiguredFeature = configureFeature(Default)('game')(Feature);
+    const features = ['game', 'bar', 'baz'];
 
-  const FeatureWithContext = withContext([])(ConfiguredFeature);
+    const $ = dom.load(
+      render(
+        <Provider value={features}>
+          <ConfiguredFeature />
+        </Provider>
+      )
+    );
 
-  const propCheck = 'bacon and eggs';
+    assert({
+      given: 'the feature is enabled',
+      should: 'not render the Inactive component',
+      actual: $('.inactive').length,
+      expected: 0
+    });
 
-  const $ = dom.load(render(<FeatureWithContext propCheck={propCheck} />));
+    assert({
+      given: 'the feature is enabled',
+      should: 'render the Active component',
+      actual: $('.active').length,
+      expected: 1
+    });
+  }
+  {
+    const ActiveComponent = createTestComponent('active');
+    const InactiveComponent = createTestComponent('inactive');
 
-  assert({
-    given: 'the feature is disabled and there is no Fallback component',
-    should: 'render the Default component',
-    actual: $('.default').length,
-    expected: 1
-  });
+    const ConfiguredFeature = configureFeature(
+      InactiveComponent,
+      'game',
+      ActiveComponent
+    );
 
-  assert({
-    given: 'the feature is disabled',
-    should: 'not render the Feature component',
-    actual: $('.feature').length,
-    expected: 0
-  });
+    const features = [];
 
-  assert({
-    given: 'the feature is disabled and there is no Fallback component',
-    should: 'not render the Fallback component',
-    actual: $('.fallback').length,
-    expected: 0
-  });
+    const $ = dom.load(
+      render(
+        <Provider value={features}>
+          <ConfiguredFeature />
+        </Provider>
+      )
+    );
 
-  assert({
-    given: 'props',
-    should: 'pass through props',
-    actual: $('.prop-check').text(),
-    expected: propCheck
-  });
-});
+    assert({
+      given: 'the feature is not enabled',
+      should: 'not render the Active component',
+      actual: $('.active').length,
+      expected: 0
+    });
 
-describe('configureFeature(Default)(FeatureName)(Feature)', async should => {
-  const { assert } = should();
-
-  const Default = createTestComponent('default');
-  const Feature = createTestComponent('feature');
-
-  const ConfiguredFeature = configureFeature(Default)('game')(Feature);
-
-  const FeatureWithContext = withContext(['lessons', 'game'])(
-    ConfiguredFeature
-  );
-
-  const propCheck = 'bacon and eggs';
-
-  const $ = dom.load(render(<FeatureWithContext propCheck={propCheck} />));
-
-  assert({
-    given: 'the feature is enabled',
-    should: 'no render the Default component',
-    actual: $('.default').length,
-    expected: 0
-  });
-
-  assert({
-    given: 'the feature is enabled',
-    should: 'render the Feature component',
-    actual: $('.feature').length,
-    expected: 1
-  });
-
-  assert({
-    given: 'the feature is enabled',
-    should: 'not render the Fallback component',
-    actual: $('.fallback').length,
-    expected: 0
-  });
-
-  assert({
-    given: 'props',
-    should: 'pass through props',
-    actual: $('.prop-check').text(),
-    expected: propCheck
-  });
+    assert({
+      given: 'the feature is not enabled',
+      should: 'render the Inactive component',
+      actual: $('.inactive').length,
+      expected: 1
+    });
+  }
 });
