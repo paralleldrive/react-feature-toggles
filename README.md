@@ -126,7 +126,7 @@ Depending on your requirements, you might need something slightly different than
 
 #### configureFeature
 
-`(inactiveComponent, feature, activeComponent) => Component`
+`(inactiveComponent, name, activeComponent) => Component`
 
 `configureFeature` is a higher order component that allows you to configure a `Feature` component. configureFeature is auto curried so that you can partially apply the props.
 
