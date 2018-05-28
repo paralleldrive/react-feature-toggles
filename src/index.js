@@ -9,3 +9,4 @@ export { deactivateFeatures } from './deactivate-features';
 export { parseQuery } from './parse-query';
 export { createRouteMiddleware } from './create-route-middleware';
 export { withFeatureToggles } from './with-feature-toggles';
+export { getReqQueryFeatures } from './get-req-query-features';
