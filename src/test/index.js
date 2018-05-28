@@ -9,3 +9,4 @@ import './feature';
 import './deactivate-features';
 import './parse-query';
 import './with-feature-toggles';
+import './get-req-query-features';
