@@ -29,10 +29,14 @@ const features = ['faq', 'foo', 'bar'];
 const MyApp = () => {
   return (
     <FeatureToggles features={features}>
-      <Feature name="faq" inactiveComponent={NotFoundComponent} activeComponent={FAQComponent}/>
+      <Feature
+        name="faq"
+        inactiveComponent={NotFoundComponent}
+        activeComponent={FAQComponent}
+      />
     </FeatureToggles>
-  )
-}
+  );
+};
 ```
 
 ## API
@@ -43,8 +47,9 @@ const MyApp = () => {
 
 `FeatureToggles` is a provider component.
 
-**props**   
-- features = []
+**props**
+
+* features = []
 
 ```js
 import { FeatureToggles } from '@paralleldrive/react-feature-toggles';
@@ -52,24 +57,21 @@ import { FeatureToggles } from '@paralleldrive/react-feature-toggles';
 const features = ['foo', 'bar', 'baz', 'cat'];
 
 const MyApp = () => {
-  return (
-    <FeatureToggles features={features}>
-      {... stuff}
-    </FeatureToggles>
-  )
-}
+  return <FeatureToggles features={features}>{...stuff}</FeatureToggles>;
+};
 ```
 
 #### Feature
 
-`Feature` is a consumer component. 
+`Feature` is a consumer component.
 
-If the feature is enabled then the *activeComponent* will render else it renders the *inactiveComponent*.
+If the feature is enabled then the _activeComponent_ will render else it renders the _inactiveComponent_.
 
-Feature takes these **props**   
-- name = ""
-- inactiveComponent = noop
-- activeComponent = null
+Feature takes these **props**
+
+* name = ""
+* inactiveComponent = noop
+* activeComponent = null
 
 ```js
 import { FeatureToggles, Feature } from '@paralleldrive/react-feature-toggles';
@@ -77,27 +79,43 @@ import { FeatureToggles, Feature } from '@paralleldrive/react-feature-toggles';
 const MyApp = () => {
   return (
     <FeatureToggles>
-      <Feature name="faq" inactiveComponent={NotFoundComponent} activeComponent={FAQComponent}/>
-      <Feature name="help" inactiveComponent={NotFoundComponent} activeComponent={HelpComponent}/>
+      <Feature
+        name="faq"
+        inactiveComponent={NotFoundComponent}
+        activeComponent={FAQComponent}
+      />
+      <Feature
+        name="help"
+        inactiveComponent={NotFoundComponent}
+        activeComponent={HelpComponent}
+      />
     </FeatureToggles>
-  )
-}
+  );
+};
 ```
 
 Alternatively, you can use `Feature` as a render prop component. Do this by passing a function as the children to the `Feature` component. Note: This will only work if an `activeComponent` is not provided.
 
 ```js
-import { FeatureToggles, Feature, isActive } from '@paralleldrive/react-feature-toggles';
+import {
+  FeatureToggles,
+  Feature,
+  isActive
+} from '@paralleldrive/react-feature-toggles';
 
 const MyApp = () => {
   return (
     <FeatureToggles>
       <Feature>
-        {({ features }) => isActive('bacon', features) ? 'The bacon feature is active' : 'Bacon is inactive' }
+        {({ features }) =>
+          isActive('bacon', features)
+            ? 'The bacon feature is active'
+            : 'Bacon is inactive'
+        }
       </Feature>
     </FeatureToggles>
-  )
-}
+  );
+};
 ```
 
 ### Higher Order Components
@@ -130,7 +148,6 @@ Depending on your requirements, you might need something slightly different than
 
 `configureFeature` is a higher order component that allows you to configure a `Feature` component. configureFeature is auto curried so that you can partially apply the props.
 
-
 ```js
 import { FeatureToggles } from '@paralleldrive/react-feature-toggles';
 const NotFoundPage = () => <div>404</div>;
@@ -146,7 +163,6 @@ const myPage = () => (
     <Chat />
   </FeatureToggles>
 );
-
 ```
 
 ### Interfaces
@@ -163,11 +179,11 @@ interface Feature {
 
 ### Functions
 
-#### getEnabledFeatures
+#### getActiveFeatures
 
 `([...Feature]) => [...String]`
 
-Takes an array of feature objects and returns an array of enabled feature names.
+Takes an array of feature objects and returns an array of active feature names.
 
 #### parseQuery
 
@@ -214,13 +230,16 @@ isActive('bar', currentFeatures); // true
 isActive('cat', currentFeatures); // false
 ```
 
-
 ## Enabling features from the URL
 
 In v2, query logic has been moved out of the provider component. You should now handle this logic before passing features to `FeatureToggles`
 
 ```js
-import { FeatureToggles, mergeFeatures, parseQuery } from '@paralleldrive/react-feature-toggles';
+import {
+  FeatureToggles,
+  mergeFeatures,
+  parseQuery
+} from '@paralleldrive/react-feature-toggles';
 import parse from 'url-parse';
 
 const url = 'https://domain.com/foo?ft=foo,bar';
@@ -229,10 +248,6 @@ const initialFeatures = ['faq', 'foo', 'bar'];
 const features = mergeFeatures(initialFeatures, parseQuery(query));
 
 const MyApp = () => {
-  return (
-    <FeatureToggles features={features}>
-      {...stuff}
-    </FeatureToggles>
-  )
-}
+  return <FeatureToggles features={features}>{...stuff}</FeatureToggles>;
+};
 ```

@@ -1,4 +1,4 @@
-export { getEnabledFeatures } from './get-enabled-features';
+export { getActiveFeatures } from './get-active-features';
 export { updateFeaturesWithQuery } from './update-features-with-query';
 export { configureFeature } from './configure-feature';
 export { mergeFeatures } from './merge-features';
