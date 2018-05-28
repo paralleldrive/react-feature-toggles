@@ -29,6 +29,7 @@
     "eslint-plugin-react": "7.2.1",
     "express": "4.16.2",
     "husky": "0.14.3",
+    "jsdom": "11.11.0",
     "pre-commit": "1.2.2",
     "prettier": "1.9.2",
     "pretty-quick": "1.1.0",
