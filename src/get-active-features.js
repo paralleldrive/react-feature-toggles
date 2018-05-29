@@ -13,5 +13,5 @@ const getName = view(nameLens);
 const filterDisabled = (features = []) =>
   filter(x => getIsEnabled(features, getName(x)), features);
 
-// getEnabledFeatures = [...Feature] => [...String]
-export const getEnabledFeatures = compose(map(getName), filterDisabled);
+// getActiveFeatures = [...Feature] => [...String]
+export const getActiveFeatures = compose(map(getName), filterDisabled);
