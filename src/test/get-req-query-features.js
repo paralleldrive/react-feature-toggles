@@ -11,52 +11,52 @@ describe('getReqQueryFeatures()', async should => {
     expected: []
   });
   {
-    const req = {
+    const req = deepFreeze({
       query: null
-    };
+    });
     assert({
       given: 'incorrectly formed req object',
       should: 'return an empty array',
-      actual: getReqQueryFeatures(deepFreeze(req)),
+      actual: getReqQueryFeatures(req),
       expected: []
     });
   }
   {
-    const req = {
+    const req = deepFreeze({
       query: {
         ft: null
       }
-    };
+    });
     assert({
       given: 'incorrectly formed req object',
       should: 'return an empty array',
-      actual: getReqQueryFeatures(deepFreeze(req)),
+      actual: getReqQueryFeatures(req),
       expected: []
     });
   }
   {
-    const req = {
+    const req = deepFreeze({
       something: {
         wrong: 'undefined'
       }
-    };
+    });
     assert({
       given: 'incorrectly formed req object',
       should: 'return an empty array',
-      actual: getReqQueryFeatures(deepFreeze(req)),
+      actual: getReqQueryFeatures(req),
       expected: []
     });
   }
   {
-    const req = {
+    const req = deepFreeze({
       query: {
         ft: 'foo,bar,help'
       }
-    };
+    });
     assert({
       given: 'req object with features',
       should: 'return the correct features',
-      actual: getReqQueryFeatures(deepFreeze(req)),
+      actual: getReqQueryFeatures(req),
       expected: ['foo', 'bar', 'help']
     });
   }
