@@ -179,11 +179,11 @@ interface Feature {
 
 ### Functions
 
-#### getEnabledFeatures
+#### getActiveFeatures
 
 `([...Feature]) => [...String]`
 
-Takes an array of feature objects and returns an array of enabled feature names.
+Takes an array of feature objects and returns an array of active feature names.
 
 #### parseQuery
 
