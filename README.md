@@ -232,7 +232,7 @@ isActive('cat', currentFeatures); // false
 
 #### getReqQueryFeatures
 
-`(req) => [...String]`
+`(req = {}) => [...String]`
 
 Takes a [req object](https://expressjs.com/en/api.html#req.query) and returns an array of enabled feature names.
 
@@ -240,8 +240,9 @@ Takes a [req object](https://expressjs.com/en/api.html#req.query) and returns an
 const req = {
   query:{
     ft='foo,bar,help'
-    }
   }
+}
+
 getReqQueryFeatures(req); // ['foo', 'bar', 'help']
 ```
 
