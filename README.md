@@ -230,6 +230,22 @@ isActive('bar', currentFeatures); // true
 isActive('cat', currentFeatures); // false
 ```
 
+#### getReqQueryFeatures
+
+`(req = {}) => [...String]`
+
+Takes a [req object](https://expressjs.com/en/api.html#req.query) and returns an array of enabled feature names.
+
+```js
+const req = {
+  query:{
+    ft='foo,bar,help'
+  }
+}
+
+getReqQueryFeatures(req); // ['foo', 'bar', 'help']
+```
+
 ## Enabling features from the URL
 
 In v2, query logic has been moved out of the provider component. You should now handle this logic before passing features to `FeatureToggles`
