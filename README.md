@@ -246,6 +246,18 @@ const req = {
 getReqQueryFeatures(req); // ['foo', 'bar', 'help']
 ```
 
+#### getBrowserQueryFeatures
+
+Takes a `window.location.search` string and returns an array of active feature names. If search is not provided will grab the global `window.location.search` if available.
+
+`(search?) => [...String]`
+
+```js
+const search = '?ft=foo,bar,baz';
+
+getBrowserQueryFeatures(search); // ['foo', 'bar', 'baz']
+```
+
 ## Enabling features from the URL
 
 In v2, query logic has been moved out of the provider component. You should now handle this logic before passing features to `FeatureToggles`
