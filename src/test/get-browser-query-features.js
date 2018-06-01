@@ -1,6 +1,5 @@
 import { describe } from 'riteway';
 import deepFreeze from 'deep-freeze';
-// import { JSDOM } from 'jsdom';
 import { getBrowserQueryFeatures } from '../get-browser-query-features';
 
 describe('getBrowserQueryFeatures()', async should => {
@@ -31,18 +30,4 @@ describe('getBrowserQueryFeatures()', async should => {
       expected: ['foo', 'bar']
     });
   }
-  // {
-  //   const dom = new JSDOM(`<script src="../get-browser-query-features">`, {
-  //     url: 'https://example.com/?ft=foo,bar',
-  //     contentType: 'text/html',
-  //     runScripts: 'outside-only',
-  //     resources: 'usable'
-  //   });
-  //   assert({
-  //     given: 'no arguments in browser',
-  //     should: 'return the correct features',
-  //     actual: dom.window.eval('getBrowserQueryFeatures()'),
-  //     expected: ['foo', 'bar']
-  //   });
-  // }
 });
