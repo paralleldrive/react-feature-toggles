@@ -45,33 +45,25 @@
     "react": ">=16.3.2",
     "react-dom": ">=16.3.2"
   },
-  "pre-commit": [
-    "lint",
-    "pretty-quick",
-    "test",
-    "test:integration"
-  ],
+  "pre-commit": ["lint", "pretty-quick", "test", "test:integration"],
   "scripts": {
     "lint": "eslint src && echo '-- linting finished --'",
     "build": "babel src -d dist",
     "prettier": "prettier --write 'src/**/*.js'",
     "test": "tape -r babel-register -r babel-polyfill src/test",
-    "test:integration": "tape -r babel-register -r babel-polyfill src/integration",
+    "test:integration":
+      "tape -r babel-register -r babel-polyfill src/integration",
     "watch": "watch 'reset && npm run --silent test' src",
     "precommit-msg": "echo 'Pre-commit checks...' && exit 0",
     "pretty-quick": "pretty-quick --staged",
     "prepare": "npm run build"
   },
-  "keywords": [
-    "react",
-    "feature",
-    "toggle",
-    "toggles"
-  ],
+  "keywords": ["react", "feature", "toggle", "toggles"],
   "author": "Parallel Drive, Inc",
   "license": "MIT",
   "dependencies": {
     "lodash": "4.17.10",
-    "ramda": "0.25.0"
+    "ramda": "0.25.0",
+    "url-parse": "1.4.0"
   }
 }
