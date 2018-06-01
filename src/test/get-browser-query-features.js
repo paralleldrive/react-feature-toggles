@@ -1,5 +1,4 @@
 import { describe } from 'riteway';
-import deepFreeze from 'deep-freeze';
 import { getBrowserQueryFeatures } from '../get-browser-query-features';
 
 describe('getBrowserQueryFeatures()', async should => {
@@ -17,7 +16,7 @@ describe('getBrowserQueryFeatures()', async should => {
     assert({
       given: 'search string with no features',
       should: 'return empy array',
-      actual: getBrowserQueryFeatures(deepFreeze(url)),
+      actual: getBrowserQueryFeatures(url),
       expected: []
     });
   }
@@ -26,7 +25,7 @@ describe('getBrowserQueryFeatures()', async should => {
     assert({
       given: 'search string with features',
       should: 'return the correct features',
-      actual: getBrowserQueryFeatures(deepFreeze(url)),
+      actual: getBrowserQueryFeatures(url),
       expected: ['foo', 'bar']
     });
   }
