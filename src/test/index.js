@@ -7,7 +7,7 @@ import './merge-features';
 import './feature-toggles';
 import './feature';
 import './deactivate-features';
-import './parse-query';
+import './get-query-features';
 import './with-feature-toggles';
 import './get-req-query-features';
 import './get-browser-query-features';

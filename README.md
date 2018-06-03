@@ -185,7 +185,7 @@ interface Feature {
 
 Takes an array of feature objects and returns an array of active feature names.
 
-#### parseQuery
+#### getQueryFeatures
 
 `(query = {}) => [...String]`
 
@@ -193,7 +193,7 @@ Takes a [query object](https://nodejs.org/api/url.html) and returns an array of 
 
 ```js
 const query = { ft='foo,bar,help' }
-parseQuery(query); // ['foo', 'bar', 'help']
+getQueryFeatures(query); // ['foo', 'bar', 'help']
 ```
 
 #### mergeFeatures
@@ -266,14 +266,14 @@ In v2, query logic has been moved out of the provider component. You should now 
 import {
   FeatureToggles,
   mergeFeatures,
-  parseQuery
+  getQueryFeatures
 } from '@paralleldrive/react-feature-toggles';
 import parse from 'url-parse';
 
 const url = 'https://domain.com/foo?ft=foo,bar';
 const query = parse(url, true);
 const initialFeatures = ['faq', 'foo', 'bar'];
-const features = mergeFeatures(initialFeatures, parseQuery(query));
+const features = mergeFeatures(initialFeatures, getQueryFeatures(query));
 
 const MyApp = () => {
   return <FeatureToggles features={features}>{...stuff}</FeatureToggles>;

@@ -1,15 +1,15 @@
 import { describe } from 'riteway';
 import deepFreeze from 'deep-freeze';
 
-import { parseQuery } from '../parse-query';
+import { getQueryFeatures } from '../get-query-features';
 
-describe('parseQuery()', async should => {
+describe('getQueryFeatures()', async should => {
   const { assert } = should();
 
   assert({
     given: 'no arguments',
     should: 'return an empty array',
-    actual: parseQuery(),
+    actual: getQueryFeatures(),
     expected: []
   });
 
@@ -18,7 +18,7 @@ describe('parseQuery()', async should => {
     assert({
       given: 'empty object',
       should: 'return an empty array',
-      actual: parseQuery(query),
+      actual: getQueryFeatures(query),
       expected: []
     });
   }
@@ -28,7 +28,7 @@ describe('parseQuery()', async should => {
     assert({
       given: 'query object with no ft key',
       should: 'return an empty array',
-      actual: parseQuery(query),
+      actual: getQueryFeatures(query),
       expected: []
     });
   }
@@ -38,7 +38,7 @@ describe('parseQuery()', async should => {
     assert({
       given: 'query object with key of ft and a value of a string of features',
       should: 'return an array of the features',
-      actual: parseQuery(query),
+      actual: getQueryFeatures(query),
       expected: ['foo', 'bar', 'help']
     });
   }
