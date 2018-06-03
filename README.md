@@ -207,7 +207,7 @@ const currentFeatures = ['foo', 'bar', 'baz'];
 mergeFeatures(currentFeatures, ['fish', 'bar', 'cat']); // ['foo', 'bar', 'baz', 'fish', 'cat']
 ```
 
-#### deactivate
+#### removeFeatures
 
 `([...String], [...String]) => [...String]`
 
@@ -215,7 +215,7 @@ Removes feature names
 
 ```js
 const currentFeatures = ['foo', 'bar', 'baz', 'cat'];
-deactivate(currentFeatures, ['fish', 'bar', 'cat']); // ['foo', 'baz']
+removeFeatures(currentFeatures, ['fish', 'bar', 'cat']); // ['foo', 'baz']
 ```
 
 #### isActive

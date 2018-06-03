@@ -1,29 +1,29 @@
 import { describe } from 'riteway';
 import deepFreeze from 'deep-freeze';
 
-import { deactivateFeatures } from '../deactivate-features';
+import { removeFeatures } from '../remove-features';
 
-describe('deactivateFeatures()', async should => {
+describe('removeFeatures()', async should => {
   const { assert } = should();
 
   assert({
     given: 'no arguments',
     should: 'return an empty array',
-    actual: deactivateFeatures(),
+    actual: removeFeatures(),
     expected: []
   });
 
   assert({
     given: 'two empty arrays',
     should: 'return an empty array',
-    actual: deactivateFeatures([], []),
+    actual: removeFeatures([], []),
     expected: []
   });
 
   assert({
     given: 'empty array of Current Features and an array of Features to Remove',
     should: 'return an empty array',
-    actual: deactivateFeatures([], ['foo', 'bar']),
+    actual: removeFeatures([], ['foo', 'bar']),
     expected: []
   });
   {
@@ -32,17 +32,17 @@ describe('deactivateFeatures()', async should => {
       given:
         'array of Current Features and an empty array of Features to Remove',
       should: 'equivalent array of Current Features',
-      actual: deactivateFeatures(currentFeatures, []),
+      actual: removeFeatures(currentFeatures, []),
       expected: ['foo', 'bar']
     });
   }
   {
     const currentFeatures = deepFreeze(['foo', 'bar', 'baz', 'cat']);
-    const removeFeatures = deepFreeze(['fish', 'bar', 'cat']);
+    const removedFeatures = deepFreeze(['fish', 'bar', 'cat']);
     assert({
       given: 'array of Current Features and an array of Features to Remove',
       should: 'the correct new array',
-      actual: deactivateFeatures(currentFeatures, removeFeatures),
+      actual: removeFeatures(currentFeatures, removedFeatures),
       expected: ['foo', 'baz']
     });
   }
@@ -51,7 +51,7 @@ describe('deactivateFeatures()', async should => {
     assert({
       given: 'an array with items',
       should: 'return equivalent array',
-      actual: deactivateFeatures(currentFeatures),
+      actual: removeFeatures(currentFeatures),
       expected: currentFeatures
     });
   }
