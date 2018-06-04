@@ -6,7 +6,7 @@ import './is-active';
 import './merge-features';
 import './feature-toggles';
 import './feature';
-import './deactivate-features';
+import './remove-features';
 import './parse-query';
 import './with-feature-toggles';
 import './get-req-query-features';
