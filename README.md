@@ -241,7 +241,7 @@ const req = {
   query:{
     ft='foo,bar,help'
   }
-}
+};
 
 getReqQueryFeatures(req); // ['foo', 'bar', 'help']
 ```
@@ -256,6 +256,24 @@ Takes a `window.location.search` string and returns an array of active feature n
 const search = '?ft=foo,bar,baz';
 
 getBrowserQueryFeatures(search); // ['foo', 'bar', 'baz']
+```
+
+#### getCurrentActiveFeatures
+
+Takes an array of initialFeatures, a req object, and a `window.location.search` string and returns an array of active Features. If search is not provided will grab the global `window.location.search` if available.
+
+`({ initialFeatures = [...String], req? , search? }) => [...String])]`
+
+```js
+const initialFeatures = ['cat', 'bar'];
+const req = {
+    query:{
+      ft='fiz,bat,help'
+    }
+  };
+const search = '?ft=foo,bar,baz';
+
+getCurrentActiveFeatures(initialFeatures, req, search); // ['cat', 'bar', 'fiz', 'bat', 'help', 'foo', 'baz']
 ```
 
 ## Enabling features from the URL
