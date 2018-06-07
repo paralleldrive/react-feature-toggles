@@ -273,7 +273,8 @@ const req = {
   };
 const search = '?ft=foo,bar,baz';
 
-getCurrentActiveFeatures(initialFeatures, req, search); // ['cat', 'bar', 'fiz', 'bat', 'help', 'foo', 'baz']
+getCurrentActiveFeatures({ initialFeatures, req, search }); // ['cat', 'bar', 'fiz', 'bat', 'help', 'foo', 'baz']
+getCurrentActiveFeatures({ initialFeatures }); // -> parses the `window.location.search` string if present if not -> ['cat', 'bar']
 ```
 
 ## Enabling features from the URL
