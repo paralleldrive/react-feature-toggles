@@ -1,4 +1,4 @@
-import { parseQuery } from './parse-query';
+import { getQueryFeatures } from './get-query-features';
 
 export const getReqQueryFeatures = ({ query } = {}) =>
-  !query ? [] : parseQuery(query);
+  !query ? [] : getQueryFeatures(query);
