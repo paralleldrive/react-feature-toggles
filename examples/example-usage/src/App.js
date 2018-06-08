@@ -1,18 +1,14 @@
 import React from 'react';
-import { FeatureToggles, Feature } from '../../../src/index';
-import { NFPage } from './features/404-page';
-import { Active } from './features/feature';
+import { FeatureToggles } from './dist/index';
+import { featureOr404 } from './hocs/featureOr404';
+import { CreateReactAppPage } from './features/CreateReactAppPage';
 
-const features = ['active', 'foo', 'bar'];
+const CreateReactApp = featureOr404('react', CreateReactAppPage);
 
-export const App = () => {
+export const App = ({ features }) => {
   return (
     <FeatureToggles features={features}>
-      <Feature
-        name={'active'}
-        inactiveComponent={NFPage}
-        activeComponent={Active}
-      />
+      <CreateReactApp />
     </FeatureToggles>
   );
 };
