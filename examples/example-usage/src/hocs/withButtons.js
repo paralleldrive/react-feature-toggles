@@ -20,12 +20,14 @@ export const withButtons = Component => features => {
     render() {
       return (
         <div>
-          {features.map(feature => (
-            <Toggle
-              onToggle={this.handleToggle}
-              feature={feature}
-              status={this.state[feature].checked}
-            />
+          {features.map((feature, i) => (
+            <div key={i}>
+              <Toggle
+                onToggle={this.handleToggle}
+                feature={feature}
+                status={this.state[feature].checked}
+              />
+            </div>
           ))}
           <Component
             {...this.state}
