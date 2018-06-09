@@ -11,3 +11,4 @@ import './remove-features';
 import './with-feature-toggles';
 import './get-req-query-features';
 import './get-browser-query-features';
+import './get-current-active-features';
