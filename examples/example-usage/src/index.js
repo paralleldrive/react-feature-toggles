@@ -4,7 +4,7 @@ import './index.css';
 import { App } from './App';
 import registerServiceWorker from './registerServiceWorker';
 import { withButtons } from './hocs/withButtons';
-const features = ['react', 'foo', 'bar'];
+const features = ['react'];
 
 const Apps = withButtons(App)(features);
 

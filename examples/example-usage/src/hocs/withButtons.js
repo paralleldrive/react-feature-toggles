@@ -19,7 +19,8 @@ export const withButtons = Component => features => {
 
     render() {
       return (
-        <div>
+        <div className="features">
+          <h1>Features</h1>
           {features.map((feature, i) => (
             <div key={i}>
               <Toggle
