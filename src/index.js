@@ -10,3 +10,4 @@ export { removeFeatures } from './remove-features';
 export { createRouteMiddleware } from './create-route-middleware';
 export { withFeatureToggles } from './with-feature-toggles';
 export { getReqQueryFeatures } from './get-req-query-features';
+export { getCurrentActiveFeatures } from './get-current-active-features';

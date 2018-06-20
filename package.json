@@ -1,6 +1,6 @@
 {
   "name": "@paralleldrive/react-feature-toggles",
-  "version": "1.4.0",
+  "version": "2.0.0-beta1",
   "description": "React Feature Toggles",
   "main": "dist/index.js",
   "repository": {
@@ -15,29 +15,30 @@
     "node": ">=8.3"
   },
   "devDependencies": {
-    "babel-cli": "6.24.1",
-    "babel-eslint": "7.2.3",
+    "babel-cli": "6.26.0",
+    "babel-eslint": "8.2.3",
     "babel-polyfill": "6.26.0",
-    "babel-preset-env": "1.6.0",
+    "babel-preset-env": "1.7.0",
     "babel-preset-react": "6.24.1",
     "babel-preset-stage-2": "6.24.1",
-    "babel-register": "6.24.1",
+    "babel-register": "6.26.0",
     "cheerio": "0.22.0",
     "deep-freeze": "0.0.1",
-    "eslint": "4.4.1",
+    "eslint": "4.19.1",
     "eslint-config-prettier": "2.9.0",
-    "eslint-plugin-react": "7.2.1",
-    "express": "4.16.2",
+    "eslint-plugin-react": "7.9.1",
+    "express": "4.16.3",
     "husky": "0.14.3",
     "pre-commit": "1.2.2",
-    "prettier": "1.9.2",
-    "pretty-quick": "1.1.0",
+    "prettier": "1.13.5",
+    "pretty-quick": "1.6.0",
     "prop-types": "15.6.1",
-    "react": "16.3.2",
-    "react-dom": "16.3.2",
-    "riteway": "2.0.3",
-    "supertest": "3.0.0",
-    "tape": "4.8.0",
+    "react": "16.4.1",
+    "react-dom": "16.4.1",
+    "riteway": "2.0.4",
+    "supertest": "3.1.0",
+    "tape": "4.9.1",
+    "updtr": "2.0.0",
     "watch": "1.0.2"
   },
   "peerDependencies": {
@@ -45,25 +46,35 @@
     "react": ">=16.3.2",
     "react-dom": ">=16.3.2"
   },
-  "pre-commit": ["lint", "pretty-quick", "test", "test:integration"],
+  "pre-commit": [
+    "lint",
+    "pretty-quick",
+    "test",
+    "test:integration"
+  ],
   "scripts": {
     "lint": "eslint src && echo '-- linting finished --'",
     "build": "babel src -d dist",
     "prettier": "prettier --write 'src/**/*.js'",
     "test": "tape -r babel-register -r babel-polyfill src/test",
-    "test:integration":
-      "tape -r babel-register -r babel-polyfill src/integration",
+    "test:integration": "tape -r babel-register -r babel-polyfill src/integration",
     "watch": "watch 'reset && npm run --silent test' src",
     "precommit-msg": "echo 'Pre-commit checks...' && exit 0",
     "pretty-quick": "pretty-quick --staged",
-    "prepare": "npm run build"
+    "prepare": "npm run build",
+    "update": "updtr"
   },
-  "keywords": ["react", "feature", "toggle", "toggles"],
+  "keywords": [
+    "react",
+    "feature",
+    "toggle",
+    "toggles"
+  ],
   "author": "Parallel Drive, Inc",
   "license": "MIT",
   "dependencies": {
     "lodash": "4.17.10",
     "ramda": "0.25.0",
-    "url-parse": "1.4.0"
+    "url-parse": "1.4.1"
   }
 }
