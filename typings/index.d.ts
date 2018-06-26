@@ -1,9 +1,11 @@
 declare module '@paralleldrive/react-feature-toggles' {
+  import * as React from 'react';
+
   function Feature(
     inactiveComponent: any,
     activeComponent: any,
     name: string,
-    children?: React.ReactNode
+    children?: (args: React.ReactNode) => React.ReactNode
   ): JSX.Element;
   export { Feature };
 
@@ -48,6 +50,9 @@ declare module '@paralleldrive/react-feature-toggles' {
     name: string,
     currentFeatures: ReadonlyArray<string>
   ): boolean;
+  function isActive(
+    name: string
+  ): (currentFeatures: ReadonlyArray<string>) => boolean;
   export { isActive };
 
   interface Req {
@@ -70,6 +75,16 @@ declare module '@paralleldrive/react-feature-toggles' {
   ): ReadonlyArray<string>;
   export { getCurrentActiveFeatures };
 
+  function configureFeature(
+    inactiveComponent: any
+  ): (name: string, activeComponent: any) => () => JSX.Element;
+  function configureFeature(
+    inactiveComponent: any
+  ): (name: string) => (activeComponent: any) => () => JSX.Element;
+  function configureFeature(
+    inactiveComponent: any,
+    name: string
+  ): (activeComponent: any) => () => JSX.Element;
   function configureFeature(
     inactiveComponent: any,
     name: string,
