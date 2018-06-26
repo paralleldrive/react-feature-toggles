@@ -77,10 +77,10 @@ declare module '@paralleldrive/react-feature-toggles' {
 
   function configureFeature(
     inactiveComponent: any
-  ): (name: string, activeComponent: any) => () => JSX.Element;
+  ): (name: string) => (activeComponent: any) => () => JSX.Element;
   function configureFeature(
     inactiveComponent: any
-  ): (name: string) => (activeComponent: any) => () => JSX.Element;
+  ): (name: string, activeComponent: any) => () => JSX.Element;
   function configureFeature(
     inactiveComponent: any,
     name: string
