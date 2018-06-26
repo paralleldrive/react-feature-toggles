@@ -1,6 +1,9 @@
-# react-feature-toggles
+# React Feature Toggles 2
 
 [![Build Status](https://travis-ci.com/paralleldrive/react-feature-toggles.svg?token=Ba8H1FN3UT5CqqFhs2AM&branch=master)](https://travis-ci.com/paralleldrive/react-feature-toggles)
+
+## Version 2
+This is the version 2, many breaking changes were made from version 1. 
 
 ## Requirements
 
