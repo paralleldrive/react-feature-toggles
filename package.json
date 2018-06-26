@@ -1,6 +1,6 @@
 {
   "name": "@paralleldrive/react-feature-toggles",
-  "version": "2.0.0-beta1",
+  "version": "2.0.0-beta2",
   "description": "React Feature Toggles",
   "main": "dist/index.js",
   "types": "typings/index.d.ts",
@@ -33,7 +33,7 @@
     "pre-commit": "1.2.2",
     "prettier": "1.13.5",
     "pretty-quick": "1.6.0",
-    "prop-types": "15.6.1",
+    "prop-types": "15.6.2",
     "react": "16.4.1",
     "react-dom": "16.4.1",
     "riteway": "2.0.4",
