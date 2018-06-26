@@ -20,9 +20,9 @@ declare module '@paralleldrive/react-feature-toggles' {
   function FeatureToggles({
     features
   }?: {
-      readonly features?: ReadonlyArray<string>;
-      readonly children?: React.ReactNode;
-    }): JSX.Element;
+    readonly features?: ReadonlyArray<string>;
+    readonly children?: React.ReactNode;
+  }): JSX.Element;
   export { FeatureToggles };
 
   type ConfigureFeature1 = (
