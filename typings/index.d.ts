@@ -1,6 +1,26 @@
 declare module '@paralleldrive/react-feature-toggles' {
   import * as React from 'react';
+  
+  interface Feature {
+    readonly name: string;
+    readonly isActive: boolean;
+    readonly dependencies?: ReadonlyArray<string>;
+  }
 
+  interface Query {
+    readonly ft: string;
+  }
+  
+  interface Req {
+    readonly query: Query;
+  }
+  
+  interface CurrentActiveFeatures {
+    readonly initialFeatures: ReadonlyArray<string>;
+    readonly req?: Req;
+    readonly search?: string;
+  }
+  
   function Feature(
     inactiveComponent: any,
     activeComponent: any,
@@ -17,20 +37,11 @@ declare module '@paralleldrive/react-feature-toggles' {
   }): JSX.Element;
   export { FeatureToggles };
 
-  interface Feature {
-    readonly name: string;
-    readonly isActive: boolean;
-    readonly dependencies?: ReadonlyArray<string>;
-  }
-
   function getActiveFeatures(
     features: ReadonlyArray<Feature>
   ): ReadonlyArray<string>;
   export { getActiveFeatures };
 
-  interface Query {
-    readonly ft: string;
-  }
   function getQueryFeatures(query?: Query): ReadonlyArray<string>;
   export { getQueryFeatures };
 
@@ -55,21 +66,12 @@ declare module '@paralleldrive/react-feature-toggles' {
   ): (currentFeatures: ReadonlyArray<string>) => boolean;
   export { isActive };
 
-  interface Req {
-    readonly query: Query;
-  }
-
   function getReqQueryFeatures(req?: Req): ReadonlyArray<string>;
   export { getReqQueryFeatures };
 
   function getBrowserQueryFeatures(search?: string): ReadonlyArray<string>;
   export { getBrowserQueryFeatures };
 
-  interface CurrentActiveFeatures {
-    readonly initialFeatures: ReadonlyArray<string>;
-    readonly req?: Req;
-    readonly search?: string;
-  }
   function getCurrentActiveFeatures(
     obj: CurrentActiveFeatures
   ): ReadonlyArray<string>;
