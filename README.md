@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.com/paralleldrive/react-feature-toggles.svg?token=Ba8H1FN3UT5CqqFhs2AM&branch=master)](https://travis-ci.com/paralleldrive/react-feature-toggles)
 
 ## Version 2
-This is version 2, it contains many breaking changes. 
+This is version 2, it contains many breaking changes from version 1. 
 
 ## Requirements
 
