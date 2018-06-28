@@ -1,6 +1,6 @@
 declare module '@paralleldrive/react-feature-toggles' {
   import * as React from 'react';
-  
+
   interface Feature {
     readonly name: string;
     readonly isActive: boolean;
@@ -10,17 +10,17 @@ declare module '@paralleldrive/react-feature-toggles' {
   interface Query {
     readonly ft: string;
   }
-  
+
   interface Req {
     readonly query: Query;
   }
-  
+
   interface CurrentActiveFeatures {
     readonly initialFeatures: ReadonlyArray<string>;
     readonly req?: Req;
     readonly search?: string;
   }
-  
+
   function Feature(
     inactiveComponent: any,
     activeComponent: any,
@@ -77,20 +77,25 @@ declare module '@paralleldrive/react-feature-toggles' {
   ): ReadonlyArray<string>;
   export { getCurrentActiveFeatures };
 
-  function configureFeature(
-    inactiveComponent: any
-  ): (name: string) => (activeComponent: any) => () => JSX.Element;
-  function configureFeature(
-    inactiveComponent: any
-  ): (name: string, activeComponent: any) => () => JSX.Element;
-  function configureFeature(
-    inactiveComponent: any,
-    name: string
-  ): (activeComponent: any) => () => JSX.Element;
-  function configureFeature(
-    inactiveComponent: any,
+  type ConfigureFeature1 = (
     name: string,
-    activeComponent: any
+    activeComponent: React.ReactNode
+  ) => () => JSX.Element;
+  type ConfigureFeature2 = (
+    name: string
+  ) => (activeComponent: React.ReactNode) => () => JSX.Element;
+
+  function configureFeature(
+    inactiveComponent: React.ReactNode
+  ): ConfigureFeature1 & ConfigureFeature2;
+  function configureFeature(
+    inactiveComponent: React.ReactNode,
+    name: string
+  ): (activeComponent: React.ReactNode) => () => JSX.Element;
+  function configureFeature(
+    inactiveComponent: React.ReactNode,
+    name: string,
+    activeComponent: React.ReactNode
   ): () => JSX.Element;
   export { configureFeature };
 }
