@@ -14,4 +14,7 @@ const filterDisabled = (features = []) =>
   filter(x => getIsEnabled(features, getName(x)), features);
 
 // getActiveFeatures = [...Feature] => [...String]
-export const getActiveFeatures = compose(map(getName), filterDisabled);
+export const getActiveFeatures = compose(
+  map(getName),
+  filterDisabled
+);

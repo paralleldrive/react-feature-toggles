@@ -9,11 +9,15 @@ const setStatus = (res, isActive) =>
 
 // ({ initialFeatures: [...String] }, { requiredFeature: String, ...methods }) => (req, res, next) => void
 export const createExpressMiddleware = curry(
-  (features, { requiredFeature, ...methods }) => (req, res, next) => {
+  ({ initialFeatures }, { requiredFeature, ...methods }) => (
+    req,
+    res,
+    next
+  ) => {
     const parsedUrl = parse(req.url, true);
     const { query } = parsedUrl;
     const updatedFeatures = mergeFeatures(
-      features,
+      initialFeatures,
       getReqQueryFeatures({ query })
     );
     setStatus(res, isActive(requiredFeature, updatedFeatures));

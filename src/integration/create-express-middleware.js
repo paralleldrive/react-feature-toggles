@@ -1,20 +1,30 @@
 import express from 'express';
 import request from 'supertest';
 import { createExpressMiddleware } from '../create-express-middleware';
-import { createFeaturesStringArray } from '../test-fixtures/create-features';
 import { describe } from 'riteway';
 
 describe('createExpressMiddleware()', async should => {
   const { assert } = should();
   {
     const app = express();
-    const features = createFeaturesStringArray();
-    const handler = createExpressMiddleware(features, {
-      requiredFeature: 'posts',
-      get: (req, res) => {
-        res.send();
+    const initialFeatures = [
+      'posts',
+      'post-rating-graph',
+      'help-rating',
+      'help-rating-graph',
+      'comments',
+      'comment-rating',
+      'comment-rating-graph'
+    ];
+    const handler = createExpressMiddleware(
+      { initialFeatures },
+      {
+        requiredFeature: 'posts',
+        get: (req, res) => {
+          res.send();
+        }
       }
-    });
+    );
     const path = '/posts';
     app.use(path, handler);
 
@@ -32,13 +42,24 @@ describe('createExpressMiddleware()', async should => {
 
   {
     const app = express();
-    const features = createFeaturesStringArray();
-    const handler = createExpressMiddleware(features, {
-      requiredFeature: 'help',
-      get: (req, res) => {
-        res.send();
+    const initialFeatures = [
+      'posts',
+      'post-rating-graph',
+      'help-rating',
+      'help-rating-graph',
+      'comments',
+      'comment-rating',
+      'comment-rating-graph'
+    ];
+    const handler = createExpressMiddleware(
+      { initialFeatures },
+      {
+        requiredFeature: 'help',
+        get: (req, res) => {
+          res.send();
+        }
       }
-    });
+    );
     const path = '/posts';
     app.use(path, handler);
 
@@ -56,13 +77,24 @@ describe('createExpressMiddleware()', async should => {
 
   {
     const app = express();
-    const features = createFeaturesStringArray();
-    const handler = createExpressMiddleware(features, {
-      requiredFeature: 'help',
-      get: (req, res) => {
-        res.send();
+    const initialFeatures = [
+      'posts',
+      'post-rating-graph',
+      'help-rating',
+      'help-rating-graph',
+      'comments',
+      'comment-rating',
+      'comment-rating-graph'
+    ];
+    const handler = createExpressMiddleware(
+      { initialFeatures },
+      {
+        requiredFeature: 'help',
+        get: (req, res) => {
+          res.send();
+        }
       }
-    });
+    );
     const path = '/posts';
     app.use(path, handler);
 
@@ -81,13 +113,24 @@ describe('createExpressMiddleware()', async should => {
 
   {
     const app = express();
-    const features = createFeaturesStringArray();
-    const handler = createExpressMiddleware(features, {
-      requiredFeature: 'help',
-      get: (req, res) => {
-        res.send();
+    const initialFeatures = [
+      'posts',
+      'post-rating-graph',
+      'help-rating',
+      'help-rating-graph',
+      'comments',
+      'comment-rating',
+      'comment-rating-graph'
+    ];
+    const handler = createExpressMiddleware(
+      { initialFeatures },
+      {
+        requiredFeature: 'help',
+        get: (req, res) => {
+          res.send();
+        }
       }
-    });
+    );
     const path = '/posts';
     app.use(path, handler);
 
@@ -105,18 +148,29 @@ describe('createExpressMiddleware()', async should => {
 
   {
     const app = express();
-    const features = createFeaturesStringArray();
+    const initialFeatures = [
+      'posts',
+      'post-rating-graph',
+      'help-rating',
+      'help-rating-graph',
+      'comments',
+      'comment-rating',
+      'comment-rating-graph'
+    ];
     const path = '/posts';
-    const handler = createExpressMiddleware(features, {
-      requiredFeature: 'posts',
-      get: (req, res) => {
-        // Simulate async handler delay
-        // This allows subsequent express methods to be called that could possibly
-        // cause errors or change the response status if the `next` callback is not
-        // used correctly.
-        setTimeout(() => res.send(), 3000);
+    const handler = createExpressMiddleware(
+      { initialFeatures },
+      {
+        requiredFeature: 'posts',
+        get: (req, res) => {
+          // Simulate async handler delay
+          // This allows subsequent express methods to be called that could possibly
+          // cause errors or change the response status if the `next` callback is not
+          // used correctly.
+          setTimeout(() => res.send(), 3000);
+        }
       }
-    });
+    );
     app.use(path, handler);
     app.get('*', (req, res) => {
       res.status(404);
@@ -138,13 +192,24 @@ describe('createExpressMiddleware()', async should => {
 
   {
     const app = express();
-    const features = createFeaturesStringArray();
-    const handler = createExpressMiddleware(features, {
-      requiredFeature: 'posts',
-      post: (req, res) => {
-        res.send();
+    const initialFeatures = [
+      'posts',
+      'post-rating-graph',
+      'help-rating',
+      'help-rating-graph',
+      'comments',
+      'comment-rating',
+      'comment-rating-graph'
+    ];
+    const handler = createExpressMiddleware(
+      { initialFeatures },
+      {
+        requiredFeature: 'posts',
+        post: (req, res) => {
+          res.send();
+        }
       }
-    });
+    );
     const path = '/posts';
     app.use(path, handler);
 
@@ -162,13 +227,24 @@ describe('createExpressMiddleware()', async should => {
 
   {
     const app = express();
-    const features = createFeaturesStringArray();
-    const handler = createExpressMiddleware(features, {
-      requiredFeature: 'posts',
-      put: (req, res) => {
-        res.send();
+    const initialFeatures = [
+      'posts',
+      'post-rating-graph',
+      'help-rating',
+      'help-rating-graph',
+      'comments',
+      'comment-rating',
+      'comment-rating-graph'
+    ];
+    const handler = createExpressMiddleware(
+      { initialFeatures },
+      {
+        requiredFeature: 'posts',
+        put: (req, res) => {
+          res.send();
+        }
       }
-    });
+    );
     const path = '/posts';
     app.use(path, handler);
 
