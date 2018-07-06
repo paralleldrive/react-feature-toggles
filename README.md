@@ -3,16 +3,17 @@
 [![Build Status](https://travis-ci.com/paralleldrive/react-feature-toggles.svg?token=Ba8H1FN3UT5CqqFhs2AM&branch=master)](https://travis-ci.com/paralleldrive/react-feature-toggles)
 
 ## Version 2
-This is version 2, it contains many breaking changes from version 1. 
+
+This is version 2, it contains many breaking changes from version 1.
 
 ## Requirements
 
 React Feature Toggles attempts to satisfy the following requirements:
 
-* Universal - server and client side
-* Conditionally execute code based on the presence or absence of a specific feature
-* Toggle features on with url parameters
-* Feature Dependency - if a feature depends on a another feature that is disabled, then neither of them should execute
+- Universal - server and client side
+- Conditionally execute code based on the presence or absence of a specific feature
+- Toggle features on with url parameters
+- Feature Dependency - if a feature depends on a another feature that is disabled, then neither of them should execute
 
 ## Install
 
@@ -52,7 +53,7 @@ const MyApp = () => {
 
 **props**
 
-* features = []
+- features = []
 
 ```js
 import { FeatureToggles } from '@paralleldrive/react-feature-toggles';
@@ -72,9 +73,9 @@ If the feature is enabled then the _activeComponent_ will render else it renders
 
 Feature takes these **props**
 
-* name = ""
-* inactiveComponent = noop
-* activeComponent = null
+- name = ""
+- inactiveComponent = noop
+- activeComponent = null
 
 ```js
 import { FeatureToggles, Feature } from '@paralleldrive/react-feature-toggles';
@@ -278,6 +279,18 @@ const search = '?ft=foo,bar,baz';
 
 getCurrentActiveFeatures({ initialFeatures, req, search }); // ['cat', 'bar', 'fiz', 'bat', 'help', 'foo', 'baz']
 getCurrentActiveFeatures({ initialFeatures }); // -> parses the `window.location.search` string if present if not -> ['cat', 'bar']
+```
+
+#### createExpressMiddleware
+
+Takes an array of initialFeatures and an object with a required feature and methods.
+
+`({ initialFeatures: [...String] }, { requiredFeature: String, ...methods }) => (req, res, next) => void`
+
+```js
+const initialFeatures = ['cat', 'bar'];
+createExpressMiddleware(initialFeatures, { 'help', get: (req, res) => { res.send() } }) //res.statusCode = 404
+createExpressMiddleware(initialFeatures, { 'cat', get: (req, res) => { res.send() } }) //res.statusCode = 200
 ```
 
 ## Enabling features from the URL
