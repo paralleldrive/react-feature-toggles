@@ -1,16 +1,15 @@
 import express from 'express';
 import request from 'supertest';
-import { createRouteMiddleware } from '../create-route-middleware';
-import { createFeatures } from '../test-fixtures/create-features';
+import { createExpressMiddleware } from '../create-express-middleware';
+import { createFeaturesStringArray } from '../test-fixtures/create-features';
 import { describe } from 'riteway';
 
-describe('createRouteMiddleware()', async should => {
+describe('createExpressMiddleware()', async should => {
   const { assert } = should();
-
   {
     const app = express();
-    const features = createFeatures();
-    const handler = createRouteMiddleware(features, {
+    const features = createFeaturesStringArray();
+    const handler = createExpressMiddleware(features, {
       requiredFeature: 'posts',
       get: (req, res) => {
         res.send();
@@ -33,8 +32,8 @@ describe('createRouteMiddleware()', async should => {
 
   {
     const app = express();
-    const features = createFeatures();
-    const handler = createRouteMiddleware(features, {
+    const features = createFeaturesStringArray();
+    const handler = createExpressMiddleware(features, {
       requiredFeature: 'help',
       get: (req, res) => {
         res.send();
@@ -57,8 +56,8 @@ describe('createRouteMiddleware()', async should => {
 
   {
     const app = express();
-    const features = createFeatures();
-    const handler = createRouteMiddleware(features, {
+    const features = createFeaturesStringArray();
+    const handler = createExpressMiddleware(features, {
       requiredFeature: 'help',
       get: (req, res) => {
         res.send();
@@ -82,8 +81,8 @@ describe('createRouteMiddleware()', async should => {
 
   {
     const app = express();
-    const features = createFeatures();
-    const handler = createRouteMiddleware(features, {
+    const features = createFeaturesStringArray();
+    const handler = createExpressMiddleware(features, {
       requiredFeature: 'help',
       get: (req, res) => {
         res.send();
@@ -106,9 +105,9 @@ describe('createRouteMiddleware()', async should => {
 
   {
     const app = express();
-    const features = createFeatures();
+    const features = createFeaturesStringArray();
     const path = '/posts';
-    const handler = createRouteMiddleware(features, {
+    const handler = createExpressMiddleware(features, {
       requiredFeature: 'posts',
       get: (req, res) => {
         // Simulate async handler delay
@@ -139,8 +138,8 @@ describe('createRouteMiddleware()', async should => {
 
   {
     const app = express();
-    const features = createFeatures();
-    const handler = createRouteMiddleware(features, {
+    const features = createFeaturesStringArray();
+    const handler = createExpressMiddleware(features, {
       requiredFeature: 'posts',
       post: (req, res) => {
         res.send();
@@ -163,8 +162,8 @@ describe('createRouteMiddleware()', async should => {
 
   {
     const app = express();
-    const features = createFeatures();
-    const handler = createRouteMiddleware(features, {
+    const features = createFeaturesStringArray();
+    const handler = createExpressMiddleware(features, {
       requiredFeature: 'posts',
       put: (req, res) => {
         res.send();

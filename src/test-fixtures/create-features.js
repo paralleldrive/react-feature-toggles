@@ -44,3 +44,8 @@ export const createFeatures = () => [
     dependencies: ['comment-rating']
   })
 ];
+
+export const createFeaturesStringArray = () =>
+  createFeatures().map(x => {
+    if (x.isActive) return x.name;
+  });
