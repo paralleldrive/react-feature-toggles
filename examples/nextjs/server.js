@@ -8,9 +8,9 @@ const handle = app.getRequestHandler();
 const {
   createExpressMiddleware
 } = require('@paralleldrive/react-feature-toggles');
-const features = require('./features');
+const initialFeatures = require('./features');
 
-const createHandler = createExpressMiddleware(features);
+const createHandler = createExpressMiddleware({ initialFeatures });
 
 app.prepare().then(() => {
   const server = express();

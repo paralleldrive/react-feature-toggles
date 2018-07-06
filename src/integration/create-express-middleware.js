@@ -7,15 +7,7 @@ describe('createExpressMiddleware()', async should => {
   const { assert } = should();
   {
     const app = express();
-    const initialFeatures = [
-      'posts',
-      'post-rating-graph',
-      'help-rating',
-      'help-rating-graph',
-      'comments',
-      'comment-rating',
-      'comment-rating-graph'
-    ];
+    const initialFeatures = ['posts', 'bar', 'foo'];
     const handler = createExpressMiddleware(
       { initialFeatures },
       {
@@ -42,15 +34,7 @@ describe('createExpressMiddleware()', async should => {
 
   {
     const app = express();
-    const initialFeatures = [
-      'posts',
-      'post-rating-graph',
-      'help-rating',
-      'help-rating-graph',
-      'comments',
-      'comment-rating',
-      'comment-rating-graph'
-    ];
+    const initialFeatures = ['posts', 'bar', 'foo'];
     const handler = createExpressMiddleware(
       { initialFeatures },
       {
@@ -77,15 +61,7 @@ describe('createExpressMiddleware()', async should => {
 
   {
     const app = express();
-    const initialFeatures = [
-      'posts',
-      'post-rating-graph',
-      'help-rating',
-      'help-rating-graph',
-      'comments',
-      'comment-rating',
-      'comment-rating-graph'
-    ];
+    const initialFeatures = ['posts', 'bar', 'foo'];
     const handler = createExpressMiddleware(
       { initialFeatures },
       {
@@ -113,15 +89,7 @@ describe('createExpressMiddleware()', async should => {
 
   {
     const app = express();
-    const initialFeatures = [
-      'posts',
-      'post-rating-graph',
-      'help-rating',
-      'help-rating-graph',
-      'comments',
-      'comment-rating',
-      'comment-rating-graph'
-    ];
+    const initialFeatures = ['posts', 'bar', 'foo'];
     const handler = createExpressMiddleware(
       { initialFeatures },
       {
@@ -148,15 +116,7 @@ describe('createExpressMiddleware()', async should => {
 
   {
     const app = express();
-    const initialFeatures = [
-      'posts',
-      'post-rating-graph',
-      'help-rating',
-      'help-rating-graph',
-      'comments',
-      'comment-rating',
-      'comment-rating-graph'
-    ];
+    const initialFeatures = ['posts', 'bar', 'foo'];
     const path = '/posts';
     const handler = createExpressMiddleware(
       { initialFeatures },
@@ -192,15 +152,7 @@ describe('createExpressMiddleware()', async should => {
 
   {
     const app = express();
-    const initialFeatures = [
-      'posts',
-      'post-rating-graph',
-      'help-rating',
-      'help-rating-graph',
-      'comments',
-      'comment-rating',
-      'comment-rating-graph'
-    ];
+    const initialFeatures = ['posts', 'bar', 'foo'];
     const handler = createExpressMiddleware(
       { initialFeatures },
       {
@@ -227,15 +179,7 @@ describe('createExpressMiddleware()', async should => {
 
   {
     const app = express();
-    const initialFeatures = [
-      'posts',
-      'post-rating-graph',
-      'help-rating',
-      'help-rating-graph',
-      'comments',
-      'comment-rating',
-      'comment-rating-graph'
-    ];
+    const initialFeatures = ['posts', 'bar', 'foo'];
     const handler = createExpressMiddleware(
       { initialFeatures },
       {

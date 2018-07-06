@@ -3,7 +3,7 @@ import { parse } from 'url';
 
 import { isActive } from './is-active';
 import { mergeFeatures } from './merge-features';
-import { getReqQueryFeatures } from './get-req-query-features';
+import { getQueryFeatures } from './get-query-features';
 const setStatus = (res, isActive) =>
   isActive ? res.status(200) : res.status(404);
 
@@ -18,7 +18,7 @@ export const createExpressMiddleware = curry(
     const { query } = parsedUrl;
     const updatedFeatures = mergeFeatures(
       initialFeatures,
-      getReqQueryFeatures({ query })
+      getQueryFeatures(query)
     );
     setStatus(res, isActive(requiredFeature, updatedFeatures));
 
