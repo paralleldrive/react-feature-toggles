@@ -7,7 +7,7 @@ export { FeatureToggles } from './feature-toggles';
 export { Feature } from './feature';
 export { getQueryFeatures } from './get-query-features';
 export { removeFeatures } from './remove-features';
-export { createRouteMiddleware } from './create-route-middleware';
+export { createExpressMiddleware } from './create-express-middleware';
 export { withFeatureToggles } from './with-feature-toggles';
 export { getReqQueryFeatures } from './get-req-query-features';
 export { getCurrentActiveFeatures } from './get-current-active-features';

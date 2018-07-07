@@ -1,2 +1,2 @@
-import './create-route-middleware';
+import './create-express-middleware';
 import './components';
