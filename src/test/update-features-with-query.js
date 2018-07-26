@@ -1,7 +1,6 @@
 import { describe } from 'riteway';
 import { updateFeaturesWithQuery } from '../update-features-with-query';
 import deepFreeze from 'deep-freeze';
-import { createFeature } from '../test-fixtures/create-feature';
 
 describe('updateFeaturesWithQuery()', async should => {
   const { assert } = should();
@@ -37,24 +36,24 @@ describe('updateFeaturesWithQuery([...Feature], Query)', async should => {
   const { assert } = should();
 
   const features = [
-    createFeature({
+    {
       name: 'posts',
       isActive: true
-    }),
-    createFeature({
+    },
+    {
       name: 'post-rating',
       isActive: false,
       dependencies: ['posts']
-    }),
-    createFeature({
+    },
+    {
       name: 'post-rating-graph',
       isActive: true,
       dependencies: ['post-rating']
-    }),
-    createFeature({
+    },
+    {
       name: 'reports',
       isActive: false
-    })
+    }
   ];
   deepFreeze(features);
 
