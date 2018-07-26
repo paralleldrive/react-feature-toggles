@@ -72,7 +72,6 @@
   "author": "Parallel Drive, Inc",
   "license": "MIT",
   "dependencies": {
-    "lodash": "4.17.10",
-    "ramda": "0.25.0"
+    "lodash": "4.17.10"
   }
 }
