@@ -10,9 +10,9 @@ This is version 2, it contains many breaking changes from version 1.
 
 React Feature Toggles attempts to satisfy the following requirements:
 
-- Conditionally execute code based on the presence or absence of a specific feature
-- Toggle features on with url parameters
-- Feature Dependency - if a feature depends on a another feature that is disabled, then neither of them should execute
+* Conditionally execute code based on the presence or absence of a specific feature
+* Toggle features on with url parameters
+* Feature Dependency - if a feature depends on a another feature that is disabled, then neither of them should execute
 
 ## Install
 
@@ -52,7 +52,7 @@ const MyApp = () => {
 
 **props**
 
-- features = []
+* features = []
 
 ```js
 import { FeatureToggles } from '@paralleldrive/react-feature-toggles';
@@ -72,9 +72,9 @@ If the feature is enabled then the _activeComponent_ will render else it renders
 
 Feature takes these **props**
 
-- name = ""
-- inactiveComponent = noop
-- activeComponent = null
+* name = ""
+* inactiveComponent = noop
+* activeComponent = null
 
 ```js
 import { FeatureToggles, Feature } from '@paralleldrive/react-feature-toggles';
@@ -101,13 +101,13 @@ Alternatively, you can use `Feature` as a render prop component. Do this by pass
 
 ```js
 import { FeatureToggles, Feature } from '@paralleldrive/react-feature-toggles';
-import { isActiveFeatureNames } from '@paralleldrive/feature-toggles';
+import { isActiveFeatureName } from '@paralleldrive/feature-toggles';
 const MyApp = () => {
   return (
     <FeatureToggles>
       <Feature>
         {({ features }) =>
-          isActiveFeatureNames('bacon', features)
+          isActiveFeatureName('bacon', features)
             ? 'The bacon feature is active'
             : 'Bacon is inactive'
         }
