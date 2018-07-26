@@ -163,18 +163,6 @@ const myPage = () => (
 );
 ```
 
-### Interfaces
-
-#### Feature
-
-```js
-interface Feature {
-  name: String,
-  isActive: false,
-  dependencies?: [...String]
-}
-```
-
 ## Enabling features from the URL
 
 In v2, query logic has been moved out of the provider component. You should now handle this logic before passing features to `FeatureToggles`
@@ -182,18 +170,23 @@ In v2, query logic has been moved out of the provider component. You should now 
 ```js
 import { FeatureToggles } from '@paralleldrive/react-feature-toggles';
 import {
-  mergeFeatureNames,
-  getQueryFeatureNames
+  getCurrentActiveFeatureNames
 } from '@paralleldrive/feature-toggles';
 import parse from 'url-parse';
 
 const url = 'https://domain.com/foo?ft=foo,bar';
 const query = parse(url, true);
-const initialFeatures = ['faq', 'foo', 'bar'];
-const features = mergeFeatureNames(
+
+const initialFeatures = [
+  { name: 'foo', isActive: true },
+  { name: 'bar', isActive: false },
+  { name: 'baz', isActive: false }
+];
+
+const features = getCurrentActiveFeatureNames({
   initialFeatures,
-  getQueryFeatureNames(query)
-);
+  req: { query }
+});
 
 const MyApp = () => {
   return <FeatureToggles features={features}>{...stuff}</FeatureToggles>;
