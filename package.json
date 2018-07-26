@@ -71,7 +71,5 @@
   ],
   "author": "Parallel Drive, Inc",
   "license": "MIT",
-  "dependencies": {
-    "lodash": "4.17.10"
-  }
+  "dependencies": {}
 }
