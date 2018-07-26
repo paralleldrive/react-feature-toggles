@@ -101,13 +101,13 @@ Alternatively, you can use `Feature` as a render prop component. Do this by pass
 
 ```js
 import { FeatureToggles, Feature } from '@paralleldrive/react-feature-toggles';
-import { isActiveFeatureNames } from '@paralleldrive/feature-toggles';
+import { isActiveFeatureName } from '@paralleldrive/feature-toggles';
 const MyApp = () => {
   return (
     <FeatureToggles>
       <Feature>
         {({ features }) =>
-          isActiveFeatureNames('bacon', features)
+          isActiveFeatureName('bacon', features)
             ? 'The bacon feature is active'
             : 'Bacon is inactive'
         }
