@@ -54,7 +54,7 @@ const MyApp = () => {
 - features = []
 
 ```js
-import { FeatureToggles } from '@paralleldrive/react-feature-toggles';
+import { FeatureToggles } from '@paralleldrive/react*feature-toggles';
 
 const features = ['foo', 'bar', 'baz', 'cat'];
 
