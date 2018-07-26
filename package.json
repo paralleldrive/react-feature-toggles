@@ -28,7 +28,6 @@
     "eslint": "4.19.1",
     "eslint-config-prettier": "2.9.0",
     "eslint-plugin-react": "7.9.1",
-    "express": "4.16.3",
     "husky": "0.14.3",
     "pre-commit": "1.2.2",
     "prettier": "1.13.5",
@@ -37,7 +36,6 @@
     "react": "16.4.1",
     "react-dom": "16.4.1",
     "riteway": "2.0.4",
-    "supertest": "3.1.0",
     "tape": "4.9.1",
     "updtr": "2.0.0",
     "watch": "1.0.2"
@@ -75,7 +73,6 @@
   "license": "MIT",
   "dependencies": {
     "lodash": "4.17.10",
-    "ramda": "0.25.0",
-    "url-parse": "1.4.1"
+    "ramda": "0.25.0"
   }
 }
