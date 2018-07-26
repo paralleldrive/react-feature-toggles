@@ -1,14 +1,4 @@
-export { getActiveFeatures } from './get-active-features';
-export { updateFeaturesWithQuery } from './update-features-with-query';
 export { configureFeature } from './configure-feature';
-export { mergeFeatures } from './merge-features';
-export { isActive } from './is-active';
 export { FeatureToggles } from './feature-toggles';
 export { Feature } from './feature';
-export { getQueryFeatures } from './get-query-features';
-export { removeFeatures } from './remove-features';
-export { createExpressMiddleware } from './create-express-middleware';
 export { withFeatureToggles } from './with-feature-toggles';
-export { getReqQueryFeatures } from './get-req-query-features';
-export { getCurrentActiveFeatures } from './get-current-active-features';
-export { getBrowserQueryFeatures } from './get-browser-query-features';
