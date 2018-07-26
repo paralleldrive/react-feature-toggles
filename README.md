@@ -10,8 +10,8 @@ This is version 2, it contains many breaking changes from version 1.
 
 React Feature Toggles attempts to satisfy the following requirements:
 
-* Universal - server and client side
-* Conditionally execute code based on the presence or absence of a specific feature
+- Universal - server and client side
+- Conditionally execute code based on the presence or absence of a specific feature
 
 ## Install
 
@@ -51,7 +51,7 @@ const MyApp = () => {
 
 **props**
 
-* features = []
+- features = []
 
 ```js
 import { FeatureToggles } from '@paralleldrive/react-feature-toggles';
@@ -71,9 +71,9 @@ If the feature is enabled then the _activeComponent_ will render else it renders
 
 Feature takes these **props**
 
-* name = ""
-* inactiveComponent = noop
-* activeComponent = null
+- name = ""
+- inactiveComponent = noop
+- activeComponent = null
 
 ```js
 import { FeatureToggles, Feature } from '@paralleldrive/react-feature-toggles';
