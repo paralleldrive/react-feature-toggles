@@ -2,9 +2,9 @@ import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { describe } from 'riteway';
 import dom from 'cheerio';
-import { withFeatureToggles } from '../with-feature-toggles';
 
-import { Consumer } from '../context';
+import { withFeatureToggles } from './with-feature-toggles';
+import { Consumer } from './context';
 
 const render = ReactDOMServer.renderToStaticMarkup;
 
