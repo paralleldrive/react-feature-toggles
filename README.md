@@ -54,7 +54,7 @@ const MyApp = () => {
 - features = []
 
 ```js
-import { FeatureToggles } from '@paralleldrive/react-feature-toggles';
+import { FeatureToggles } from '@paralleldrive/react*feature-toggles';
 
 const features = ['foo', 'bar', 'baz', 'cat'];
 
@@ -142,9 +142,9 @@ Depending on your requirements, you might need something slightly different than
 
 #### configureFeature
 
-`(inactiveComponent, name, activeComponent) => Component`
+`(inactiveComponent: Component) => (name: String) => (activeComponent: Component) => Component`
 
-`configureFeature` is a higher order component that allows you to configure a `Feature` component. configureFeature is auto curried so that you can partially apply the props.
+`configureFeature` is a higher order component that allows you to configure a `Feature` component.
 
 ```js
 import { FeatureToggles } from '@paralleldrive/react-feature-toggles';
@@ -152,7 +152,7 @@ const NotFoundPage = () => <div>404</div>;
 const ChatPage = () => <div>Chat</div>;
 
 const featureOr404 = configureFeature(NotFoundPage);
-const Chat = featureOr404('chat', ChatPage);
+const Chat = featureOr404('chat')(ChatPage);
 
 const features = ['foo', 'bar', 'chat'];
 
