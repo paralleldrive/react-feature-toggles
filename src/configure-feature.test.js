@@ -3,8 +3,8 @@ import dom from 'cheerio';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 
-import { configureFeature } from '../configure-feature';
-import { Provider } from '../context';
+import { configureFeature } from './configure-feature';
+import { Provider } from './context';
 
 const render = ReactDOMServer.renderToStaticMarkup;
 

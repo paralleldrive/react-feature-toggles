@@ -8,7 +8,7 @@ import {
   Feature,
   configureFeature,
   withFeatureToggles
-} from '../index';
+} from '../../src/index';
 
 const render = ReactDOMServer.renderToStaticMarkup;
 
