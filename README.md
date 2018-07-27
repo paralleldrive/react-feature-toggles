@@ -10,8 +10,8 @@ This is version 2, it contains many breaking changes from version 1.
 
 React Feature Toggles attempts to satisfy the following requirements:
 
-* Universal - server and client side
-* Conditionally render components based on the presence or absence of a specific feature
+- Universal - server and client side
+- Conditionally render components based on the presence or absence of a specific feature
 
 
 ## Install
