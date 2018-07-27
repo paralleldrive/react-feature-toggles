@@ -10,8 +10,8 @@ This is version 2, it contains many breaking changes from version 1.
 
 React Feature Toggles attempts to satisfy the following requirements:
 
-* Universal - server and client side
-* Conditionally execute code based on the presence or absence of a specific feature
+- Universal - server and client side
+- Conditionally execute code based on the presence or absence of a specific feature
 
 ## Install
 
@@ -51,10 +51,10 @@ const MyApp = () => {
 
 **props**
 
-* features = []
+- features = []
 
 ```js
-import { FeatureToggles } from '@paralleldrive/react-feature-toggles';
+import { FeatureToggles } from '@paralleldrive/react*feature-toggles';
 
 const features = ['foo', 'bar', 'baz', 'cat'];
 
@@ -71,9 +71,9 @@ If the feature is enabled then the _activeComponent_ will render else it renders
 
 Feature takes these **props**
 
-* name = ""
-* inactiveComponent = noop
-* activeComponent = null
+- name = ""
+- inactiveComponent = noop
+- activeComponent = null
 
 ```js
 import { FeatureToggles, Feature } from '@paralleldrive/react-feature-toggles';
@@ -142,9 +142,9 @@ Depending on your requirements, you might need something slightly different than
 
 #### configureFeature
 
-`(inactiveComponent, name, activeComponent) => Component`
+`(inactiveComponent: Component) => (name: String) => (activeComponent: Component) => Component`
 
-`configureFeature` is a higher order component that allows you to configure a `Feature` component. configureFeature is auto curried so that you can partially apply the props.
+`configureFeature` is a higher order component that allows you to configure a `Feature` component.
 
 ```js
 import { FeatureToggles } from '@paralleldrive/react-feature-toggles';
@@ -152,7 +152,7 @@ const NotFoundPage = () => <div>404</div>;
 const ChatPage = () => <div>Chat</div>;
 
 const featureOr404 = configureFeature(NotFoundPage);
-const Chat = featureOr404('chat', ChatPage);
+const Chat = featureOr404('chat')(ChatPage);
 
 const features = ['foo', 'bar', 'chat'];
 
