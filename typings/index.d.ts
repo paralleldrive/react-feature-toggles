@@ -1,16 +1,8 @@
 declare module '@paralleldrive/react-feature-toggles' {
   import * as React from 'react';
 
-  type Feature1 = {
-    children?: (obj: { features: ReadonlyArray<string> }) => React.ReactNode;
-  };
-  type Feature2 = {
-    inactiveComponent: () => React.ReactNode;
-    activeComponent: () => React.ReactNode;
-    name: string;
-  };
-  function Feature({ children }: Feature1): React.ReactNode;
-  function Feature({ inactiveComponent, name, activeComponent }: Feature2);
+  function Feature({ children }: { children?: (features: ReadonlyArray<string>) => React.ReactNode }): React.ReactNode;
+  function Feature({ inactiveComponent, name, activeComponent }: { inactiveComponent: () => React.ReactNode; activeComponent: () => React.ReactNode; name: string }): React.ReactNode;
   export { Feature };
 
   function FeatureToggles({
