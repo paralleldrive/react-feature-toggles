@@ -16,7 +16,7 @@ declare module '@paralleldrive/react-feature-toggles' {
     inactiveComponent: () => React.ReactNode;
     activeComponent: () => React.ReactNode;
     name: string;
-  }): React.ReactNode;
+  });
   export { Feature };
 
   function FeatureToggles({
