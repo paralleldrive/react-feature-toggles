@@ -1,9 +1,10 @@
 declare module '@paralleldrive/react-feature-toggles' {
+  import { ComponentClass, StatelessComponent } from 'react';
   type FeatureNames = ReadonlyArray<string>;
-  type Component = (props: any) => JSX.Element;
+  type Component = ComponentClass | StatelessComponent;
 
   export function Feature(props: {
-    children: (obj: { features: FeatureNames }) => JSX.Element;
+    children: (args: { features: FeatureNames }) => JSX.Element;
   }): JSX.Element;
 
   export function Feature(props: {
@@ -12,16 +13,12 @@ declare module '@paralleldrive/react-feature-toggles' {
     name: string;
   }): JSX.Element;
 
+  export function FeatureToggles(props: {
+    readonly features?: FeatureNames;
+    readonly children?: JSX.Element;
+  }): JSX.Element;
+
   export function configureFeature(
     inactiveComponent: Component
   ): (name: string) => (activeComponent: Component) => Component;
-
-  export function FeatureToggles(props: {
-    readonly features: FeatureNames;
-    readonly children: JSX.Element;
-  }): JSX.Element;
-
-  export function withFeatureToggles(config: {
-    features: FeatureNames;
-  }): Component;
 }
