@@ -14,8 +14,8 @@ declare module '@paralleldrive/react-feature-toggles' {
   }): JSX.Element;
 
   export function FeatureToggles(props: {
-    readonly features?: FeatureNames;
-    readonly children?: JSX.Element;
+    readonly features: FeatureNames;
+    readonly children: JSX.Element;
   }): JSX.Element;
 
   export function configureFeature(
