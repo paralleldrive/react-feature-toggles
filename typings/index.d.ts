@@ -7,7 +7,7 @@ declare module '@paralleldrive/react-feature-toggles' {
     children?: (
       { features }: { features: ReadonlyArray<string> }
     ) => React.ReactNode;
-  }): React.ReactNode;
+  }): React.Consumer;
   function Feature({
     inactiveComponent,
     name,
