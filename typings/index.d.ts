@@ -1,26 +1,25 @@
 declare module '@paralleldrive/react-feature-toggles' {
+  type features = ReadonlyArray<string>;
   type Component = (props: any) => JSX.Element;
 
-  function Feature(props: {
+  export function Feature(props: {
+    children: (obj: { features: features }) => JSX.Element;
+  }): JSX.Element;
+
+  export function Feature(props: {
     inactiveComponent: Component;
     activeComponent: Component;
     name: string;
   }): JSX.Element;
-  function Feature(props: {
-    children: (obj: { features: ReadonlyArray<string> }) => JSX.Element;
-  }): JSX.Element;
 
-  export { Feature };
+  export function configureFeature(
+    inactiveComponent: Component
+  ): (name: string) => (activeComponent: Component) => Component;
 
-  function FeatureToggles(props: {
-    readonly features: ReadonlyArray<string>;
+  export function FeatureToggles(props: {
+    readonly features: features;
     readonly children: JSX.Element;
   }): JSX.Element;
 
-  export { FeatureToggles };
-
-  function configureFeature(
-    inactiveComponent: Component
-  ): (name: string) => (activeComponent: Component) => Component;
-  export { configureFeature };
+  export function withFeatureToggles(config: { features: features }): Component;
 }
