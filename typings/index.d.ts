@@ -1,7 +1,7 @@
 declare module '@paralleldrive/react-feature-toggles' {
-  import { ComponentClass, SFC } from 'react';
+  import { ComponentClass, SFC, StatelessComponent } from 'react';
   type FeatureNames = ReadonlyArray<string>;
-  type Component = ComponentClass | SFC<any>;
+  type Component = ComponentClass | SFC<any> | StatelessComponent;
 
   export function Feature(props: {
     children: (args: { features: FeatureNames }) => JSX.Element;
