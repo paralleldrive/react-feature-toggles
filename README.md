@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.com/paralleldrive/react-feature-toggles.svg?token=Ba8H1FN3UT5CqqFhs2AM&branch=master)](https://travis-ci.com/paralleldrive/react-feature-toggles)
 
+[![Known Vulnerabilities](https://snyk.io/test/github/paralleldrive/react-feature-toggles/badge.svg?targetFile=package.json)](https://snyk.io/test/github/paralleldrive/react-feature-toggles?targetFile=package.json)
+
 ## Version 2
 
 This is version 2, it contains many breaking changes from version 1.
