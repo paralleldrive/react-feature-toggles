@@ -1,8 +1,6 @@
 # React Feature Toggles
 
-[![Build Status](https://travis-ci.com/paralleldrive/react-feature-toggles.svg?token=Ba8H1FN3UT5CqqFhs2AM&branch=master)](https://travis-ci.com/paralleldrive/react-feature-toggles)
-
-[![Known Vulnerabilities](https://snyk.io/test/github/paralleldrive/react-feature-toggles/badge.svg?targetFile=package.json)](https://snyk.io/test/github/paralleldrive/react-feature-toggles?targetFile=package.json)
+[![Build Status](https://travis-ci.com/paralleldrive/react-feature-toggles.svg?token=Ba8H1FN3UT5CqqFhs2AM&branch=master)](https://travis-ci.com/paralleldrive/react-feature-toggles)[![Known Vulnerabilities](https://snyk.io/test/github/paralleldrive/react-feature-toggles/badge.svg?targetFile=package.json)](https://snyk.io/test/github/paralleldrive/react-feature-toggles?targetFile=package.json)
 
 ## Version 2
 
@@ -149,13 +147,15 @@ Depending on your requirements, you might need something slightly different than
 
 `configureFeature` is a higher order component that allows you to configure a `Feature` component.
 
+`configureFeature` is autocurried, so you can call it with one or more of its arguments to create a partial application of the function. In the following example, `featureOr404()` is a partial application of `configureFeature()`:
+
 ```js
 import { FeatureToggles } from '@paralleldrive/react-feature-toggles';
 const NotFoundPage = () => <div>404</div>;
 const ChatPage = () => <div>Chat</div>;
 
 const featureOr404 = configureFeature(NotFoundPage);
-const Chat = featureOr404('chat')(ChatPage);
+const Chat = featureOr404('chat', ChatPage);
 
 const features = ['foo', 'bar', 'chat'];
 
