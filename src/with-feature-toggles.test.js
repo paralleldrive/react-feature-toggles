@@ -21,9 +21,7 @@ const createTestComponent = () => ({ propCheck } = {}) => (
   </Consumer>
 );
 
-describe('withFeatureToggles()', async should => {
-  const { assert } = should();
-
+describe('withFeatureToggles()', async assert => {
   {
     const Component = createTestComponent();
     const Page = withFeatureToggles()(Component);
@@ -38,7 +36,6 @@ describe('withFeatureToggles()', async should => {
   }
 
   {
-    const { assert } = should();
     const Component = createTestComponent();
     const features = [];
     const Page = withFeatureToggles({ features })(Component);
@@ -53,7 +50,6 @@ describe('withFeatureToggles()', async should => {
     });
   }
   {
-    const { assert } = should();
     const Component = createTestComponent();
     const features = ['foo', 'bar', 'baz'];
 

@@ -12,8 +12,7 @@ const createTestComponent = componentName => () => (
   <div className={componentName} />
 );
 
-describe('Feature()', async should => {
-  const { assert } = should();
+describe('Feature()', async assert => {
   {
     const ActiveComponent = createTestComponent('active');
     const InactiveComponent = createTestComponent('inactive');
