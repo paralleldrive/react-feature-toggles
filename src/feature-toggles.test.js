@@ -8,9 +8,7 @@ import { Consumer } from './context';
 
 const render = ReactDOMServer.renderToStaticMarkup;
 
-describe('FeatureToggles()', async should => {
-  const { assert } = should();
-
+describe('FeatureToggles()', async assert => {
   {
     const $ = dom.load(
       render(

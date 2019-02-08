@@ -16,9 +16,7 @@ const createTestComponent = componentName => () => (
   <div className={componentName} />
 );
 
-describe('FeatureToggles and Feature', async should => {
-  const { assert } = should();
-
+describe('FeatureToggles and Feature', async assert => {
   {
     const FooActive = createTestComponent('foo-active');
     const FooInactive = createTestComponent('foo-inactive');
@@ -72,9 +70,7 @@ describe('FeatureToggles and Feature', async should => {
   }
 });
 
-describe('FeatureToggles and configureFeature', async should => {
-  const { assert } = should();
-
+describe('FeatureToggles and configureFeature', async assert => {
   {
     const FooActive = createTestComponent('foo-active');
     const FooInactive = createTestComponent('foo-inactive');
@@ -123,9 +119,7 @@ describe('FeatureToggles and configureFeature', async should => {
   }
 });
 
-describe('withFeatureToggles and configureFeature', async should => {
-  const { assert } = should();
-
+describe('withFeatureToggles and configureFeature', async assert => {
   {
     const FooActive = createTestComponent('foo-active');
     const FooInactive = createTestComponent('foo-inactive');
