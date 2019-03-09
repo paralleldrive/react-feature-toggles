@@ -1,6 +1,8 @@
+import RecentlyActiveUsersPage from '../recently-active-users-page/feature-toggles'
+
+
 const intialFeatures = [
-  { name: 'recently-active-users-mini', isActive: false },
-  { name: 'recently-active-users-page', isActive: false }, 
+  ...RecentlyActiveUsersPage
 ]
 
-export default intialFeatures;
+export default intialFeatures

@@ -4,22 +4,22 @@ import initialFeatures from '../feature-toggles/initial-features'
 import { getCurrentActiveFeatureNames } from '@paralleldrive/feature-toggles'
 import { FeatureToggles } from '@paralleldrive/react-feature-toggles'
 import { withRouter } from 'next/router'
-import getComponentInitialProps from './get-component-initial-props';
+import getComponentInitialProps from './get-component-initial-props'
 
 const withFeatureToggles = Component => {
-  const withFeatureTogglesHOC = ({ query, ...rest }) => (
+  const withFeatureTogglesHOC = (props) => (
     <FeatureToggles features={
       getCurrentActiveFeatureNames({
         initialFeatures,
-        req: { query }
+        req: { query: props.query }
       })
     }>
-      <Component {...rest} />
+      <Component {...props} />
     </FeatureToggles>
   )
 
   withFeatureTogglesHOC.getInitialProps = async (ctx) => {
-    const { query } = ctx;
+    const { query } = ctx
     return {
       ...await getComponentInitialProps(Component, ctx),
       query

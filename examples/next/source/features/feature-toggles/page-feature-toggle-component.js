@@ -1,6 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Error from 'next/error';
+import React from 'react'
+import PropTypes from 'prop-types'
+import Error from 'next/error'
 
 const PageFeatureToggleComponent = ({ isActive, ActiveComponent, ...rest }) => {
   return (
@@ -13,6 +13,6 @@ const PageFeatureToggleComponent = ({ isActive, ActiveComponent, ...rest }) => {
 PageFeatureToggleComponent.propTypes = {
   isActive: PropTypes.bool.isRequired,
   ActiveComponent: PropTypes.func.isRequired
-};
+}
 
-export default PageFeatureToggleComponent;
+export default PageFeatureToggleComponent
