@@ -1,30 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import curry from 'lodash/fp/curry';
-import Error from 'next/error';
 import {
   getCurrentActiveFeatureNames,
   isActiveFeatureName
 } from '@paralleldrive/feature-toggles';
 import { withRouter } from 'next/router';
-
-const PageFeatureToggle = ({ isActive, ActiveComponent, ...rest }) => {
-  return (
-    isActive
-      ? <ActiveComponent {...rest} />
-      : <Error statusCode={404} />
-  )
-}
-
-PageFeatureToggle.propTypes = {
-  isActive: PropTypes.bool.isRequired,
-  ActiveComponent: PropTypes.func.isRequired
-};
+import getComponentInitialProps from './get-component-initial-props';
+import PageFeatureToggleComponent from './page-feature-toggle-component';
 
 const configurePageFeatureToggle = (
   initialFeatures,
   featureName,
-  ComposedComponent
+  Component
 ) => {
 
   const featureIsActive = query => isActiveFeatureName(
@@ -33,7 +21,7 @@ const configurePageFeatureToggle = (
   )
 
   const PageFeatureToggleHOC = ({ query, ...rest }) =>
-    <PageFeatureToggle {...rest} isActive={featureIsActive(query)} ActiveComponent={ComposedComponent} />
+    <PageFeatureToggleComponent {...rest} isActive={featureIsActive(query)} ActiveComponent={Component} />
 
 
   PageFeatureToggleHOC.getInitialProps = async (ctx) => {
@@ -43,6 +31,7 @@ const configurePageFeatureToggle = (
       res.statusCode = 404;
 
     return {
+      ...await getComponentInitialProps(Component, ctx),
       query
     };
   };
