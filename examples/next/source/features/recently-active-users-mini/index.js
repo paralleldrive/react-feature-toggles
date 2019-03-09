@@ -3,6 +3,7 @@ import Link from 'next/link'
 
 const RecentlyActiveUsersMini = () => (
   <Fragment>
+    <h4>Recently Active Users</h4>
     <ul>
       <li>Jenny - 4 mins ago</li>
       <li>Steve - 10 mins ago</li>
