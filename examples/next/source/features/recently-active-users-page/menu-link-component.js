@@ -6,7 +6,7 @@ import { RECENTLY_ACTIVE_USERS_PAGE } from './feature-toggles'
 const MenuLink = () => (
   <Feature
     name={RECENTLY_ACTIVE_USERS_PAGE}
-    inactiveComponent={() => <div>df</div>}
+    inactiveComponent={() => null}
     activeComponent={
       () => 
         <li>
