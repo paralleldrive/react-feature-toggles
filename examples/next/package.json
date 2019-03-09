@@ -1,0 +1,17 @@
+{
+  "name": "next-example",
+  "version": "1.0.0",
+  "license": "ISC",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@paralleldrive/feature-toggles": "1.0.4",
+    "@paralleldrive/react-feature-toggles": "2.1.0",
+    "next": "8.0.3",
+    "react": "16.8.4",
+    "react-dom": "16.8.4"
+  }
+}
