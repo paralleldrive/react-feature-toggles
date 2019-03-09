@@ -9,7 +9,7 @@ const RecentlyActiveUsersMini = () => (
       <li>Steve - 10 mins ago</li>
       <li>Jon - 1 hour ago</li>
     </ul>
-    <Link href="/recently-active-users">More</Link>
+    <Link href="/recently-active-users"><a>More</a></Link>
   </Fragment>
   
 )

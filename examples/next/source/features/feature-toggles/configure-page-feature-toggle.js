@@ -6,6 +6,20 @@ import {
   getCurrentActiveFeatureNames,
   isActiveFeatureName
 } from '@paralleldrive/feature-toggles';
+import { withRouter } from 'next/router';
+
+const PageFeatureToggle = ({ isActive, ActiveComponent, ...rest }) => {
+  return (
+    isActive
+      ? <ActiveComponent {...rest} />
+      : <Error statusCode={404} />
+  )
+}
+
+PageFeatureToggle.propTypes = {
+  isActive: PropTypes.bool.isRequired,
+  ActiveComponent: PropTypes.func.isRequired
+};
 
 const configurePageFeatureToggle = (
   initialFeatures,
@@ -13,35 +27,31 @@ const configurePageFeatureToggle = (
   ComposedComponent
 ) => {
 
-  const PageFeatureToggle = ({ statusCode, ...rest }) => (
-    statusCode === 200
-      ? <ComposedComponent {...rest} />
-      : <Error statusCode={statusCode} />
-  );
+  const featureIsActive = query => isActiveFeatureName(
+    featureName,
+    getCurrentActiveFeatureNames({ initialFeatures, req: { query } })
+  )
 
-  PageFeatureToggle.getInitialProps = async (ctx) => {
-    const { res, query, err } = ctx;
+  const PageFeatureToggleHOC = ({ query, ...rest }) =>
+    <PageFeatureToggle {...rest} isActive={featureIsActive(query)} ActiveComponent={ComposedComponent} />
 
-    const activeFeaturesNames = getCurrentActiveFeatureNames({
-      initialFeatures,
-      req: { query }
-    });
 
-    if (res && !isActiveFeatureName(featureName, activeFeaturesNames))
+  PageFeatureToggleHOC.getInitialProps = async (ctx) => {
+    const { res, query } = ctx;
+
+    if (res && !featureIsActive(query))
       res.statusCode = 404;
 
-    const statusCode = res ? res.statusCode : err ? err.statusCode : null;
-
     return {
-      statusCode
+      query
     };
   };
 
-  PageFeatureToggle.propTypes = {
-    statusCode: PropTypes.number.isRequired
-  };
-
-  return PageFeatureToggle;
+  PageFeatureToggleHOC.propTypes = {
+    query: PropTypes.object.isRequired,
+  }
+  
+  return withRouter(PageFeatureToggleHOC);
 };
 
 export default curry(configurePageFeatureToggle);
