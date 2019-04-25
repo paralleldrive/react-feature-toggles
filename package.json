@@ -26,7 +26,7 @@
     "cheerio": "0.22.0",
     "deep-freeze": "0.0.1",
     "eslint": "5.16.0",
-    "eslint-config-prettier": "4.1.0",
+    "eslint-config-prettier": "4.2.0",
     "eslint-plugin-react": "7.12.4",
     "husky": "2.1.0",
     "pre-commit": "1.2.2",
