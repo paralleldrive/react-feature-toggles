@@ -7,5 +7,6 @@
   "major": {
     "automerge": false
   },
-  "schedule": "before 4am"
+  "schedule": "before 4am",
+  "timezone": "America/Los_Angeles"
 }
