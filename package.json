@@ -27,7 +27,7 @@
     "deep-freeze": "0.0.1",
     "eslint": "5.16.0",
     "eslint-config-prettier": "4.3.0",
-    "eslint-plugin-react": "7.15.0",
+    "eslint-plugin-react": "7.15.1",
     "husky": "3.0.7",
     "pre-commit": "1.2.2",
     "prettier": "1.18.2",
