@@ -3,11 +3,11 @@ import curry from './curry';
 import { Feature } from './feature';
 
 export const configureFeature = curry(
-  (inactiveComponent, name, activeComponent) => () => (
+  (InactiveComponent, name, ActiveComponent) => props => (
     <Feature
       name={name}
-      inactiveComponent={inactiveComponent}
-      activeComponent={activeComponent}
+      inactiveComponent={() => <InactiveComponent {...props} />}
+      activeComponent={() => <ActiveComponent {...props} />}
     />
   )
 );
