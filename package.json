@@ -30,7 +30,7 @@
     "eslint-plugin-react": "7.16.0",
     "husky": "3.0.9",
     "pre-commit": "1.2.2",
-    "prettier": "1.19.0",
+    "prettier": "1.19.1",
     "pretty-quick": "1.11.1",
     "prop-types": "15.7.2",
     "react": "16.11.0",
