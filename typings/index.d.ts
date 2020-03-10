@@ -21,4 +21,10 @@ declare module '@paralleldrive/react-feature-toggles' {
   export function configureFeature(
     inactiveComponent: Component
   ): (name: string) => (activeComponent: Component) => Component;
+
+  export function withFeatures(
+      component: Component
+  ): any;
+
+  export function useFeatures(): FeatureNames;
 }
