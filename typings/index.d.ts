@@ -1,5 +1,5 @@
 declare module '@paralleldrive/react-feature-toggles' {
-  import { ComponentClass, SFC, StatelessComponent } from 'react';
+  import { ComponentClass, SFC, StatelessComponent, Provider, Consumer } from 'react';
   type FeatureNames = ReadonlyArray<string>;
   type Component = ComponentClass | SFC<any> | StatelessComponent;
 
@@ -21,6 +21,12 @@ declare module '@paralleldrive/react-feature-toggles' {
   export function configureFeature(
     inactiveComponent: Component
   ): (name: string) => (activeComponent: Component) => Component;
+
+  export interface FeatureTogglesContext<T> {
+    Provider: Provider<T>;
+    Consumer: Consumer<T>;
+    displayName?: string;
+  }
 
   export function withFeatures(
       component: Component
