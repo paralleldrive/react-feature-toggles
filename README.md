@@ -166,6 +166,36 @@ const myPage = () => (
 );
 ```
 
+#### withFeatures
+
+If you'd prefer to directly access the list of active Features, you can obtain a `features` prop with the HoC:
+
+```js
+import { withFeatures } from '@paralleldrive/react-feature-toggles';
+
+function MyButton({ title, features }) {
+    return (
+        <Button disabled={features.includes('disable-login-button')}>{title}</Button>
+    );
+}
+export default withFeatures(MyButton);
+```
+
+#### useFeatures
+
+If you're using React >= 16.8, you can access the active Features with the `useFeatures()` hook:
+
+```js
+import { useFeatures } from '@paralleldrive/react-feature-toggles';
+
+export default function MyButton({ title }) {
+    const features = useFeatures();
+    return (
+        <Button disabled={features.includes('disable-login-button')}>{title}</Button>
+    );
+}
+```
+
 ## Enabling features from the URL
 
 In v2, query logic has been moved out of the provider component. You should now handle this logic before passing features to `FeatureToggles`

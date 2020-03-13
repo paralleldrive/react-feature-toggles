@@ -1,3 +1,4 @@
 import React from 'react';
 
-export const { Consumer, Provider } = React.createContext([]);
+export const FeatureTogglesContext = React.createContext([]);
+export const { Consumer, Provider } = FeatureTogglesContext;
