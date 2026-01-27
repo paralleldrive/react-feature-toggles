@@ -1,6 +1,6 @@
 # React Feature Toggles
 
-[![SudoLang AIDD](https://img.shields.io/badge/✨_SudoLang_AIDD-black)](https://github.com/paralleldrive/aidd)[![Known Vulnerabilities](https://snyk.io/test/github/paralleldrive/react-feature-toggles/badge.svg?targetFile=package.json)](https://snyk.io/test/github/paralleldrive/react-feature-toggles?targetFile=package.json)
+[![aidd Framework](https://img.shields.io/badge/✨_aidd_Framework-black)](https://github.com/paralleldrive/aidd)[![Known Vulnerabilities](https://snyk.io/test/github/paralleldrive/react-feature-toggles/badge.svg?targetFile=package.json)](https://snyk.io/test/github/paralleldrive/react-feature-toggles?targetFile=package.json)
 
 ## Version 2
 
