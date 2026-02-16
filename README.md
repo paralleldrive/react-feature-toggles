@@ -126,7 +126,6 @@ const MyApp = () => {
 You can use `withFeatureToggles` to compose your page functionality.
 
 ```js
-import MyPage from '../feautures/my-page';
 import { withFeatureToggles } from '@paralleldrive/react-feature-toggles';
 
 const features = ['foo', 'bar', 'baz', 'cat'];
