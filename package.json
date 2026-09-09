@@ -35,7 +35,7 @@
     "prop-types": "15.7.2",
     "react": "16.13.1",
     "react-dom": "16.13.1",
-    "riteway": "6.1.2",
+    "riteway": "6.3.1",
     "tape": "4.13.3",
     "updtr": "3.1.0",
     "watch": "1.0.2"
